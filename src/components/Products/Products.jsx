@@ -1,9 +1,9 @@
 import React from 'react';
-import img1 from "../../assets/img1.jpg";
-import img2 from "../../assets/img2.jpg";
-import img3 from "../../assets/img3.jpg";
-import img4 from "../../assets/img4.jpg";
-import img5 from "../../assets/img5.jpg";
+import img1 from "../../assets/dry.png";
+import img2 from "../../assets/mu.png";
+import img3 from "../../assets/la.png";
+import img4 from "../../assets/n.png";
+import img5 from "../../assets/milk.png";
 
 const ProductsData = [
    { id: 1,
