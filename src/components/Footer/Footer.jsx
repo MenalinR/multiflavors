@@ -83,12 +83,12 @@ const Footer = () => {
                 </a>
               </div>
 
-              <div className="mt-6">
-                <div className="flex items-center gap-3">
+              <div className="mt-6 ">
+                <div className="flex items-center gap-5">
                   <FaLocationArrow />
                   <p>Maddumagewatta, Housing Scheme, Nugegoda</p>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 mt-4">
                   <FaMobileAlt />
                   <p>+94 0777031212</p>
                 </div>
