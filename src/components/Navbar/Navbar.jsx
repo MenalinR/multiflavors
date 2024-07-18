@@ -59,7 +59,7 @@ const Navbar = () => {
                 <div>
                     <a href='#' className='font-bold text-2xl sm:text-3xl flex gap-2'>
                         <img src={Logo} alt='Logo'
-                        className='w-12 uppercase rounded-full' />
+                        className='w-12 rounded-lg' />
                         Mannar Flavors
                     </a>
                 </div>
@@ -85,17 +85,17 @@ const Navbar = () => {
 
         {/* lower Navbar */}
         <div className='flex justify-center'>
-            <ul className='sm:flex hidden items-center gap-4'>
+            <ul className='sm:flex hidden items-center gap-4 '>
                 {
                     Menu.map((data) => (
-                        <li key={data.id}>
+                        <li key={data.id} className='hover:translate-x-1'>
                             <a href={data.link}
                             className='inline-block px-4 hover:text-primary duration-200'>{data.name}</a>
                             </li>
                     ))
                 }
                 {
-                    <li className='group relative cursor-pointer'>
+                    <li className='group relative cursor-pointer hover:translate-x-1'>
                         <a
                         href='#'
                         className='flex items-center gap-[2px] py-2'> Dry Fishes
@@ -106,7 +106,7 @@ const Navbar = () => {
                             <div className='absolute z-[9999] hidden group-hover:block w-[150px] rounded-md bg-white p-2 text-black shadow-md'>
                                 <ul>
                                     {DropdownLinks.map((data)=>(
-                                        <li key={data.id}>
+                                        <li key={data.id} className='hover:translate-x-1'>
                                             <a href={data.link}
                                             className='inline-block w-full rounded-md p-2 hover:bg-primary/20'>
                                                 {data.name}
