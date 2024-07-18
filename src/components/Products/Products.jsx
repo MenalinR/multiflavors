@@ -64,7 +64,7 @@ const Products = () => {
                                 src={data.img}
                                 className='h-[220px] w-[200px] object-cover rounded-md '/>
 
-                            <div>
+                            <div className='text-center'>
                                 <h3 className='font-semibold'>{data.title}</h3>
                             </div>
 
