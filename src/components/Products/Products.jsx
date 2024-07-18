@@ -29,7 +29,7 @@ const ProductsData = [
             },
             { id: 4,
                 img: img4,
-                title:"Peanut",
+                title:"Nuts",
                 color:"white",
                 aosDelay: "600",
             
