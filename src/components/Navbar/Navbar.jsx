@@ -25,6 +25,7 @@ const Menu =[
         name:"Snacks",
         link:"/#",
     },
+   
     {
         id:5,
         name:"Fried prawns",
@@ -44,8 +45,26 @@ const DropdownLinks = [
         link:"/#services",
     },
     {
-        id:2,
+        id:3,
         name:"Dried Thalapath",
+        link:"/#services",
+    },
+];
+
+const SweetsDropdownLinks = [
+    {
+        id:1,
+        name:"Laddu",
+        link:"/#services",
+    },
+    {
+        id:2,
+        name:"Milk Toffee",
+        link:"/#services",
+    },
+    {
+        id:3,
+        name:"Rich Cake",
         link:"/#services",
     },
 ];
@@ -94,7 +113,36 @@ const Navbar = () => {
                             </li>
                     ))
                 }
+                
                 {
+                    <li className='group relative cursor-pointer hover:translate-x-1'>
+                        <a
+                        href='#'
+                        className='flex items-center gap-[2px] py-2'> Nuts
+                        <span>
+                            <FaCaretDown
+                            className='transition-all duration-200 group-hover:rotate-180' />
+                            </span></a>
+                            <div className='absolute z-[9999] hidden group-hover:block w-[150px] rounded-md bg-white p-2 text-black shadow-md'>
+                                <ul>
+                                    {SweetsDropdownLinks.map((data)=>(
+                                        <li key={data.id} className='hover:translate-x-1'>
+                                            <a href={data.link}
+                                            className='inline-block w-full rounded-md p-2 hover:bg-primary/20'>
+                                                {data.name}
+                                            </a>
+
+                                            
+                                        </li>
+
+                                        
+                                    ))}
+                                    </ul>
+                            </div>
+                    </li>
+                }
+
+{
                     <li className='group relative cursor-pointer hover:translate-x-1'>
                         <a
                         href='#'
@@ -111,7 +159,11 @@ const Navbar = () => {
                                             className='inline-block w-full rounded-md p-2 hover:bg-primary/20'>
                                                 {data.name}
                                             </a>
+
+                                            
                                         </li>
+
+                                        
                                     ))}
                                     </ul>
                             </div>
