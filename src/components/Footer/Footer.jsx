@@ -41,7 +41,7 @@ const Footer = () => {
               <img src={FooterLogo} className="w-12 rounded-lg" alt="Footer Logo" />
               Multi Flavours
             </h1>
-            <p className='sm:text-xl text-sm'>Welcome to Multi Flavours! Discover our range of quality snacks and sweets. Stay connected via social media for the latest news and offers. Thanks for choosing us!</p>
+            <p className='sm:text-base text-sm'>Welcome to Multi Flavours! Discover our range of quality snacks and sweets. Stay connected via social media for the latest news and offers. Thanks for choosing us!</p>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 col-span-2 md:pl-10">
