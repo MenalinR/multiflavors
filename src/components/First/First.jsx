@@ -1,7 +1,7 @@
 import React from 'react';
 import Dryfish from "../../assets/dryfish.jpg";
 import Snacks from "../../assets/snacks.jpg";
-import Sweets from "../../assets/sweets.jpg";
+import Sweets from "../../assets/sweet.jpg";
 import Slider from "react-slick";
 
 const ImageList = [
