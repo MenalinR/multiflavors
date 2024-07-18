@@ -1,5 +1,5 @@
 import React from 'react';
-import FooterLogo from '../../assets/mnr.svg';
+import FooterLogo from '../../assets/multi.svg';
 import Banner from '../../assets/footer.jpg';
 import { FaInstagram, FaFacebook, FaLocationArrow, FaMobileAlt } from 'react-icons/fa';
 
