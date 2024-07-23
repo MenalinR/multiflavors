@@ -86,7 +86,7 @@ const Footer = () => {
               <div className="mt-6 ">
                 <div className="flex items-center gap-5">
                   <FaLocationArrow />
-                  <a href='https://maps.app.goo.gl/vq71owXn2jJsn8qq6'>click here</a>
+                  <a href='https://maps.app.goo.gl/vq71owXn2jJsn8qq6'>Maddumagewatta, Housing Scheme, Nugegoda</a>
                 </div>
                 <div className="flex items-center gap-3 mt-4">
                   <FaMobileAlt />
