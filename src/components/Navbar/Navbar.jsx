@@ -118,7 +118,7 @@ const Navbar = ({handleOrderPopup}) => {
                     <li className='group relative cursor-pointer hover:translate-x-1'>
                         <a
                         href='#'
-                        className='flex items-center gap-[2px] py-2'> Nuts
+                        className='flex items-center gap-[2px] py-2 hover:text-primary '> Nuts
                         <span>
                             <FaCaretDown
                             className='transition-all duration-200 group-hover:rotate-180' />
@@ -146,7 +146,7 @@ const Navbar = ({handleOrderPopup}) => {
                     <li className='group relative cursor-pointer hover:translate-x-1'>
                         <a
                         href='#'
-                        className='flex items-center gap-[2px] py-2'> Dry Fishes
+                        className='flex items-center gap-[2px] py-2 hover:text-primary '> Dry Fishes
                         <span>
                             <FaCaretDown
                             className='transition-all duration-200 group-hover:rotate-180' />
