@@ -33,7 +33,7 @@ const FooterLinks = [
 
 const Footer = () => {
   return (
-    <div style={BannerImg} className="text-white mb-0">
+    <div  className="text-black mb-0 bg-gray-300">
       <div className="container">
         <div data-aos="zoom-in" className="grid md:grid-cols-3 py-44 pt-5">
           <div className="py-8 px-4">
