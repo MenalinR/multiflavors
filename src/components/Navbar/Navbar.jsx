@@ -17,17 +17,12 @@ const Menu =[
     },
     {
         id:3,
-        name:"Sweets",
-        link:"/#",
-    },
-    {
-        id:4,
         name:"Snacks",
         link:"/#",
     },
    
     {
-        id:5,
+        id:4,
         name:"Fried prawns",
         link:"/#",
     },
@@ -67,6 +62,35 @@ const SweetsDropdownLinks = [
         name:"Rich Cake",
         link:"/#services",
     },
+];
+
+const NutsDropdownLinks = [
+    {
+        id:1,
+        name:"Peanuts",
+        link:"/#services",
+    },
+    {
+        id:2,
+        name:"Cashew",
+        link:"/#services",
+    },
+    {
+        id:3,
+        name:"Pistachio",
+        link:"/#services",
+    },
+    {
+        id:4,
+        name:"Almonds",
+        link:"/#services",
+    },
+    {
+        id:5,
+        name:"Walnuts",
+        link:"/#services",
+    },
+
 ];
 
 const Navbar = ({handleOrderPopup}) => {
@@ -118,7 +142,7 @@ const Navbar = ({handleOrderPopup}) => {
                     <li className='group relative cursor-pointer hover:translate-x-1'>
                         <a
                         href='#'
-                        className='flex items-center gap-[2px] py-2 hover:text-primary '> Nuts
+                        className='flex items-center gap-[2px] py-2 hover:text-primary '> Sweets
                         <span>
                             <FaCaretDown
                             className='transition-all duration-200 group-hover:rotate-180' />
@@ -126,6 +150,33 @@ const Navbar = ({handleOrderPopup}) => {
                             <div className='absolute z-[9999] hidden group-hover:block w-[150px] rounded-md bg-white p-2 text-black shadow-md'>
                                 <ul>
                                     {SweetsDropdownLinks.map((data)=>(
+                                        <li key={data.id} className='hover:translate-x-1'>
+                                            <a href={data.link}
+                                            className='inline-block w-full rounded-md p-2 hover:bg-primary/20'>
+                                                {data.name}
+                                            </a>
+
+                                            
+                                        </li>
+
+                                        
+                                    ))}
+                                    </ul>
+                            </div>
+                    </li>
+                }
+                {
+                    <li className='group relative cursor-pointer hover:translate-x-1'>
+                        <a
+                        href='#'
+                        className='flex items-center gap-[2px] py-2 hover:text-primary '> Nuts
+                        <span>
+                            <FaCaretDown
+                            className='transition-all duration-200 group-hover:rotate-180' />
+                            </span></a>
+                            <div className='absolute z-[9999] hidden group-hover:block w-[150px] rounded-md bg-white p-2 text-black shadow-md'>
+                                <ul>
+                                    {NutsDropdownLinks.map((data)=>(
                                         <li key={data.id} className='hover:translate-x-1'>
                                             <a href={data.link}
                                             className='inline-block w-full rounded-md p-2 hover:bg-primary/20'>
