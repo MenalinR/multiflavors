@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Logo from "../../assets/multi.svg";
 import { IoMdSearch } from "react-icons/io";
 import { FaCaretDown, FaCartShopping } from 'react-icons/fa6';
@@ -8,23 +9,24 @@ const Menu =[
     {
         id:1,
         name:"Home",
-        link:"/#",
+        link:"/Home",
+        
     },
     {
         id:2,
         name:"New Arrivals",
-        link:"/#services",
+        link:"/NewArrivals",
     },
     {
         id:3,
         name:"Snacks",
-        link:"/#",
+        link:"/Snacks",
     },
    
     {
         id:4,
         name:"Fried prawns",
-        link:"/#",
+        link:"/Prawns",
     },
 
 ]
@@ -32,17 +34,17 @@ const DropdownLinks = [
     {
         id:1,
         name:"Dried Katta ",
-        link:"/#services",
+        link:"/Katta ",
     },
     {
         id:2,
         name:"Dried Sprats",
-        link:"/#services",
+        link:"/Sprats",
     },
     {
         id:3,
         name:"Dried Thalapath",
-        link:"/#services",
+        link:"/Thalapath",
     },
 ];
 
@@ -50,17 +52,17 @@ const SweetsDropdownLinks = [
     {
         id:1,
         name:"Laddu",
-        link:"/#services",
+        link:"/Laddu",
     },
     {
         id:2,
         name:"Milk Toffee",
-        link:"/#services",
+        link:"/MilkToffee",
     },
     {
         id:3,
         name:"Rich Cake",
-        link:"/#services",
+        link:"/RichCake",
     },
 ];
 
@@ -68,27 +70,27 @@ const NutsDropdownLinks = [
     {
         id:1,
         name:"Peanuts",
-        link:"/#services",
+        link:"/Peanuts",
     },
     {
         id:2,
         name:"Cashew",
-        link:"/#services",
+        link:"/Cashew",
     },
     {
         id:3,
         name:"Pistachio",
-        link:"/#services",
+        link:"/Pistachio",
     },
     {
         id:4,
         name:"Almonds",
-        link:"/#services",
+        link:"/Almonds",
     },
     {
         id:5,
         name:"Walnuts",
-        link:"/#services",
+        link:"/Walnuts",
     },
 
 ];
@@ -100,11 +102,11 @@ const Navbar = ({handleOrderPopup}) => {
         <div className='bg-white py-4'>
             <div className='container flex justify-between items-center'>
                 <div>
-                    <a href='#' className='font-bold text-2xl sm:text-4xl flex gap-2'>
+                    <Link to='/'  className='font-bold text-2xl sm:text-4xl flex gap-2'>
                         <img src={Logo} alt='Logo'
                         className='w-12 rounded-lg' />
                         Multi Flavours
-                    </a>
+                    </Link>
                 </div>
                 <div className='flex justify-between items-center gap-4'>
                     <div className="relative group hidden sm:block">
@@ -132,8 +134,8 @@ const Navbar = ({handleOrderPopup}) => {
                 {
                     Menu.map((data) => (
                         <li key={data.id} className='hover:translate-x-1'>
-                            <a href={data.link}
-                            className='inline-block px-4 hover:text-primary duration-200'>{data.name}</a>
+                            <Link to={data.link}
+                            className='inline-block px-4 hover:text-primary duration-200'>{data.name}</Link>
                             </li>
                     ))
                 }
@@ -151,10 +153,10 @@ const Navbar = ({handleOrderPopup}) => {
                                 <ul>
                                     {SweetsDropdownLinks.map((data)=>(
                                         <li key={data.id} className='hover:translate-x-1'>
-                                            <a href={data.link}
+                                            <Link to={data.link}
                                             className='inline-block w-full rounded-md p-2 hover:bg-primary/20'>
                                                 {data.name}
-                                            </a>
+                                            </Link>
 
                                             
                                         </li>
@@ -178,10 +180,10 @@ const Navbar = ({handleOrderPopup}) => {
                                 <ul>
                                     {NutsDropdownLinks.map((data)=>(
                                         <li key={data.id} className='hover:translate-x-1'>
-                                            <a href={data.link}
+                                            <Link to={data.link}
                                             className='inline-block w-full rounded-md p-2 hover:bg-primary/20'>
                                                 {data.name}
-                                            </a>
+                                            </Link >
 
                                             
                                         </li>
@@ -206,10 +208,10 @@ const Navbar = ({handleOrderPopup}) => {
                                 <ul>
                                     {DropdownLinks.map((data)=>(
                                         <li key={data.id} className='hover:translate-x-1'>
-                                            <a href={data.link}
+                                            <Link to={data.link}
                                             className='inline-block w-full rounded-md p-2 hover:bg-primary/20'>
                                                 {data.name}
-                                            </a>
+                                            </Link>
 
                                             
                                         </li>
