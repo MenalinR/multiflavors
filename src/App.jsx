@@ -44,8 +44,8 @@ const App = () => {
     <div className='bg-white  duration-200 '>
       <Navbar handleOrderPopup={handleOrderPopup}/>
       <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/Home" element={<Home />} />
-        
           <Route path="/NewArrivals" element={<NewArrivals />} />
           <Route path="/Snacks" element={<Snacks />} />
           <Route path="/Prawns" element={<Prawns />} />
@@ -59,8 +59,7 @@ const App = () => {
           <Route path="/Cashew" element={<Cashew />} />
           <Route path="/Pistachio" element={<Pistachio/>} />
           <Route path="/Almonds" element={<Almonds />} />
-          <Route path="/Walnuts" element={<Walnuts />} />
-          
+          <Route path="/Walnuts" element={<Walnuts />} /> 
       </Routes>
       <Footer/>
       <Popup orderPopup={orderPopup} setOrderPopup={setOrderPopup} />   
