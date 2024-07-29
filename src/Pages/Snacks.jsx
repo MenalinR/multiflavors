@@ -93,7 +93,7 @@ const Snacks = () => {
                   <h3 className='font-semibold'>{data.title}</h3>
                   <div className='pt-4'>
                     <button className='bg-gradient-to-r from-black to-black hover:scale-105 duration-200 text-white py-2 px-4 rounded-full font-bold'>
-                      View
+                      Select Options
 
                     </button>
                   </div>

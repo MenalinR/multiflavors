@@ -28,72 +28,87 @@ const Menu =[
         name:"Fried prawns",
         link:"/Prawns",
     },
-
-]
-const DropdownLinks = [
-    {
-        id:1,
-        name:"Dried Katta ",
-        link:"/Katta ",
-    },
-    {
-        id:2,
-        name:"Dried Sprats",
-        link:"/Sprats",
-    },
-    {
-        id:3,
-        name:"Dried Thalapath",
-        link:"/Thalapath",
-    },
-];
-
-const SweetsDropdownLinks = [
-    {
-        id:1,
-        name:"Laddu",
-        link:"/Laddu",
-    },
-    {
-        id:2,
-        name:"Milk Toffee",
-        link:"/MilkToffee",
-    },
-    {
-        id:3,
-        name:"Rich Cake",
-        link:"/RichCake",
-    },
-];
-
-const NutsDropdownLinks = [
-    {
-        id:1,
-        name:"Peanuts",
-        link:"/Peanuts",
-    },
-    {
-        id:2,
-        name:"Cashew",
-        link:"/Cashew",
-    },
-    {
-        id:3,
-        name:"Pistachio",
-        link:"/Pistachio",
-    },
-    {
-        id:4,
-        name:"Almonds",
-        link:"/Almonds",
-    },
     {
         id:5,
-        name:"Walnuts",
-        link:"/Walnuts",
+        name:"Sweets",
+        link:"/Sweets",
+    },
+    {
+        id:6,
+        name:"Nuts",
+        link:"/Nuts",
+    },
+    {
+        id:7,
+        name:"Dry Fishes",
+        link:"/DryFishes",
     },
 
-];
+]
+// const DropdownLinks = [
+//     {
+//         id:1,
+//         name:"Dried Katta ",
+//         link:"/Katta ",
+//     },
+//     {
+//         id:2,
+//         name:"Dried Sprats",
+//         link:"/Sprats",
+//     },
+//     {
+//         id:3,
+//         name:"Dried Thalapath",
+//         link:"/Thalapath",
+//     },
+// ];
+
+// const SweetsDropdownLinks = [
+//     {
+//         id:1,
+//         name:"Laddu",
+//         link:"/Laddu",
+//     },
+//     {
+//         id:2,
+//         name:"Milk Toffee",
+//         link:"/MilkToffee",
+//     },
+//     {
+//         id:3,
+//         name:"Rich Cake",
+//         link:"/RichCake",
+//     },
+// ];
+
+// const NutsDropdownLinks = [
+//     {
+//         id:1,
+//         name:"Peanuts",
+//         link:"/Peanuts",
+//     },
+//     {
+//         id:2,
+//         name:"Cashew",
+//         link:"/Cashew",
+//     },
+//     {
+//         id:3,
+//         name:"Pistachio",
+//         link:"/Pistachio",
+//     },
+//     {
+//         id:4,
+//         name:"Almonds",
+//         link:"/Almonds",
+//     },
+//     {
+//         id:5,
+//         name:"Walnuts",
+//         link:"/Walnuts",
+//     },
+
+// ];
 
 const Navbar = ({handleOrderPopup}) => {
   return (
@@ -140,7 +155,7 @@ const Navbar = ({handleOrderPopup}) => {
                     ))
                 }
                 
-                {
+                {/* {
                     <li className='group relative cursor-pointer hover:translate-x-1'>
                         <a
                         href='#'
@@ -221,7 +236,7 @@ const Navbar = ({handleOrderPopup}) => {
                                     </ul>
                             </div>
                     </li>
-                }
+                } */}
             </ul>
         </div>
     </div>

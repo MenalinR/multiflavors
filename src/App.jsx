@@ -12,6 +12,9 @@ import Home from './Pages/Home';
 import NewArrivals from './Pages/NewArrivals';
 import Snacks from './Pages/Snacks';
 import Prawns from './Pages/Prawns';
+import Sweets from './Pages/Sweets';
+import Nuts from './Pages/Nuts';
+import DryFishes from './Pages/DryFishes';
 import Katta from './Pages/Katta';
 import Sprats from './Pages/Sprats';
 import Thalapath from './Pages/Thalapath';
@@ -49,17 +52,10 @@ const App = () => {
           <Route path="/NewArrivals" element={<NewArrivals />} />
           <Route path="/Snacks" element={<Snacks />} />
           <Route path="/Prawns" element={<Prawns />} />
-          <Route path="/Katta" element={<Katta />} />
-          <Route path="/Sprats" element={<Sprats />} />
-          <Route path="/Thalapath" element={<Thalapath/>} />
-          <Route path="/Laddu" element={<Laddu />} />
-          <Route path="/MilkToffee" element={<MilkToffee />} />
-          <Route path="/RichCake" element={<RichCake />} />
-          <Route path="/Peanuts" element={<Peanuts />} />
-          <Route path="/Cashew" element={<Cashew />} />
-          <Route path="/Pistachio" element={<Pistachio/>} />
-          <Route path="/Almonds" element={<Almonds />} />
-          <Route path="/Walnuts" element={<Walnuts />} /> 
+          <Route path="/Sweets" element={<Sweets />} />
+          <Route path="/Nuts" element={<Nuts />} />
+          <Route path="/DryFishes" element={<DryFishes />} />
+           
       </Routes>
       <Footer/>
       <Popup orderPopup={orderPopup} setOrderPopup={setOrderPopup} />   
