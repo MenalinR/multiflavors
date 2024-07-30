@@ -14,14 +14,14 @@ const SnacksData = [
   {
     id: 1,
     img: snk1,
-    title:"snack",
+    title:"Corn Flour Murukku",
     
 
   },
   {
     id: 2,
     img: snk2,
-    title:"snack"
+    title:"Thenkuzhal Murukku"
 
   },
   {
@@ -39,7 +39,7 @@ const SnacksData = [
   {
     id: 5,
     img: snk5,
-    title:"snack"
+    title:"Sweet Murukku"
 
   },
   {
@@ -51,13 +51,13 @@ const SnacksData = [
   {
     id: 7,
     img: snk7,
-    title:"snack"
+    title:"Garlic Ribbon Pakoda"
 
   },
   {
     id: 8,
     img: snk8,
-    title:"snack"
+    title:"Paruthithurai Vadai"
 
   },
   {
@@ -69,7 +69,7 @@ const SnacksData = [
   {
     id: 10,
     img: snk10,
-    title:"snack"
+    title:"Dark Sweet Murukku"
 
   },
 ]
