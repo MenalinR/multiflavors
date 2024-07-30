@@ -31,7 +31,7 @@ const Sweets = () => {
   return (
     <div className='mt-14 mb-12'>
       <div className='container'>
-        <div className='text-center mb-10 '>
+        <div className='text-center mb-10  '>
           <h1 className='text-4xl font-bold font-serif'>Sweets</h1>
         </div>
         <div>
@@ -39,12 +39,12 @@ const Sweets = () => {
             {
                 SweetsData.map((data) => (
 
-                    <div className='space-y-3'>
+                    <div >
                         <img
                         src={data.img}
                         className='h-[220px] w-[200px] object-cover rounded-md' />
 
-                        <div className='text-center'>
+                        <div className='text-center pt-4'>
                             <h3 className='font-semibold'>{data.title}</h3>
                             <div className='pt-4'>
                             <button className='bg-gradient-to-r from-black to-black hover:scale-105 duration-200 text-white py-2 px-4 rounded-full font-bold'>
