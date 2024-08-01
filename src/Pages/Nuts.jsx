@@ -4,6 +4,7 @@ import nut2 from "../assets/Nuts/nut2.jpg"
 import nut3 from "../assets/Nuts/nut3.jpg"
 import nut4 from "../assets/Nuts/nut4.jpg"
 import nut5 from "../assets/Nuts/nut5.jpg"
+import nut6 from "../assets/Nuts/nut6.jpeg"
 
 const NutsData = [
   {
@@ -38,6 +39,13 @@ const NutsData = [
       id: 5,
       img: nut5,
       title:"Walnuts",
+      
+  
+    },
+    {
+      id: 6,
+      img: nut6,
+      title:"Mixed Nuts",
       
   
     },
