@@ -19,7 +19,7 @@ const SnacksData = [
 
   },
   {
-    id: 2,
+    id: 2, 
     img: snk2,
     title:"Thenkuzhal Murukku"
 
@@ -73,7 +73,7 @@ const SnacksData = [
 
   },
 ]
-const Snacks = () => {
+const Snacks = ({handleOrderPopuppage}) => {
   return (
     <div className='mt-14 mb-12'>
       <div className='container'>
@@ -92,7 +92,9 @@ const Snacks = () => {
                 <div className='text-center'>
                   <h3 className='font-semibold'>{data.title}</h3>
                   <div className='pt-4'>
-                    <button className='bg-gradient-to-r from-black to-black hover:scale-105 duration-200 text-white py-2 px-4 rounded-full font-bold'>
+                    <button 
+                    onClick={() => handleOrderPopuppage() }
+                    className='bg-gradient-to-r from-black to-black hover:scale-105 duration-200 text-white py-2 px-4 rounded-full font-bold'>
                       Select Options
 
                     </button>
