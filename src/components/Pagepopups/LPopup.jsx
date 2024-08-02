@@ -5,7 +5,7 @@ import swt1 from "../../assets/Sweets/swt1.jpg";
 
 const Popup = ({ orderLPopup,setOrderLPopup}) => {
     const [selectedWeight, setSelectedWeight] = useState('50g');
-  const [totalPrice, setTotalPrice] = useState(5);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const weightPrices = {
     '50g': 250,
