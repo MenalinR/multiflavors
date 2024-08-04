@@ -14,7 +14,7 @@ const Home = () => {
     <div>
       <First handleOrderPopup={handleOrderPopup} />
       <Products/>
-      <Testimonials/>
+      {/* <Testimonials/> */}
       
     </div>
   )
