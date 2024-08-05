@@ -1,7 +1,7 @@
 import React from 'react';
 import FooterLogo from '../../assets/multi.svg';
 import Banner from '../../assets/footer.jpg';
-import { FaInstagram, FaFacebook, FaLocationArrow, FaMobileAlt } from 'react-icons/fa';
+import { FaInstagram, FaFacebook, FaLocationArrow, FaMobileAlt, FaTiktok } from 'react-icons/fa';
 
 const BannerImg = {
   backgroundImage: `url(${Banner})`,
@@ -80,6 +80,9 @@ const Footer = () => {
                 </a>
                 <a href="https://www.facebook.com/share/Xr7k7XSrzjvPx5HA/?mibextid=qi2Omg">
                   <FaFacebook className="text-3xl" />
+                </a>
+                <a href="https://vt.tiktok.com/ZSYoPaVto/">
+                  <FaTiktok className="text-3xl" />
                 </a>
               </div>
 
