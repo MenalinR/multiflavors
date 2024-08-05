@@ -75,10 +75,10 @@ const Footer = () => {
 
             <div className="py-8 px-4">
               <div className="flex items-center gap-3">
-                <a href="#">
+                <a href="https://www.instagram.com/multi_flavours?utm_source=qr&igsh=azZhY3liNDBscDJm">
                   <FaInstagram className="text-3xl" />
                 </a>
-                <a href="#">
+                <a href="https://www.facebook.com/share/Xr7k7XSrzjvPx5HA/?mibextid=qi2Omg">
                   <FaFacebook className="text-3xl" />
                 </a>
               </div>
