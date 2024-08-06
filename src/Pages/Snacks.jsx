@@ -24,20 +24,26 @@ const SnacksData = [
 ];
 
 const Popup = ({ snack, handleClose }) => {
-  const [pieceCount, setPieceCount] = useState(0); // Default value set to 0
+  const [selectedValue, setSelectedValue] = useState(null);
+  const [quantity, setQuantity] = useState(1);
 
   if (!snack) return null;
 
-  const handlePieceCountChange = (e) => {
+  const handleValueChange = (value) => {
+    setSelectedValue(value);
+  };
+
+  const handleQuantityChange = (e) => {
     const value = e.target.value;
-    if (value >= 0) {
-      setPieceCount(value);
+    if (value >= 1) {
+      setQuantity(value);
     }
   };
 
+  const isPackItem = [1, 2, 5, 8, 10].includes(snack.id);
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-      
       <div className="relative bg-white p-8 rounded-md w-[80%] h-[60%] flex flex-row">
         <button
           onClick={handleClose}
@@ -45,49 +51,65 @@ const Popup = ({ snack, handleClose }) => {
         >
           &times;
         </button>
-        
+
         <div className="w-1/2 flex flex-col justify-center items-center pr-8">
           <img
             src={snack.img}
             className="h-full w-full object-cover"
             alt={snack.title}
           />
-          
         </div>
-        <div className="w-1/2 space-y-5 ">
+        <div className="w-1/2 space-y-5">
           <div className="space-y-2 pt-8">
-          <h3 className="font-semibold text-2xl">{snack.title}</h3>
-            <label className="block text-lg">{snack.type === "weight" ? "Weight:" : "Pieces:"}</label>
+            <h3 className="font-semibold text-2xl">{snack.title}</h3>
+            <label className="block text-lg">
+              {snack.type === "weight" ? "Weight:" : "Pieces:"}
+            </label>
             {snack.type === "weight" ? (
               <div>
-                <select className="border p-2 rounded w-full">
-                <option value="50g">50g</option>
-              <option value="100g">100g</option>
-              <option value="150g">150g</option>
-              <option value="200g">200g</option>
-              <option value="250g">250g</option>
-              <option value="300g">300g</option>
-              <option value="350g">350g</option>
-              <option value="400g">400g</option>
-              <option value="450g">450g</option>
-              <option value="500g">500g</option>
-              <option value="1kg">1kg</option>
-                </select>
+                <div className="flex flex-wrap gap-2">
+                  {[50, 100, 250, 500, 1000].map((weight) => (
+                    <button
+                      key={weight}
+                      className={`border p-2 rounded ${selectedValue === weight ? 'bg-gray-300' : ''}`}
+                      onClick={() => handleValueChange(weight)}
+                    >
+                      {weight}g
+                    </button>
+                  ))}
+                </div>
                 <p className="mt-2">Price: Rs{snack.price} per gram</p>
               </div>
             ) : (
               <div>
-                <input
-                  type="number"
-                  className="border p-2 rounded w-full"
-                  placeholder="Enter number of pieces"
-                  value={pieceCount}
-                  onChange={handlePieceCountChange}
-                   min="0"
-                />
+                <div className="flex flex-wrap gap-2">
+                  {[10, 20, 30, 40, 50].map((piece) => (
+                    <button
+                      key={piece}
+                      className={`border p-2 rounded ${selectedValue === piece ? 'bg-gray-300' : ''}`}
+                      onClick={() => handleValueChange(piece)}
+                    >
+                      {piece} pieces
+                    </button>
+                  ))}
+                </div>
                 <p className="mt-2">Price: Rs{snack.price} per piece</p>
+                {isPackItem && (
+                  <p className="mt-2 text-gray-600">Note: One pack contains 10 pieces.</p>
+                )}
               </div>
             )}
+            <div className="mt-4">
+              <label className="block text-lg">Quantity:</label>
+              <input
+                type="number"
+                className="border p-2 rounded w-100"
+                placeholder="Enter quantity"
+                value={quantity}
+                onChange={handleQuantityChange}
+                min="1"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -99,7 +121,7 @@ const Snacks = () => {
   const [selectedSnack, setSelectedSnack] = useState(null);
 
   const handleOrderPopup = (snack) => {
-    setSelectedSnack({ ...snack, pieceCount: 0 }); // Reset piece count
+    setSelectedSnack(snack);
   };
 
   const handleClosePopup = () => {
