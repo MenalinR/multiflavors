@@ -29,11 +29,15 @@ const Popup = ({ snack, handleClose }) => {
   if (!snack) return null;
 
   const handlePieceCountChange = (e) => {
-    setPieceCount(e.target.value);
+    const value = e.target.value;
+    if (value >= 0) {
+      setPieceCount(value);
+    }
   };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+      
       <div className="relative bg-white p-8 rounded-md w-[80%] h-[60%] flex flex-row">
         <button
           onClick={handleClose}
@@ -41,16 +45,18 @@ const Popup = ({ snack, handleClose }) => {
         >
           &times;
         </button>
-        <div className="w-1/2">
+        
+        <div className="w-1/2 flex flex-col justify-center items-center pr-8">
           <img
             src={snack.img}
-            className="h-[400px] w-[700px] object-cover rounded-md mb-4"
+            className="h-full w-full object-cover"
             alt={snack.title}
           />
-          <h3 className="font-semibold text-2xl">{snack.title}</h3>
+          
         </div>
-        <div className="w-1/2 space-y-4">
-          <div className="space-y-2">
+        <div className="w-1/2 space-y-5 ">
+          <div className="space-y-2 pt-8">
+          <h3 className="font-semibold text-2xl">{snack.title}</h3>
             <label className="block text-lg">{snack.type === "weight" ? "Weight:" : "Pieces:"}</label>
             {snack.type === "weight" ? (
               <div>
@@ -67,7 +73,7 @@ const Popup = ({ snack, handleClose }) => {
               <option value="500g">500g</option>
               <option value="1kg">1kg</option>
                 </select>
-                <p className="mt-2">Price: ${snack.price} per gram</p>
+                <p className="mt-2">Price: Rs{snack.price} per gram</p>
               </div>
             ) : (
               <div>
@@ -77,8 +83,9 @@ const Popup = ({ snack, handleClose }) => {
                   placeholder="Enter number of pieces"
                   value={pieceCount}
                   onChange={handlePieceCountChange}
+                   min="0"
                 />
-                <p className="mt-2">Price: ${snack.price} per piece</p>
+                <p className="mt-2">Price: Rs{snack.price} per piece</p>
               </div>
             )}
           </div>
