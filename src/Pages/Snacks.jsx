@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import snk1 from "../assets/Snacks/snk1.jpg";
 import snk2 from "../assets/Snacks/snk2.jpeg";
 import snk3 from "../assets/Snacks/snk3.png";
@@ -26,6 +26,13 @@ const SnacksData = [
 const Popup = ({ snack, handleClose }) => {
   const [selectedValue, setSelectedValue] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    if (selectedValue !== null) {
+      setTotalPrice(selectedValue * quantity * snack.price);
+    }
+  }, [selectedValue, quantity, snack.price]);
 
   if (!snack) return null;
 
@@ -59,7 +66,7 @@ const Popup = ({ snack, handleClose }) => {
             alt={snack.title}
           />
         </div>
-        <div className="w-1/2 space-y-5">
+        <div className="w-1/2 space-y-5 pt-8">
           <div className="space-y-2 pt-8">
             <h3 className="font-semibold text-2xl">{snack.title}</h3>
             <label className="block text-lg">
@@ -109,6 +116,13 @@ const Popup = ({ snack, handleClose }) => {
                 onChange={handleQuantityChange}
                 min="1"
               />
+            </div>
+            <div className="mt-4">
+              <label className="block text-lg">Total Price:</label>
+              <p className="text-xl">Rs{totalPrice}</p>
+            </div>
+            <div className="mt-4">
+              <button className='mt-5 ml-16 bg-gradient-to-r from-primary to-secondary transition-all duration-200 text-black py-1 px-4 rounded-full flex items-center gap-3 group'>Add to cart</button>
             </div>
           </div>
         </div>
