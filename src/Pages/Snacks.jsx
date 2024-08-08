@@ -50,7 +50,6 @@ const Popup = ({ snack, handleClose }) => {
     }
   };
 
-  const isPackItem = [1, 2, 5, 8, 10].includes(snack.id);
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
@@ -104,12 +103,10 @@ const Popup = ({ snack, handleClose }) => {
                   ))}
                 </div>
                 <p className="mt-2">Price: Rs{snack.price} per piece</p>
-                {isPackItem && (
-                  <p className="mt-2 text-gray-600">Note: One pack contains 10 pieces.</p>
-                )}
+                
               </div>
             )}
-            <div className="mt-4">
+            <div className="flex items-center gap-4  mt-4">
               <label className="block text-lg">Quantity:</label>
               <div className="quantity-selector inline-flex  items-center  border rounded-md">
                 <button onClick={decrementQuantity} className="quantity-button px-4 py-2 rounded-l">
@@ -125,14 +122,15 @@ const Popup = ({ snack, handleClose }) => {
                   +
                 </button>
               </div>
+              <button  className="bg-gradient-to-r from-primary to-secondary text-white py-2 px-4 rounded-md flex items-center justify-center"
+    style={{ height: '100%', minWidth: '120px' }}>Add to cart</button>
+          
             </div>
             <div className="mt-4">
               <label className="block text-lg">Total Price:</label>
               <p className="text-xl">Rs{totalPrice}</p>
             </div>
-            <div className="mt-4">
-              <button className='mt-5 ml-16 bg-gradient-to-r from-primary to-secondary transition-all duration-200 text-black py-1 px-4 rounded-full flex items-center gap-3 group'>Add to cart</button>
-            </div>
+           
           </div>
         </div>
       </div>
