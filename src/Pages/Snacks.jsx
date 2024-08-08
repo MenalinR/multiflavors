@@ -56,7 +56,7 @@ const Popup = ({ snack, handleClose }) => {
       <div className="relative bg-white p-4 md:p-8 rounded-md w-[90%] md:w-[80%] lg:w-[60%] max-h-[90%] overflow-y-auto flex flex-col md:flex-row">
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 text-black text-2xl font-bold"
+          className="absolute top-4 right-4 text-black text-2xl font-bold z-10"
         >
           &times;
         </button>
@@ -123,7 +123,7 @@ const Popup = ({ snack, handleClose }) => {
                 </button>
               </div>
               <button  className="bg-gradient-to-r from-primary to-secondary text-white py-2 px-4 rounded-md flex items-center justify-center"
-    style={{ height: '100%', minWidth: '120px' }}>Add to cart</button>
+    style={{ height: '100%', minWidth: '230px' }}>Add to cart</button>
           
             </div>
             <div className="mt-4">
