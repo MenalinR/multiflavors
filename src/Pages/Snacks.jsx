@@ -47,7 +47,7 @@ const Popup = ({ snack, handleClose }) => {
     }
   };
 
-  const isPackItem = [1, 2, 5, 8, 10].includes(snack.id);
+  // const isPackItem = [1, 2, 5, 8, 10].includes(snack.id);
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
@@ -78,7 +78,7 @@ const Popup = ({ snack, handleClose }) => {
                   {[50, 100, 250, 500, 1000].map((weight) => (
                     <button
                       key={weight}
-                      className={`border p-2 rounded ${selectedValue === weight ? 'bg-gray-300' : ''}`}
+                      className={`border p-2 rounded ${selectedValue === weight ? 'bg-gradient-to-r from-primary to-secondary' : ''}`}
                       onClick={() => handleValueChange(weight)}
                     >
                       {weight}g
@@ -93,7 +93,7 @@ const Popup = ({ snack, handleClose }) => {
                   {[10, 20, 30, 40, 50].map((piece) => (
                     <button
                       key={piece}
-                      className={`border p-2 rounded ${selectedValue === piece ? 'bg-gray-300' : ''}`}
+                      className={`border p-2 rounded ${selectedValue === piece ? 'bg-gradient-to-r from-primary to-secondary' : ''}`}
                       onClick={() => handleValueChange(piece)}
                     >
                       {piece} pieces
@@ -101,9 +101,9 @@ const Popup = ({ snack, handleClose }) => {
                   ))}
                 </div>
                 <p className="mt-2">Price: Rs{snack.price} per piece</p>
-                {isPackItem && (
+                {/* {isPackItem && (
                   <p className="mt-2 text-gray-600">Note: One pack contains 10 pieces.</p>
-                )}
+                )} */}
               </div>
             )}
             <div className="mt-4">
