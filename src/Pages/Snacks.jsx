@@ -60,12 +60,7 @@ const Popup = ({ snack, handleClose }) => {
         >
           &times;
         </button>
-        <button
-          onClick={handleClose}
-          className="absolute top-2 left-1/2 transform -translate-x-1/2 text-black text-2xl font-bold z-50 md:hidden"
-        >
-          &times;
-        </button>
+        
 
         <div className="w-full md:w-1/2 flex justify-center items-center md:pr-8">
           <img
