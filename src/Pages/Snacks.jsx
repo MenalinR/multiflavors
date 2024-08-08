@@ -56,7 +56,7 @@ const Popup = ({ snack, handleClose }) => {
       <div className="relative bg-white p-4 md:p-8 rounded-md w-[90%] md:w-[80%] lg:w-[60%] max-h-[90%] overflow-y-auto flex flex-col md:flex-row">
         <button
           onClick={handleClose}
-          className="absolute top-4 right-4 text-black text-2xl font-bold z-10"
+          className="absolute top-2 right-2 text-black text-2xl font-bold z-50 md:top-4 md:right-4"
         >
           &times;
         </button>
