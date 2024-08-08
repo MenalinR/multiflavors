@@ -40,14 +40,17 @@ const Popup = ({ snack, handleClose }) => {
     setSelectedValue(value);
   };
 
-  const handleQuantityChange = (e) => {
-    const value = e.target.value;
-    if (value >= 1) {
-      setQuantity(value);
+  const incrementQuantity = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
+  };
+
+  const decrementQuantity = () => {
+    if (quantity > 1) {
+      setQuantity((prevQuantity) => prevQuantity - 1);
     }
   };
 
-  // const isPackItem = [1, 2, 5, 8, 10].includes(snack.id);
+  const isPackItem = [1, 2, 5, 8, 10].includes(snack.id);
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
@@ -66,7 +69,7 @@ const Popup = ({ snack, handleClose }) => {
             alt={snack.title}
           />
         </div>
-        <div className="w-1/2 space-y-5 pt-8">
+        <div className="w-1/2 space-y-5">
           <div className="space-y-2 pt-8">
             <h3 className="font-semibold text-2xl">{snack.title}</h3>
             <label className="block text-lg">
@@ -101,21 +104,27 @@ const Popup = ({ snack, handleClose }) => {
                   ))}
                 </div>
                 <p className="mt-2">Price: Rs{snack.price} per piece</p>
-                {/* {isPackItem && (
+                {isPackItem && (
                   <p className="mt-2 text-gray-600">Note: One pack contains 10 pieces.</p>
-                )} */}
+                )}
               </div>
             )}
             <div className="mt-4">
               <label className="block text-lg">Quantity:</label>
-              <input
-                type="number"
-                className="border p-2 rounded w-100"
-                placeholder="Enter quantity"
-                value={quantity}
-                onChange={handleQuantityChange}
-                min="1"
-              />
+              <div className="quantity-selector inline-flex  items-center  border rounded-md">
+                <button onClick={decrementQuantity} className="quantity-button px-4 py-2 rounded-l">
+                  -
+                </button>
+                <input
+                  type="text"
+                  value={quantity}
+                  readOnly
+                  className="quantity-input  p-2 w-16 text-center"
+                />
+                <button onClick={incrementQuantity} className="quantity-button px-4 py-2 rounded-r">
+                  +
+                </button>
+              </div>
             </div>
             <div className="mt-4">
               <label className="block text-lg">Total Price:</label>
