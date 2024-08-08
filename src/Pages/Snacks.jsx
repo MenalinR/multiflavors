@@ -122,8 +122,7 @@ const Popup = ({ snack, handleClose }) => {
                   +
                 </button>
               </div>
-              <button  className="bg-gradient-to-r from-primary to-secondary text-white py-2 px-4 rounded-md flex items-center justify-center"
-    style={{ height: '100%', minWidth: '230px' }}>Add to cart</button>
+              <button  className="bg-gradient-to-r from-primary to-secondary text-white py-2 px-4 rounded-md flex items-center justify-center w-full md:w-auto h-full">Add to cart</button>
           
             </div>
             <div className="mt-4">
