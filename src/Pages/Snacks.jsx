@@ -23,6 +23,8 @@ const SnacksData = [
   { id: 10, img: snk10, title: "Dark Sweet Murukku", type: "weight", price: 1.0 },
 ];
 
+const inStockIds = [1, 5, 8];
+
 const Popup = ({ snack, handleClose }) => {
   const [selectedValue, setSelectedValue] = useState(null);
   const [quantity, setQuantity] = useState(1);
@@ -54,13 +56,14 @@ const Popup = ({ snack, handleClose }) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
       <div className="relative bg-white p-4 md:p-8 rounded-md w-[90%] md:w-[80%] lg:w-[60%] max-h-[90%] overflow-y-auto flex flex-col md:flex-row">
-        <button
+        
+        <div><button
           onClick={handleClose}
-          className="absolute top-2 right-2 text-black text-2xl font-bold z-50 md:top-4 md:right-4"
+          className="absolute top-2 right-2 text-black text-2xl font-bold z-50 md:top-4 md:right-4 md:left-auto  sm:top-4"
         >
           &times;
         </button>
-        
+        </div>
 
         <div className="w-full md:w-1/2 flex justify-center items-center md:pr-8">
           <img
@@ -157,26 +160,37 @@ const Snacks = () => {
         </div>
         <div>
           <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 place-items-center gap-5">
-            {SnacksData.map((data) => (
-              <div key={data.id} className="space-y-3">
-                <img
-                  src={data.img}
-                  className="h-[220px] w-[200px] object-cover rounded-md"
-                  alt={data.title}
-                />
-                <div className="text-center">
-                  <h3 className="font-semibold">{data.title}</h3>
-                  <div className="pt-4">
-                    <button
-                      onClick={() => handleOrderPopup(data)}
-                      className="bg-gradient-to-r from-black to-black hover:scale-105 duration-200 text-white py-2 px-4 rounded-full font-bold"
+            {SnacksData.map((data) => {
+              const inStock = inStockIds.includes(data.id);
+              return (
+                <div key={data.id} className="space-y-3">
+                  <img
+                    src={data.img}
+                    className="h-[220px] w-[200px] object-cover rounded-md"
+                    alt={data.title}
+                  />
+                  <div className="text-center">
+                    <h3 className="font-semibold">{data.title}</h3>
+                    <span
+                      className={`block mt-2 text-sm font-bold ${
+                        inStock ? 'text-green-500' : 'text-red-500'
+                      }`}
                     >
-                      Select Options
-                    </button>
+                      {inStock ? 'In Stock' : 'Out of Stock'}
+                    </span>
+                    <div className="pt-4">
+                      <button
+                        onClick={() => handleOrderPopup(data)}
+                        className="bg-gradient-to-r from-black to-black hover:scale-105 duration-200 text-white py-2 px-4 rounded-full font-bold"
+                        disabled={!inStock} // Disable the button if the item is out of stock
+                      >
+                        Select Options
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
