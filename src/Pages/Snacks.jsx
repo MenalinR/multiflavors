@@ -31,6 +31,16 @@ const Popup = ({ snack, handleClose }) => {
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
+    // Add the overflow-hidden class to the body when the popup is opened
+    document.body.classList.add('overflow-hidden');
+
+    // Remove the overflow-hidden class when the popup is closed
+    return () => {
+      document.body.classList.remove('overflow-hidden');
+    };
+  }, []);
+
+  useEffect(() => {
     if (selectedValue !== null) {
       setTotalPrice(selectedValue * quantity * snack.price);
     }
