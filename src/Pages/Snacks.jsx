@@ -62,18 +62,15 @@ const Popup = ({ snack, handleClose }) => {
     }
   };
 
-
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
       <div className="relative bg-white p-4 md:p-8 rounded-md w-[90%] md:w-[80%] lg:w-[60%] max-h-[90%] overflow-y-auto flex flex-col md:flex-row">
-        
-        <div><button
+        <button
           onClick={handleClose}
-          className="absolute top-2 right-2 text-black text-2xl font-bold z-50 md:top-4 md:right-4 md:left-auto  sm:top-4"
+          className="absolute top-2 right-2 text-black text-2xl font-bold z-50 md:top-4 md:right-4 md:left-auto sm:top-4"
         >
           &times;
         </button>
-        </div>
 
         <div className="w-full md:w-1/2 flex justify-center items-center md:pr-8">
           <img
@@ -117,12 +114,11 @@ const Popup = ({ snack, handleClose }) => {
                   ))}
                 </div>
                 <p className="mt-2">Price: Rs{snack.price} per piece</p>
-                
               </div>
             )}
-            <div className="flex items-center gap-4  mt-4">
+            <div className="flex items-center gap-4 mt-4">
               <label className="block text-lg">Quantity:</label>
-              <div className="quantity-selector inline-flex  items-center  border rounded-md">
+              <div className="quantity-selector inline-flex items-center border rounded-md">
                 <button onClick={decrementQuantity} className="quantity-button px-4 py-2 rounded-l">
                   -
                 </button>
@@ -130,20 +126,20 @@ const Popup = ({ snack, handleClose }) => {
                   type="text"
                   value={quantity}
                   readOnly
-                  className="quantity-input  p-2 w-16 text-center"
+                  className="quantity-input p-2 w-16 text-center"
                 />
                 <button onClick={incrementQuantity} className="quantity-button px-4 py-2 rounded-r">
                   +
                 </button>
               </div>
-              <button  className="bg-gradient-to-r from-primary to-secondary text-white py-2 px-4 rounded-md flex items-center justify-center w-full md:w-auto h-full">Add to cart</button>
-          
+              <button className="bg-gradient-to-r from-primary to-secondary text-white py-2 px-4 rounded-md flex items-center justify-center w-full md:w-auto h-full">
+                Add to cart
+              </button>
             </div>
             <div className="mt-4">
               <label className="block text-lg">Total Price:</label>
               <p className="text-xl">Rs{totalPrice}</p>
             </div>
-           
           </div>
         </div>
       </div>
@@ -155,7 +151,11 @@ const Snacks = () => {
   const [selectedSnack, setSelectedSnack] = useState(null);
 
   const handleOrderPopup = (snack) => {
-    setSelectedSnack(snack);
+    if (inStockIds.includes(snack.id)) {
+      setSelectedSnack(snack);
+    } else {
+      alert("Not available yet");
+    }
   };
 
   const handleClosePopup = () => {
@@ -192,7 +192,6 @@ const Snacks = () => {
                       <button
                         onClick={() => handleOrderPopup(data)}
                         className="bg-gradient-to-r from-black to-black hover:scale-105 duration-200 text-white py-2 px-4 rounded-full font-bold"
-                        disabled={!inStock} // Disable the button if the item is out of stock
                       >
                         Select Options
                       </button>
@@ -202,9 +201,11 @@ const Snacks = () => {
               );
             })}
           </div>
+          {selectedSnack && (
+            <Popup snack={selectedSnack} handleClose={handleClosePopup} />
+          )}
         </div>
       </div>
-      {selectedSnack && <Popup snack={selectedSnack} handleClose={handleClosePopup} />}
     </div>
   );
 };
