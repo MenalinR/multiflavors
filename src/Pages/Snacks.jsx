@@ -11,14 +11,14 @@ import snk9 from "../assets/Snacks/snk9.jpg";
 import snk10 from "../assets/Snacks/snk10.jpg";
 
 const SnacksData = [
-  { id: 1, img: snk1, title: "Corn Flour Murukku", type: "pieces", price: 10 },
+  { id: 1, img: snk1, title: "Corn Flour Murukku", type: "pieces", price: 30 },
   { id: 2, img: snk2, title: "Thenkuzhal Murukku", type: "pieces", price: 12 },
   { id: 3, img: snk3, title: "Snack", type: "weight", price: 0.5 },
   { id: 4, img: snk4, title: "Snack", type: "weight", price: 0.6 },
-  { id: 5, img: snk5, title: "Sweet Murukku", type: "pieces", price: 15 },
+  { id: 5, img: snk5, title: "Sweet Murukku", type: "pieces", price: 30 },
   { id: 6, img: snk6, title: "Snack", type: "weight", price: 0.7 },
   { id: 7, img: snk7, title: "Garlic Ribbon Pakoda", type: "weight", price: 0.8 },
-  { id: 8, img: snk8, title: "Paruthithurai Vadai", type: "pieces", price: 20 },
+  { id: 8, img: snk8, title: "Paruthithurai Vadai", type: "pieces", price: 30 },
   { id: 9, img: snk9, title: "Snack", type: "weight", price: 0.9 },
   { id: 10, img: snk10, title: "Dark Sweet Murukku", type: "weight", price: 1.0 },
 ];
@@ -62,6 +62,10 @@ const Popup = ({ snack, handleClose }) => {
     }
   };
 
+  const minPrice = snack.type === "weight" ? 50 * snack.price : 10 * snack.price;
+  const maxPrice = snack.type === "weight" ? 1000 * snack.price : 50 * snack.price;
+
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div className="relative bg-white p-4 md:p-8 rounded-md w-[90%] md:w-[80%] lg:w-[60%] max-h-[90%] overflow-y-auto flex flex-col md:flex-row z-60">
@@ -82,6 +86,9 @@ const Popup = ({ snack, handleClose }) => {
         <div className="w-full md:w-1/2 space-y-5 mt-4 md:mt-0">
           <div className="space-y-2 ">
             <h3 className="font-semibold text-2xl">{snack.title}</h3>
+            <p className="text-lg text-orange-400 font-bold ">
+               Rs{minPrice} - Rs{maxPrice}
+            </p>
             <label className="block text-lg">
               {snack.type === "weight" ? "Weight:" : "Pieces:"}
             </label>

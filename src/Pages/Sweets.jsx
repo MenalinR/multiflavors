@@ -70,6 +70,10 @@ const Popup = ({ sweets ,handleClose}) => {
     }
   };
 
+  const minPrice = sweets.type === "weight" ? 50 * sweets.price : 5 * sweets.price;
+  const maxPrice = sweets.type === "weight" ? 1000 * sweets.price : 20 * sweets.price;
+
+
   return(
     <div className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50'>
       <div className='relative bg-white p-4 md:p-8 rounded-md w-[90%] md:w-[80%] lg:w-[60%] max-h-[90%] overflow-y-auto flex flex-col md:flex-row  z-60'>
@@ -90,6 +94,9 @@ const Popup = ({ sweets ,handleClose}) => {
         <div className='w-full md:w-1/2 space-y-5 mt-4 md:mt-0'>
         <div className='space-y-2 '>
           <h3 className='font-semibold text-2xl'>{sweets.title}</h3>
+          <p className="text-lg text-orange-400 font-bold ">
+               Rs{minPrice} - Rs{maxPrice}
+            </p>
 
           <label className="block text-lg">
               {sweets.type === "weight" ? "Weight:" : "Pieces:"}
