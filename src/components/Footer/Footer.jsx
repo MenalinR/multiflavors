@@ -2,6 +2,7 @@ import React from 'react';
 import FooterLogo from '../../assets/multi.svg';
 import Banner from '../../assets/footer.jpg';
 import { FaInstagram, FaFacebook, FaLocationArrow, FaMobileAlt, FaTiktok } from 'react-icons/fa';
+import { FaWhatsapp } from 'react-icons/fa6';
 
 const BannerImg = {
   backgroundImage: `url(${Banner})`,
@@ -84,6 +85,9 @@ const Footer = () => {
                 <a href="https://vt.tiktok.com/ZSYoPaVto/">
                   <FaTiktok className="text-3xl" />
                 </a>
+                <a href="https://wa.me/94750606206">
+                  <FaWhatsapp className="text-3xl" />
+                </a>
               </div>
 
               <div className="mt-6 ">
@@ -93,7 +97,7 @@ const Footer = () => {
                 </div>
                 <div className="flex items-center gap-3 mt-4">
                   <FaMobileAlt />
-                  <p>+94 0777031212</p>
+                  <p>+94 750606206</p>
                 </div>
               </div>
             </div>
