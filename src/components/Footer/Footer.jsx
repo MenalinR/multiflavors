@@ -1,7 +1,7 @@
 import React from 'react';
 import FooterLogo from '../../assets/multi.svg';
 import Banner from '../../assets/footer.jpg';
-import { FaInstagram, FaFacebook, FaLocationArrow, FaMobileAlt, FaTiktok } from 'react-icons/fa';
+import { FaInstagram, FaFacebook, FaLocationArrow, FaMobileAlt, FaTiktok, FaYoutube } from 'react-icons/fa';
 import { FaWhatsapp } from 'react-icons/fa6';
 
 const BannerImg = {
@@ -87,6 +87,9 @@ const Footer = () => {
                 </a>
                 <a href="https://wa.me/94750606206">
                   <FaWhatsapp className="text-3xl" />
+                </a>
+                <a href="https://youtube.com/@multiflavours_com?si=vZhBOL4eyTzShbfo">
+                  <FaYoutube className="text-3xl" />
                 </a>
               </div>
 
