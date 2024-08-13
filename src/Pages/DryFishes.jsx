@@ -1,8 +1,8 @@
 import React,{useState,useEffect} from 'react'
 import dry1 from "../assets/Dryfishes/kat.jpg"
-import dry2 from "../assets/Dryfishes/bala.jpg"
-import dry3 from "../assets/Dryfishes/sen.jpg"
-import dry4 from "../assets/Dryfishes/dry5.png"
+import dry2 from "../assets/Dryfishes/si.jpg"
+import dry3 from "../assets/Dryfishes/se.jpg"
+import dry4 from "../assets/Dryfishes/sada.jpg"
 import dry5 from "../assets/Dryfishes/sp.jpg"
 import dry6 from "../assets/Dryfishes/sambol.jpg"
 import dry7 from "../assets/Dryfishes/raal.jpg"
@@ -20,7 +20,7 @@ const DryFishesData = [
     {
       id: 2,
       img: dry2,
-      title:"Siraya",
+      title:"Grey mullet",
       type: "weight",
       price: 3
   
@@ -36,7 +36,7 @@ const DryFishesData = [
     {
       id: 4,
       img: dry4,
-      title:"Sadayan",
+      title:"Atlantic tripletail",
       type: "weight",
       price: 3
   
