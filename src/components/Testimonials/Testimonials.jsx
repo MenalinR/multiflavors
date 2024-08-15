@@ -2,7 +2,7 @@ import React from 'react';
 import Slider from 'react-slick';
 import img1 from '../../assets/Testi/dars.jpg';
 import img2 from '../../assets/Testi/seles.jpg';
-import img3 from '../../assets/Testi/vash.jpg';
+import img3 from '../../assets/Testi/vashni.jpg';
 import img4 from '../../assets/Testi/mena.jpg';
 
 const TestimonialData = [
