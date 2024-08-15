@@ -89,7 +89,7 @@ const Testimonials = () => {
                         <div className='my-6'>
                         <div
     key={data.id}
-    className='flex flex-col gap-4 shadow-lg py-4 px-6 mx-4 rounded-xl h-[300px] w-[250px] sm:h-[300px] sm:w-[400px] md:h-[350px] md:w-[400px] lg:h-[350px] lg:w-[450px] relative'
+    className='flex flex-col gap-4 shadow-lg py-4 px-6 mx-4 rounded-xl  h-[300px] w-[250px] sm:h-[350px] sm:w-[300px] md:h-[400px] md:w-[350px] lg:h-[450px] lg:w-[400px] relative'
 >
     <div className='mb-4 flex justify-center'>
         <img
