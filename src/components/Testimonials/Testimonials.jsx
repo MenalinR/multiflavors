@@ -104,7 +104,7 @@ const Testimonials = () => {
             </p>
         </div>
         <div className='text-center px-2'>
-            <h1 className='text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-black/80 dark:text-light'>
+            <h1 className='text-xl sm:text-xl md:text-2xl lg:text-3xl font-bold text-black/80 dark:text-light'>
                 {data.name}
             </h1>
         </div>
