@@ -89,30 +89,31 @@ const Testimonials = () => {
                         <div className='my-6'>
                         <div
     key={data.id}
-    className='flex flex-col gap-4 shadow-lg py-4 px-6 mx-4 rounded-xl h-[200px] w-[500px] relative'
+    className='flex flex-col gap-4 shadow-lg py-4 px-6 mx-4 rounded-xl h-[300px] w-[250px] sm:h-[300px] sm:w-[400px] md:h-[350px] md:w-[400px] lg:h-[350px] lg:w-[450px] relative'
 >
-    <div className='mb-4 flex right-0'>
+    <div className='mb-4 flex justify-center'>
         <img
             src={data.img}
-            className='rounded-full w-20 h-20'
+            className='rounded-full w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32'
         />
     </div>
     <div className='flex flex-col items-center justify-between flex-1'>
-        <div className='text-center'>
-            <p className='text-sm text-gray-500'>
+        <div className='text-center px-2'>
+            <p className='text-sm sm:text-base md:text-lg lg:text-xl text-gray-500'>
                 {data.text}
             </p>
         </div>
-        <div className='text-center'>
-            <h1 className='text-xl font-bold text-black/80 dark:text-light'>
+        <div className='text-center px-2'>
+            <h1 className='text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-black/80 dark:text-light'>
                 {data.name}
             </h1>
         </div>
     </div>
-    <p className='text-black/20 text-9xl font-serif absolute top-0 right-5'>
+    <p className='text-black/20 text-9xl font-serif absolute top-0 right-0'>
         ''
     </p>
 </div>
+
 
                         </div>
                     ))
