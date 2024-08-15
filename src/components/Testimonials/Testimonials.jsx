@@ -89,12 +89,12 @@ const Testimonials = () => {
                         <div className='my-6'>
                         <div
     key={data.id}
-    className='flex flex-col gap-4 shadow-lg py-4 px-6 mx-4 rounded-xl  h-[300px] w-[250px] sm:h-[350px] sm:w-[300px] md:h-[400px] md:w-[350px] lg:h-[450px] lg:w-[400px] relative'
+    className='flex flex-col gap-4 shadow-lg py-4 px-6 mx-4 rounded-xl  h-[250px] w-[350px] sm:h-[300px] sm:w-[280px] md:h-[250px] md:w-[300px] lg:h-[280px] lg:w-[430px] relative'
 >
-    <div className='mb-4 flex justify-center'>
+    <div className='mb-4 flex  left-0'>
         <img
             src={data.img}
-            className='rounded-full w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32'
+            className='rounded-full w-10 h-10 sm:w-18 sm:h-18 md:w-22 md:h-22 lg:w-26 lg:h-26'
         />
     </div>
     <div className='flex flex-col items-center justify-between flex-1'>
