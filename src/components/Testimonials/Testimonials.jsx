@@ -82,10 +82,10 @@ const Testimonials = () => {
                     <h1 data-aos="fade-up" className='text-3xl font-bold'>Testimonials</h1>
                 </div>
                 <div data-aos="zoom-in">
-                    <Slider {...settings}>
+                    <Slider {...settings} className='space-x-4'>
                         {
                             TestimonialData.map((data) => (
-                                <div key={data.id} className='px-2'>  {/* Add padding here */}
+                                <div key={data.id} className='px-4'>  {/* Add padding here */}
                                     <div
                                         className='flex flex-col gap-4 shadow-lg py-4 px-6 rounded-xl h-[250px] w-[350px] sm:h-[300px] sm:w-[280px] md:h-[250px] md:w-[300px] lg:h-[280px] lg:w-[460px] relative bg-white'
                                     >
