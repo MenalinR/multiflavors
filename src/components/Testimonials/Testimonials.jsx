@@ -99,7 +99,7 @@ const Testimonials = () => {
     </div>
     <div className='flex flex-col items-center justify-between flex-1'>
         <div className='text-center px-2'>
-            <p className='text-sm sm:text-base md:text-lg lg:text-xl text-gray-500'>
+            <p className='text-sm sm:text-base md:text-sm lg:text-lg text-gray-500'>
                 {data.text}
             </p>
         </div>
