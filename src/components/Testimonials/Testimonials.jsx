@@ -89,9 +89,9 @@ const Testimonials = () => {
                         <div className='my-6'>
                         <div
     key={data.id}
-    className='flex flex-col gap-4 shadow-lg py-4 px-6 mx-4 rounded-xl  h-[250px] w-[350px] sm:h-[300px] sm:w-[280px] md:h-[250px] md:w-[300px] lg:h-[280px] lg:w-[460px] relative'
+    className='flex flex-col gap-4 shadow-lg py-4 px-6 mx-4 mb-6 rounded-xl h-[250px] w-[350px] sm:h-[300px] sm:w-[280px] md:h-[250px] md:w-[300px] lg:h-[280px] lg:w-[460px] relative'
 >
-    <div className='mb-4 flex  left-0'>
+    <div className='mb-4 flex left-0'>
         <img
             src={data.img}
             className='rounded-full w-10 h-10 sm:w-18 sm:h-18 md:w-22 md:h-22 lg:w-26 lg:h-26'
@@ -109,7 +109,9 @@ const Testimonials = () => {
             </h1>
         </div>
     </div>
-   
+    <p className='text-black/20 text-9xl font-serif absolute top-0 right-0'>
+        ''
+    </p>
 </div>
 
 
