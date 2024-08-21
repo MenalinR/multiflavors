@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import dry1 from "../assets/Dryfishes/kat.jpg"
+import dry1 from "../assets/Dryfishes/katta.jpg"
 import dry2 from "../assets/Dryfishes/si.jpg"
 import dry3 from "../assets/Dryfishes/se.jpg"
 import dry4 from "../assets/Dryfishes/sada.jpg"
@@ -14,7 +14,7 @@ const DryFishesData = [
       img: dry1,
       title:"Katta",
       type: "weight",
-      price: 3
+      price: 4
   
     },
     {
@@ -52,7 +52,7 @@ const DryFishesData = [
     {
       id: 6,
       img: dry6,
-      title:"Maldive fish onion sambol",
+      title:"Maldive fish sambol",
       type: "weight",
       price: 6
   
