@@ -13,6 +13,7 @@ import Snacks from './Pages/Snacks';
 import Prawns from './Pages/Prawns';
 import Sweets from './Pages/Sweets';
 import Nuts from './Pages/Nuts';
+import Fruits from './Pages/Fruits';
 import DryFishes from './Pages/DryFishes';
 
 const App = () => {
@@ -54,6 +55,7 @@ const App = () => {
           <Route path="/Prawns" element={<Prawns />} />
           <Route path="/Sweets" element={<Sweets handleOrderLPopup={handleLPopup} />} />
           <Route path="/Nuts" element={<Nuts />} />
+          <Route path="/Fruits" element={<Fruits />} />
           <Route path="/DryFishes" element={<DryFishes />} />
         </Routes>
         <Footer />

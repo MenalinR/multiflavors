@@ -38,6 +38,11 @@ const Menu = [
   },
   {
     id: 7,
+    name: "Fruits",
+    link: "/Fruits",
+  },
+  {
+    id: 8,
     name: "Dry Fishes",
     link: "/DryFishes",
   },
