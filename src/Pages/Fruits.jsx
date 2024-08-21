@@ -9,7 +9,7 @@ const FruitsData = [
   {
       id: 1,
       img: frd1,
-      title:"Dated",
+      title:"Dates",
       type: "weight",
       price: 2.375
   
