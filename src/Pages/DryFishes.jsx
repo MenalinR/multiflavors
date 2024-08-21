@@ -54,7 +54,7 @@ const DryFishesData = [
       img: dry6,
       title:"Maldive fish onion sambol",
       type: "weight",
-      price: 3
+      price: 6
   
     },
     {
@@ -67,7 +67,7 @@ const DryFishesData = [
     },
   
 ];
-const inStockIds = [2,3,4,5];
+const inStockIds = [1,2,3,4,5,6];
 
 
 const Popup = ({dry, handleClose}) => {
