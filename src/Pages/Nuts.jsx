@@ -197,6 +197,7 @@ const Nuts = () => {
       <div className='text-center mb-10 '>
         <h1 className='text-4xl font-bold font-serif'>Nuts</h1>
       </div>
+      
       <div>
         <div className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 place-items-center gap-8'>
         { NutsData.map((data) => {
