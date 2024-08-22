@@ -17,7 +17,7 @@ const FruitsData = [
     {
         id: 2,
         img: frd3,
-        title:"Strawberry",
+        title:"Dried Strawberry",
         type: "weight",
         price: 2.375
     
@@ -25,7 +25,7 @@ const FruitsData = [
     {
       id: 3,
       img: frd2,
-      title:"Grapes",
+      title:"Dried plums",
       type: "weight",
       price:2.375
   
