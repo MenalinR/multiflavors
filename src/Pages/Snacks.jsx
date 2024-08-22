@@ -18,7 +18,7 @@ const SnacksData = [
   { id: 5, img: snk5, title: "Sweet Murukku", type: "pieces", price: 30 },
   { id: 6, img: snk6, title: "Snack", type: "weight", price: 0.7 },
   { id: 7, img: snk7, title: "Garlic Ribbon Pakoda", type: "weight", price: 0.8 },
-  { id: 8, img: snk8, title: "Paruthithurai Vadai", type: "pieces", price: 30 },
+  { id: 8, img: snk8, title: "Point pedro Vadai", type: "pieces", price: 30 },
   { id: 9, img: snk9, title: "Snack", type: "weight", price: 0.9 },
   { id: 10, img: snk10, title: "Dark Sweet Murukku", type: "weight", price: 1.0 },
 ];
