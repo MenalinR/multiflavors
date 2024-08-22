@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import swt1 from "../assets/Sweets/swt1.jpg";
 import swt2 from "../assets/Sweets/swt2.jpg";
 import swt3 from "../assets/Sweets/swt3.jpg";
-
+import swt4 from "../assets/Sweets/swt4.jpg";
 
 
 
@@ -29,9 +29,16 @@ const SweetsData =[
     type: "pieces",
     price: 220
   },
+  {
+    id:4,
+    img:swt4,
+    title:"Dates Sweet",
+    type: "pieces",
+    price: 60
+  },
 ]
 
-const inStockIds = [1]; 
+const inStockIds = [1,4]; 
 
 const Popup = ({ sweets ,handleClose}) => {
   const [selectedValue, setSelectedValue] = useState(null);
