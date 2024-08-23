@@ -4,6 +4,7 @@ import Logo from "../../assets/multi.svg";
 import { IoMdSearch } from "react-icons/io";
 import { FaCaretDown, FaCartShopping, FaBars } from 'react-icons/fa6';
 import { FaTimes } from 'react-icons/fa';
+import { NavLink } from 'react-router-dom';
 
 const Menu = [
   {
@@ -48,7 +49,7 @@ const Menu = [
   },
 ];
 
-const Navbar = ({ handleOrderPopup }) => {
+const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const handleMobileMenuToggle = () => {
@@ -76,9 +77,9 @@ const Navbar = ({ handleOrderPopup }) => {
               <IoMdSearch className='text-gray-500 group-hover:text-primary absolute top-1/2 -translate-y-1/2 right-3' />
             </div>
             <button
-              onClick={() => handleOrderPopup()}
+             
               className='bg-gradient-to-r from-primary to-secondary transition-all duration-200 text-black py-1 px-4 rounded-full flex items-center gap-3 group'>
-              <span className='group-hover:block transition-all duration-200'>Order</span>
+              <span className='group-hover:block transition-all duration-200'>Cart</span>
               <FaCartShopping className='text-xl text-black drop-shadow-sm cursor-pointer' />
             </button>
             <button className='sm:hidden text-2xl' onClick={handleMobileMenuToggle}>
@@ -94,9 +95,15 @@ const Navbar = ({ handleOrderPopup }) => {
           {
             Menu.map((data) => (
               <li key={data.id} className='hover:translate-x-1'>
-                <Link to={data.link}
-                  className='inline-block px-4 py-2 hover:text-primary duration-200'>{data.name}</Link>
-              </li>
+                <NavLink 
+        to={data.link}
+        className={({ isActive }) => 
+          isActive 
+            ? 'inline-block px-4 py-2 text-primary duration-200' 
+            : 'inline-block px-4 py-2 hover:text-primary duration-200'
+        }>
+        {data.name}
+      </NavLink> </li>
             ))
           }
         </ul>
