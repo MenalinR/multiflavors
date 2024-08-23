@@ -1,63 +1,35 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'; // Ensure NavLink is imported
 import Logo from "../../assets/multi.svg";
 import { IoMdSearch } from "react-icons/io";
-import { FaCaretDown, FaCartShopping, FaBars } from 'react-icons/fa6';
-import { FaTimes } from 'react-icons/fa';
+import { FaShoppingCart, FaBars, FaTimes } from 'react-icons/fa'; // Updated import
+import Cart from '../../components/Cart/Cart'; // Ensure path is correct
 
 const Menu = [
-  {
-    id: 1,
-    name: "Home",
-    link: "/",
-  },
-  {
-    id: 2,
-    name: "New Arrivals",
-    link: "/NewArrivals",
-  },
-  {
-    id: 3,
-    name: "Snacks",
-    link: "/Snacks",
-  },
-  {
-    id: 4,
-    name: "Fried prawns",
-    link: "/Prawns",
-  },
-  {
-    id: 5,
-    name: "Sweets",
-    link: "/Sweets",
-  },
-  {
-    id: 6,
-    name: "Nuts",
-    link: "/Nuts",
-  },
-  {
-    id: 7,
-    name: "Fruits",
-    link: "/Fruits",
-  },
-  {
-    id: 8,
-    name: "Dry Fishes",
-    link: "/DryFishes",
-  },
+  { id: 1, name: "Home", link: "/" },
+  { id: 2, name: "New Arrivals", link: "/NewArrivals" },
+  { id: 3, name: "Snacks", link: "/Snacks" },
+  { id: 4, name: "Fried prawns", link: "/Prawns" },
+  { id: 5, name: "Sweets", link: "/Sweets" },
+  { id: 6, name: "Nuts", link: "/Nuts" },
+  { id: 7, name: "Fruits", link: "/Fruits" },
+  { id: 8, name: "Dry Fishes", link: "/DryFishes" },
 ];
 
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
 
   const handleMobileMenuToggle = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  const handleCartClick = () => {
+    setCartOpen(!cartOpen); // Toggle cart sidebar
+  };
+
   return (
     <div className='shadow-md duration-200 relative z-40'>
-      {/* upper Navbar */}
       <div className='bg-white py-4'>
         <div className='container flex justify-between items-center'>
           <div>
@@ -76,10 +48,10 @@ const Navbar = () => {
               <IoMdSearch className='text-gray-500 group-hover:text-primary absolute top-1/2 -translate-y-1/2 right-3' />
             </div>
             <button
-             
+              onClick={handleCartClick}
               className='bg-gradient-to-r from-primary to-secondary transition-all duration-200 text-black py-1 px-4 rounded-full flex items-center gap-3 group'>
               <span className='group-hover:block transition-all duration-200'>Cart</span>
-              <FaCartShopping className='text-xl text-black drop-shadow-sm cursor-pointer' />
+              <FaShoppingCart className='text-xl text-black drop-shadow-sm cursor-pointer' />
             </button>
             <button className='sm:hidden text-2xl' onClick={handleMobileMenuToggle}>
               {mobileMenuOpen ? <FaTimes /> : <FaBars />}
@@ -87,8 +59,6 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-
-      {/* lower Navbar */}
       <div
         className={`transition-all duration-300 ease-in-out transform ${
           mobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
@@ -110,6 +80,7 @@ const Navbar = () => {
           ))}
         </ul>
       </div>
+      <Cart isOpen={cartOpen} onClose={() => setCartOpen(false)} />
     </div>
   );
 };
