@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Logo from "../../assets/multi.svg";
 import { IoMdSearch } from "react-icons/io";
 import { FaCaretDown, FaCartShopping, FaBars } from 'react-icons/fa6';
 import { FaTimes } from 'react-icons/fa';
-import { NavLink } from 'react-router-dom';
 
 const Menu = [
   {
     id: 1,
     name: "Home",
-    link: "/Home",
+    link: "/",
   },
   {
     id: 2,
@@ -62,10 +61,10 @@ const Navbar = () => {
       <div className='bg-white py-4'>
         <div className='container flex justify-between items-center'>
           <div>
-            <Link to='/' className='font-bold text-2xl sm:text-4xl flex gap-2'>
+            <NavLink to='/' className='font-bold text-2xl sm:text-4xl flex gap-2'>
               <img src={Logo} alt='Logo' className='w-12 rounded-lg' />
               Multi Flavours
-            </Link>
+            </NavLink>
           </div>
           <div className='flex justify-between items-center gap-4'>
             <div className="relative group hidden sm:block">
@@ -90,22 +89,25 @@ const Navbar = () => {
       </div>
 
       {/* lower Navbar */}
-      <div className={`flex justify-center ${mobileMenuOpen ? 'block' : 'hidden'} sm:flex`}>
+      <div
+        className={`transition-all duration-300 ease-in-out transform ${
+          mobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+        } overflow-hidden sm:max-h-none sm:opacity-100 sm:flex justify-center`}
+      >
         <ul className='sm:flex items-center gap-4 flex-col sm:flex-row'>
-          {
-            Menu.map((data) => (
-              <li key={data.id} className='hover:translate-x-1'>
-                <NavLink 
-        to={data.link}
-        className={({ isActive }) => 
-          isActive 
-            ? 'inline-block px-4 py-2 text-primary duration-200' 
-            : 'inline-block px-4 py-2 hover:text-primary duration-200'
-        }>
-        {data.name}
-      </NavLink> </li>
-            ))
-          }
+          {Menu.map((data) => (
+            <li key={data.id} className='hover:translate-x-1'>
+              <NavLink 
+                to={data.link}
+                className={({ isActive }) => 
+                  isActive 
+                    ? 'inline-block px-4 py-2 text-primary duration-200' 
+                    : 'inline-block px-4 py-2 hover:text-primary duration-200'
+                }>
+                {data.name}
+              </NavLink>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
