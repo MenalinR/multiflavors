@@ -5,11 +5,11 @@ import Ad2 from '../../assets/Ad/ad2.jpg';
 import Ad3 from '../../assets/Ad/ad3.jpg';
 import Ad4 from '../../assets/Ad/ad4.jpg';
 import Ad5 from '../../assets/Ad/ad5.jpg';
-import Ad6 from '../../assets/Ad/ad6.jpg';
-import Ad7 from '../../assets/Ad/ad7.jpg';
-import Ad8 from '../../assets/Ad/ad8.jpg';
-import Ad9 from '../../assets/Ad/ad9.jpg';
-import Ad10 from '../../assets/Ad/ad10.jpg';
+import Ad6 from '../../assets/Ad/ad6.png';
+import Ad7 from '../../assets/Ad/ad7.png';
+import Ad8 from '../../assets/Ad/ad8.png';
+import Ad9 from '../../assets/Ad/ad9.png';
+import Ad10 from '../../assets/Ad/ad10.png';
 
 const AdData = [
     { id: 1, img: Ad1 },
