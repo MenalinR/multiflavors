@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import snk1 from "../assets/Snacks/snk1.jpg";
 import snk2 from "../assets/Snacks/snk2.jpeg";
-import snk3 from "../assets/Snacks/snk3.png";
+import snk3 from "../assets/Snacks/snk3.jpg";
 import snk4 from "../assets/Snacks/snk4.jpg";
 import snk5 from "../assets/Snacks/snk5.jpg";
 import snk6 from "../assets/Snacks/snk6.jpg";
@@ -11,19 +11,18 @@ import snk9 from "../assets/Snacks/snk9.jpg";
 import snk10 from "../assets/Snacks/snk10.jpg";
 
 const SnacksData = [
-  { id: 1, img: snk1, title: "Spicy Murukku", type: "weight", price: 2.5 },
-  { id: 2, img: snk2, title: "Thenkuzhal Murukku", type: "pieces", price: 12 },
-  { id: 3, img: snk3, title: "Snack", type: "weight", price: 0.5 },
-  { id: 4, img: snk4, title: "Snack", type: "weight", price: 0.6 },
-  { id: 5, img: snk5, title: "Sweet Murukku", type: "weight", price: 2.5 },
-  { id: 6, img: snk6, title: "Snack", type: "weight", price: 0.7 },
-  { id: 7, img: snk7, title: "Garlic Ribbon Pakoda", type: "weight", price: 0.8 },
-  { id: 8, img: snk8, title: "Point pedro Vadai", type: "weight", price: 2 },
-  { id: 9, img: snk9, title: "Snack", type: "weight", price: 0.9 },
-  { id: 10, img: snk10, title: "Dark Sweet Murukku", type: "weight", price: 1.0 },
+  { id: 1, img: snk1, title: "Spicy Muruku", type: "weight", price: 2.5 },
+  { id: 2, img: snk2, title: "Thenkuzhal Muruku", type: "pieces", price: 12 },
+  { id: 3, img: snk3, title: "strip Muruku", type: "weight", price: 2 },
+  { id: 4, img: snk5, title: "Sweet Murukku", type: "weight", price: 2.5 },
+  { id: 5, img: snk6, title: "Snack", type: "weight", price: 0.7 },
+  { id: 6, img: snk7, title: "Pakoda", type: "weight", price: 2 },
+  { id: 7, img: snk8, title: "Point pedro Vadai", type: "weight", price: 2 },
+  { id: 8, img: snk9, title: "Snack", type: "weight", price: 0.9 },
+  
 ];
 
-const inStockIds = [1, 5, 8];
+const inStockIds = [1,3, 4, 7];
 
 const Popup = ({ snack, handleClose }) => {
   const [selectedValue, setSelectedValue] = useState(null);
