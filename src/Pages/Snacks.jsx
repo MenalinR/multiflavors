@@ -11,14 +11,14 @@ import snk9 from "../assets/Snacks/snk9.jpg";
 import snk10 from "../assets/Snacks/snk10.jpg";
 
 const SnacksData = [
-  { id: 1, img: snk1, title: "Corn Flour Murukku", type: "pieces", price: 30 },
+  { id: 1, img: snk1, title: "Spicy Murukku", type: "weight", price: 2.5 },
   { id: 2, img: snk2, title: "Thenkuzhal Murukku", type: "pieces", price: 12 },
   { id: 3, img: snk3, title: "Snack", type: "weight", price: 0.5 },
   { id: 4, img: snk4, title: "Snack", type: "weight", price: 0.6 },
-  { id: 5, img: snk5, title: "Sweet Murukku", type: "pieces", price: 30 },
+  { id: 5, img: snk5, title: "Sweet Murukku", type: "weight", price: 2.5 },
   { id: 6, img: snk6, title: "Snack", type: "weight", price: 0.7 },
   { id: 7, img: snk7, title: "Garlic Ribbon Pakoda", type: "weight", price: 0.8 },
-  { id: 8, img: snk8, title: "Point pedro Vadai", type: "pieces", price: 30 },
+  { id: 8, img: snk8, title: "Point pedro Vadai", type: "weight", price: 2 },
   { id: 9, img: snk9, title: "Snack", type: "weight", price: 0.9 },
   { id: 10, img: snk10, title: "Dark Sweet Murukku", type: "weight", price: 1.0 },
 ];
