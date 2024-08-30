@@ -178,12 +178,9 @@ const Nuts = ({ addToCart }) => {
   const [selectedNuts, setSelectedNuts] = useState(null);
 
   const openPopup = (nuts) => {
-    if (inStockIds.includes(nuts.id)) {
+    
       setSelectedNuts(nuts);
-    } else {
-      alert("Not available yet");
-    }
-  };
+    } ;
 
   const closePopup = () => {
     setSelectedNuts(null);
@@ -205,7 +202,7 @@ const Nuts = ({ addToCart }) => {
               </p>
               <button
                 onClick={() => openPopup(nuts)}
-                className={`mt-4 px-4 py-2 rounded-md flex items-center gap-2 ${inStockIds.includes(nuts.id) ? 'bg-primary text-white' : 'bg-gray-400 cursor-not-allowed'}`}
+                className={`mt-4 px-4 py-2 rounded-md flex items-center gap-2 ${nuts.inStock  ? 'bg-primary text-white' : 'bg-gray-400 cursor-not-allowed'}`}
                 disabled={!nuts.inStock}
               >
                 Select 
