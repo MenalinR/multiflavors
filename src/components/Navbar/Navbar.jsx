@@ -1,22 +1,11 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom'; // Ensure NavLink is imported
+import { NavLink } from 'react-router-dom';
 import Logo from "../../assets/multi.svg";
 import { IoMdSearch } from "react-icons/io";
-import { FaShoppingCart, FaBars, FaTimes } from 'react-icons/fa'; // Updated import
-import Cart from '../../components/Cart/Cart'; // Ensure path is correct
+import { FaShoppingCart, FaBars, FaTimes } from 'react-icons/fa'; 
+import Cart from '../../components/Cart/Cart';
 
-const Menu = [
-  { id: 1, name: "Home", link: "/" },
-  { id: 2, name: "New Arrivals", link: "/NewArrivals" },
-  { id: 3, name: "Snacks", link: "/Snacks" },
-  { id: 4, name: "Fried prawns", link: "/Prawns" },
-  { id: 5, name: "Sweets", link: "/Sweets" },
-  { id: 6, name: "Nuts", link: "/Nuts" },
-  { id: 7, name: "Fruits", link: "/Fruits" },
-  { id: 8, name: "Dry Fishes", link: "/DryFishes" },
-];
-
-const Navbar = () => {
+const Navbar = ({ cartItems }) => { // Accept cartItems as props
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
 
@@ -25,9 +14,18 @@ const Navbar = () => {
   };
 
   const handleCartClick = () => {
-    setCartOpen(!cartOpen); // Toggle cart sidebar
+    setCartOpen(!cartOpen); 
   };
-
+  const Menu = [
+    { id: 1, name: "Home", link: "/Home" },
+    { id: 2, name: "New Arrivals", link: "/NewArrivals" },
+    { id: 3, name: "Snacks", link: "/Snacks" },
+    { id: 4, name: "Sweets", link: "/Sweets" },
+    { id: 5, name: "Nuts", link: "/Nuts" },
+    { id: 6, name: "Fruits", link: "/Fruits" },
+    { id: 7, name: "Dry Fishes", link: "/DryFishes" },
+   
+  ];
   return (
     <div className='shadow-md duration-200 relative z-40'>
       <div className='bg-white py-4'>
@@ -50,7 +48,7 @@ const Navbar = () => {
             <button
               onClick={handleCartClick}
               className='bg-gradient-to-r from-primary to-secondary transition-all duration-200 text-black py-1 px-4 rounded-full flex items-center gap-3 group'>
-              <span className='group-hover:block transition-all duration-200'>Cart</span>
+              <span className='group-hover:block transition-all duration-200'>Cart ({cartItems.length})</span> {/* Display cart size */}
               <FaShoppingCart className='text-xl text-black drop-shadow-sm cursor-pointer' />
             </button>
             <button className='sm:hidden text-2xl' onClick={handleMobileMenuToggle}>
@@ -80,7 +78,7 @@ const Navbar = () => {
           ))}
         </ul>
       </div>
-      <Cart isOpen={cartOpen} onClose={() => setCartOpen(false)} />
+      <Cart isOpen={cartOpen} onClose={() => setCartOpen(false)} cartItems={cartItems} setCartItems={() => {}} /> {/* Pass cartItems to Cart */}
     </div>
   );
 };
