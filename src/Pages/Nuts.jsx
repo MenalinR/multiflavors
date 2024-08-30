@@ -1,69 +1,24 @@
-
-import React, {useState, useEffect} from 'react'
-import nut1 from "../assets/Nuts/nut1.jpg"
-import nut2 from "../assets/Nuts/nut2.jpg"
-import nut3 from "../assets/Nuts/nut3.jpg"
-import nut4 from "../assets/Nuts/nut4.jpg"
-import nut5 from "../assets/Nuts/nut5.jpg"
-import nut6 from "../assets/Nuts/nut6.jpeg"
+import React, { useState, useEffect  } from 'react';
+import nut1 from "../assets/Nuts/nut1.jpg";
+import nut2 from "../assets/Nuts/nut2.jpg";
+import nut3 from "../assets/Nuts/nut3.jpg";
+import nut4 from "../assets/Nuts/nut4.jpg";
+import nut5 from "../assets/Nuts/nut5.jpg";
+import nut6 from "../assets/Nuts/nut6.jpeg";
+import { FaCartPlus } from "react-icons/fa";
 
 const NutsData = [
-  {
-      id: 1,
-      img: nut1,
-      title:"Cashews",
-      type: "weight",
-      price: 7.2
-  
-    },
-    {
-      id: 2,
-      img: nut2,
-      title:"Peanuts",
-      type: "weight",
-      price: 0.8
-  
-    },
-    {
-      id: 3,
-      img: nut3,
-      title:"Pistachios",
-      type: "weight",
-      price: 7.6
-  
-    },
-    {
-      id: 4,
-      img: nut4,
-      title:"Almonds",
-      type: "weight",
-      price: 5
-  
-    },
-    {
-      id: 5,
-      img: nut5,
-      title:"Walnuts",
-      type: "weight",
-      price: 5
-  
-    },
-    {
-      id: 6,
-      img: nut6,
-      title:"Mixed Nuts",
-      type: "weight",
-      price: 8
-  
-    },
+  { id: 1, img: nut1, title: "Cashews", type: "weight", price: 7.2 ,inStock: true},
+  { id: 2, img: nut2, title: "Peanuts", type: "weight",price: 0.8,inStock: false },
+  { id: 3, img: nut3, title: "Pistachios",type: "weight", price: 7.6,inStock: true },
+  { id: 4, img: nut4, title: "Almonds",type: "weight", price: 5 ,inStock: true},
+  { id: 5, img: nut5, title: "Walnuts",type: "weight", price: 5 ,inStock: true},
+  { id: 6, img: nut6, title: "Mixed Nuts",type: "weight", price: 8 ,inStock: true},
 ];
 
-const inStockIds = [1,3,4,5,6];
+const inStockIds = [1, 3, 4, 5, 6];
 
-
-
-const Popup = ({Nuts, handleClose}) => {
-  
+const Popup = ({ nuts, handleClose, addToCart }) => {
   const [selectedValue, setSelectedValue] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -76,30 +31,61 @@ const Popup = ({Nuts, handleClose}) => {
   }, []);
 
   useEffect(() => {
-    if (selectedValue !== null) {
-      setTotalPrice(selectedValue * quantity * Nuts.price);
+    if (nuts) {
+      // Calculate the total price based on selected value and quantity
+      const price = nuts.price || 0;
+      const value = selectedValue || 1; // Default to 1 if no selected value
+      setTotalPrice(price * value * quantity);
     }
-  }, [selectedValue, quantity, Nuts.price]);
-
-  if (!Nuts) return null;
-
+  }, [selectedValue, quantity, nuts.price]);
+  
   const handleValueChange = (value) => {
     setSelectedValue(value);
   };
 
-  const incrementQuantity = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
+
+  const incrementQuantity = (item) => {
+    setQuantity(prevQuantity => {
+      const newQuantity = prevQuantity + 1;
+      addToCart({ ...item, quantity: newQuantity });
+      return newQuantity;
+    });
+  };
+  
+  const decrementQuantity = (item) => {
+    setQuantity(prevQuantity => {
+      if (prevQuantity > 1) {
+        const newQuantity = prevQuantity - 1;
+        addToCart({ ...item, quantity: newQuantity });
+        return newQuantity;
+      }
+      return prevQuantity;
+    });
   };
 
-  const decrementQuantity = () => {
-    if (quantity > 1) {
-      setQuantity((prevQuantity) => prevQuantity - 1);
-    }
+  
+  const handleAddToCart = () => {
+    // Calculate the total price
+    const itemTotalPrice = nuts.price * (selectedValue || 1) * quantity;
+
+    // Create the item object to add to the cart
+    const item = {
+      id: nuts.id,
+      name: nuts.title,
+      price: nuts.price,
+      quantity: quantity,
+      totalPrice: itemTotalPrice,
+      selectedValue: selectedValue, // The selected value (e.g., weight or pieces)
+    };
+
+    addToCart(item);
+    handleClose();
   };
 
-  // Calculate min and max price for weight only
-  const minPrice = 50 * Nuts.price;
-  const maxPrice = 1000 * Nuts.price;
+  if (!nuts) return null;
+
+  const minPrice = nuts.type === "weight" ? 50 * nuts.price : 10 * nuts.price;
+  const maxPrice = nuts.type === "weight" ? 1000 * nuts.price : 50 * nuts.price;
 
 
   return (
@@ -107,28 +93,26 @@ const Popup = ({Nuts, handleClose}) => {
       <div className='relative bg-white p-4 md:p-8 rounded-md w-[90%] md:w-[80%] lg:w-[60%] max-h-[90%] overflow-y-auto flex flex-col md:flex-row z-60'>
         <button
           onClick={handleClose}
-          className='absolute top-2 right-2 text-black text-2xl font-bold z-50 md:top-4 md:right-4 md:left-auto sm:top-4'>
+          className='absolute top-2 right-2 text-black text-2xl font-bold z-50 md:top-4 md:right-4 md:left-auto sm:top-4'
+        >
           &times;
         </button>
         <div className='w-full md:w-1/2 flex justify-center items-center md:pr-8'>
-          <img
-            src={Nuts.img}
-            className='h-full w-full object-cover rounded-md'
-            alt={Nuts.title}
-          />
+          <img src={nuts.img} alt={nuts.title} className='max-w-full h-auto rounded-lg' />
         </div>
 
-        <div className='w-full md:w-1/2 space-y-5 mt-4 md:mt-0'>
-          <div className='space-y-2'>
-            <h3 className='font-semibold text-2xl'>{Nuts.title}</h3>
-            <p className="text-lg text-orange-400 font-bold ">
-              Rs{minPrice} - Rs{maxPrice}
-            </p>
-
-            <label className="block text-lg">Weight:</label>
+        <div className='w-full md:w-1/2 flex flex-col'>
+          <h2 className='text-2xl font-bold'>{nuts.title}</h2>
+          <p className="text-lg text-orange-400 font-bold ">
+            Rs{minPrice} - Rs{maxPrice}
+          </p>
+          <label className="block text-lg mt-4">
+            {nuts.type === "weight" ? "Weight:" : "Pieces:"}
+          </label>
+          {nuts.type === "weight" ? (
             <div>
-              <div className='flex flex-wrap gap-2'>
-                {[50, 100, 250, 500, 1000].map((weight) => (
+              <div className="flex flex-wrap gap-2">
+                {[50, 100, 250, 500, 1000].map(weight => (
                   <button
                     key={weight}
                     className={`border p-2 rounded ${selectedValue === weight ? 'border border-primary' : ''}`}
@@ -138,110 +122,103 @@ const Popup = ({Nuts, handleClose}) => {
                   </button>
                 ))}
               </div>
-              <p className="mt-2">Price: Rs{Nuts.price} per gram</p>
+              <p className="mt-2">Price: Rs{nuts.price} per gram</p>
             </div>
-
-            <div className='flex items-center gap-4 mt-4'>
-              <label className="block text-lg">Quantity:</label>
-              <div className="quantity-selector inline-flex items-center border rounded-md">
-                <button onClick={decrementQuantity} className="quantity-button px-4 py-2 rounded-l">
-                  -
-                </button>
-                <input
-                  type="text"
-                  value={quantity}
-                  readOnly
-                  className="quantity-input p-2 w-16 text-center"
-                />
-                <button onClick={incrementQuantity} className="quantity-button px-4 py-2 rounded-r">
-                  +
-                </button>
+          ) : (
+            <div>
+              <div className="flex flex-wrap gap-2">
+                {[10, 20, 30, 40, 50].map(piece => (
+                  <button
+                    key={piece}
+                    className={`border p-2 rounded ${selectedValue === piece ? 'border border-primary' : ''}`}
+                    onClick={() => handleValueChange(piece)}
+                  >
+                    {piece} pieces
+                  </button>
+                ))}
               </div>
-              <button className="bg-gradient-to-r from-primary to-secondary text-white py-2 px-4 rounded-md flex items-center justify-center w-full md:w-auto h-full">
-                Add to cart
+              <p className="mt-2">Price: Rs{nuts.price} per piece</p>
+            </div>
+          )}
+
+          <div className='mt-4 flex items-center gap-4'>
+            <label className="block text-lg">Quantity:</label>
+            <div className="quantity-selector inline-flex items-center border rounded-md">
+              <button onClick={decrementQuantity} className="quantity-button px-4 py-2 rounded-l">
+                -
+              </button>
+              <input
+                type="text"
+                value={quantity}
+                readOnly
+                className="quantity-input p-2 w-16 text-center"
+              />
+              <button onClick={incrementQuantity} className="quantity-button px-4 py-2 rounded-r">
+                +
               </button>
             </div>
-            <div className="mt-4">
-              <label className="block text-lg">Total Price:</label>
-              <p className="text-xl">Rs{totalPrice}</p>
-            </div>
+            <button
+              onClick={handleAddToCart}
+              className="bg-gradient-to-r from-primary to-secondary text-white py-2 px-4 rounded-md flex items-center justify-center w-full md:w-auto h-full"
+            >
+              <FaCartPlus className="mr-2" /> Add to Cart
+            </button>
+          </div>
+          <div className='mt-4'>
+            <label className="block text-lg">Total Price:</label>
+            <p className="text-xl">Rs{totalPrice}</p>
           </div>
         </div>
       </div>
     </div>
   );
-
 };
 
-
-
-const Nuts = () => {
-
+const Nuts = ({ addToCart }) => {
   const [selectedNuts, setSelectedNuts] = useState(null);
 
-  const handleOrderPopup = (Nuts) => {
-    if (inStockIds.includes(Nuts.id)) {
-      setSelectedNuts(Nuts);
+  const openPopup = (nuts) => {
+    if (inStockIds.includes(nuts.id)) {
+      setSelectedNuts(nuts);
     } else {
       alert("Not available yet");
     }
   };
 
-  const handleClosePopup = () => {
+  const closePopup = () => {
     setSelectedNuts(null);
   };
 
   return (
-    <div className='mt-14 mb-12'>
-    <div className='container'>
-      <div className='text-center mb-10 '>
-        <h1 className='text-4xl font-bold font-serif'>Nuts</h1>
+    <div className="container mx-auto py-8">
+      <h1 className="text-3xl font-bold mb-6 text-center">Nuts</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        {NutsData.map(nuts => (
+          <div key={nuts.id} className="bg-white shadow-md rounded-lg overflow-hidden">
+            <img src={nuts.img} alt={nuts.title} className="w-full h-56 object-cover" />
+            <div className="p-4">
+              <h2 className={`text-xl font-bold ${nuts.inStock ? 'text-green-500' : 'text-red-500'}`}>
+                {nuts.title}
+              </h2>
+              <p className={`mt-2 ${nuts.inStock ? 'text-green-500' : 'text-red-500'}`}>
+                {nuts.inStock ? 'In Stock' : 'Out of Stock'}
+              </p>
+              <button
+                onClick={() => openPopup(nuts)}
+                className={`mt-4 px-4 py-2 rounded-md flex items-center gap-2 ${inStockIds.includes(nuts.id) ? 'bg-primary text-white' : 'bg-gray-400 cursor-not-allowed'}`}
+                disabled={!nuts.inStock}
+              >
+                Select 
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
-      
-      <div>
-        <div className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 place-items-center gap-8'>
-        { NutsData.map((data) => {
-                  const inStock = inStockIds.includes(data.id);
-
-                  return(
-                  <div key={data.id}  className='space-y-3'>
-                        <img
-                        src={data.img}
-                        className='h-[220px] w-[200px] object-cover rounded-md' />
-
-                        <div className='text-center'>
-                            <h3 className='font-semibold'>{data.title}</h3>
-                            <span
-                      className={`block mt-2 text-sm font-bold ${
-                        inStock ? 'text-green-500' : 'text-red-500'
-                      }`}
-                    >
-                      {inStock ? 'In Stock' : 'Out of Stock'}
-                    </span>
-                            <div className='pt-4'>
-                            <button 
-                            onClick={() => handleOrderPopup(data)}
-                            className='bg-gradient-to-r from-black to-black hover:scale-105 duration-200 text-white py-2 px-4 rounded-full font-bold'>
-                            Select Options
-
-                    </button>
-                            </div>
-
-                        </div>
-
-                    </div>
-                  );
-})}
-
-        </div>
-        {selectedNuts && (
-            <Popup Nuts={selectedNuts} handleClose={handleClosePopup} />
-          )}
-      </div>
-
+      {selectedNuts && (
+        <Popup nuts={selectedNuts} handleClose={closePopup} addToCart={addToCart} />
+      )}
     </div>
-  </div>
-  )
-}
+  );
+};
 
-export default Nuts
+export default Nuts;
