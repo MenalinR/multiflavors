@@ -217,7 +217,7 @@ const Sweets = ({ addToCart }) => {
   return (
     <div className="container mx-auto py-8">
       <h1 className="text-3xl font-bold mb-6 text-center">Sweets</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  lg:grid-cols-4 gap-8">
         {SweetsData.map(sweet => (
           <div key={sweet.id} className="bg-white shadow-md rounded-lg overflow-hidden">
             <img src={sweet.img} alt={sweet.title} className="w-full h-56 object-cover" />
