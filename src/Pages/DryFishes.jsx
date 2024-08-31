@@ -258,20 +258,24 @@ const DryFishes = ({ addToCart }) => {
                 className="w-full h-56 object-cover"
               />
               <div className="p-4">
+              <div className="flex justify-between items-center">
+              <div>
                 <h2 className={`text-xl font-bold ${dryFish.inStock ? 'text-green-500' : 'text-red-500'}`}>
                   {dryFish.title}
                 </h2>
                 <p className={`mt-2 ${dryFish.inStock ? 'text-green-500' : 'text-red-500'}`}>
                   {dryFish.inStock ? 'In Stock' : 'Out of Stock'}
                 </p>
+                </div>
                 <button
                   onClick={() => openPopup(dryFish)}
                   className={`mt-4 px-4 py-2 rounded-md flex items-center gap-2 ${dryFish.inStock ? 'bg-primary text-white' : 'bg-gray-400 cursor-not-allowed'}`}
                   disabled={!dryFish.inStock}
                 >
-                  Select Options
+                  Select 
                 </button>
               </div>
+            </div>
             </div>
           
         ))}

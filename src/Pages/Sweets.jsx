@@ -217,24 +217,26 @@ const Sweets = ({ addToCart }) => {
   return (
     <div className="container mx-auto py-8">
       <h1 className="text-3xl font-bold mb-6 text-center">Sweets</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3  lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {SweetsData.map(sweet => (
           <div key={sweet.id} className="bg-white shadow-md rounded-lg overflow-hidden">
             <img src={sweet.img} alt={sweet.title} className="w-full h-56 object-cover" />
             <div className="p-4">
-              <h2 className={`text-xl font-bold ${sweet.inStock ? 'text-green-500' : 'text-red-500'}`}>
-                {sweet.title}
-              </h2>
-              <p className={`mt-2 ${sweet.inStock ? 'text-green-500' : 'text-red-500'}`}>
-                {sweet.inStock ? 'In Stock' : 'Out of Stock'}
-              </p>
-              <button
-                onClick={() => openPopup(sweet)}
-                className={`mt-4 px-4 py-2 rounded-md flex items-center gap-2 ${sweet.inStock ? 'bg-primary text-white' : 'bg-gray-400 cursor-not-allowed'}`}
-                disabled={!sweet.inStock}
-              >
-                Select
-              </button>
+              <div className="flex justify-between items-center">
+                <div>
+                  <h2 className="text-xl font-bold">{sweet.title}</h2>
+                  <p className={`mt-1 ${sweet.inStock ? 'text-green-500' : 'text-red-500'}`}>
+                    {sweet.inStock ? 'In Stock' : 'Out of Stock'}
+                  </p>
+                </div>
+                <button
+                  onClick={() => openPopup(sweet)}
+                  className={`ml-4 px-4 py-2 rounded-md ${sweet.inStock ? 'bg-primary text-white' : 'bg-gray-400 cursor-not-allowed'}`}
+                  disabled={!sweet.inStock}
+                >
+                  Select
+                </button>
+              </div>
             </div>
           </div>
         ))}

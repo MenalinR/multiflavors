@@ -194,12 +194,15 @@ const Nuts = ({ addToCart }) => {
           <div key={nuts.id} className="bg-white shadow-md rounded-lg overflow-hidden">
             <img src={nuts.img} alt={nuts.title} className="w-full h-56 object-cover" />
             <div className="p-4">
+            <div className="flex justify-between items-center">
+            <div>
               <h2 className={`text-xl font-bold ${nuts.inStock ? 'text-green-500' : 'text-red-500'}`}>
                 {nuts.title}
               </h2>
               <p className={`mt-2 ${nuts.inStock ? 'text-green-500' : 'text-red-500'}`}>
                 {nuts.inStock ? 'In Stock' : 'Out of Stock'}
               </p>
+              </div>
               <button
                 onClick={() => openPopup(nuts)}
                 className={`mt-4 px-4 py-2 rounded-md flex items-center gap-2 ${nuts.inStock  ? 'bg-primary text-white' : 'bg-gray-400 cursor-not-allowed'}`}
@@ -208,6 +211,7 @@ const Nuts = ({ addToCart }) => {
                 Select 
               </button>
             </div>
+          </div>
           </div>
         ))}
       </div>

@@ -201,12 +201,15 @@ const Snacks = ({ addToCart }) => {
             <div key={snack.id} className="bg-white shadow-md rounded-lg overflow-hidden">
               <img src={snack.img} alt={snack.title} className="w-full h-56 object-cover" />
               <div className="p-4">
+              <div className="flex justify-between items-center">
+              <div>
                 <h2 className={`text-xl font-bold ${snack.inStock ? 'text-green-500' : 'text-red-500'}`}>
                   {snack.title}
                 </h2>
                 <p className={`mt-2 ${snack.inStock ? 'text-green-500' : 'text-red-500'}`}>
                   {snack.inStock ? 'In Stock' : 'Out of Stock'}
                 </p>
+                </div>
                 <button
                   onClick={() => openPopup(snack)}
                   className={`mt-4 px-4 py-2 rounded-md flex items-center gap-2 ${snack.inStock ? 'bg-primary text-white' : 'bg-gray-400 cursor-not-allowed'}`}
@@ -215,6 +218,7 @@ const Snacks = ({ addToCart }) => {
                   Select
                 </button>
               </div>
+            </div>
             </div>
         
         ))}
