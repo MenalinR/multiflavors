@@ -3,7 +3,7 @@ import snk5 from "../assets/Snacks/snk5.jpg"
 import snk8 from "../assets/Snacks/snk8.jpg"
 import dry1 from "../assets/Dryfishes/sambol.jpg"
 import swt1 from "../assets/Sweets/swt4.jpg"
-
+import snk7 from "../assets/Snacks/snk7.jpg"
 
 const NewarrivalData = [
   {
@@ -34,6 +34,11 @@ const NewarrivalData = [
       
   
     },
+    { id: 5, 
+      img: snk7,
+       title: "Pakoda"
+     },
+
     
   
 ]
@@ -57,10 +62,7 @@ const NewArrivals = () => {
                     <div className='text-center'>
                         <h3 className='font-semibold'>{data.title}</h3>
                         <div className='pt-4'>
-                        <button className='bg-gradient-to-r from-black to-black hover:scale-105 duration-200 text-white py-2 px-4 rounded-full font-bold'>
-                        Select Options
-
-                </button>
+                        
                         </div>
 
                     </div>
