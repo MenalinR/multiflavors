@@ -16,6 +16,22 @@ const BannerImg = {
 
 const FooterLinks = [
   {
+    title: 'Introduction',
+    link: '/#',
+  },
+  {
+    title: 'Our Products',
+    link: '/#about',
+  },
+  {
+    title: 'Advertisement',
+    link: '/#contact',
+  },
+  
+];
+
+const FooterSecondLinks = [
+  {
     title: 'Home',
     link: '/#',
   },
@@ -64,7 +80,7 @@ const Footer = () => {
             <div className="py-8 px-4 pl-8">
               <h2 className="sm:text-3xl text-xl font-bold sm:text-left text-justify mb-3">Important Links</h2>
               <ul className="flex flex-col gap-3">
-                {FooterLinks.map((link) => (
+                {FooterSecondLinks.map((link) => (
                   <li
                     className="cursor-pointer hover:text-primary hover:translate-x-1 duration-300"
                     key={link.title}
