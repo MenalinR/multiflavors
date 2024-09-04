@@ -48,7 +48,7 @@ const Cart = ({ isOpen, onClose, cartItems, onDelete }) => {
         </button>
         {isUnderConstruction ? (
           <div className="text-center">
-            <p className="text-xl font-semibold">This page is still under construction, sorry for the inconvenience! You can easily order through Instagram, PickMe, UberEats, or WhatsApp. Links are in the footer!</p>
+            <p className="text-xl font-semibold">We are currently building our cart ordering feature, so it's not quite ready yet. In the meantime, you can easily place your orders through Instagram, PickMe, UberEats, or WhatsApp. Just check the footer for the links!</p>
           </div>
         ) : (
           <>
