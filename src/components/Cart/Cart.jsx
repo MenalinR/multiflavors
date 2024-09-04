@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const CartItem = ({ item, onDelete }) => {
   // Calculate the total price for the item
@@ -18,17 +18,13 @@ const CartItem = ({ item, onDelete }) => {
       <div className="w-[23%] text-right">
         <p>= Rs {itemTotalPrice}</p>
       </div>
-      {/* <button
-        onClick={() => onDelete(item.id)}
-        className="text-red-500 hover:text-red-700 font-bold ml-4"
-      >
-        Remove
-      </button> */}
     </div>
   );
 };
 
 const Cart = ({ isOpen, onClose, cartItems, onDelete }) => {
+  const [isUnderConstruction, setIsUnderConstruction] = useState(false);
+
   if (!isOpen) return null;
 
   // Calculate the total price for all items in the cart
@@ -36,6 +32,10 @@ const Cart = ({ isOpen, onClose, cartItems, onDelete }) => {
     cartItems.reduce((total, item) => total + (item.totalPrice || 0), 0);
 
   const isCartEmpty = cartItems.length === 0;
+
+  const handleCheckoutClick = () => {
+    setIsUnderConstruction(true);
+  };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
@@ -46,30 +46,40 @@ const Cart = ({ isOpen, onClose, cartItems, onDelete }) => {
         >
           &times;
         </button>
-        <h2 className="text-2xl font-semibold mb-4">Your Cart</h2>
-        {isCartEmpty ? (
-          <p className="text-lg">Your cart is empty.</p>
-        ) : (
-          <div>
-            {/* Header Row */}
-            <div className="flex justify-between items-center border-b py-2 font-semibold">
-              <div className="w-[23%] mr-2">Item</div>
-              <div className="w-[23%] mr-2 text-center">Price</div>
-              <div className="w-[23%] mr-2 text-center">Quantity</div>
-              <div className="w-[23%] text-right">Total</div>
-              <div className="flex-none"></div>
-            </div>
-            {cartItems.map((item) => (
-              <CartItem key={item.id} item={item} onDelete={onDelete} />
-            ))}
-            <div className="flex justify-between items-center mt-4">
-              <span className="text-lg font-semibold">Total Price:</span>
-              <span className="text-lg font-bold">Rs {calculateTotalPrice()}</span>
-            </div>
-            <button className="bg-primary text-white py-2 px-4 rounded-md mt-4 w-full">
-              Checkout
-            </button>
+        {isUnderConstruction ? (
+          <div className="text-center">
+            <p className="text-xl font-semibold">This page is still under construction, sorry for the inconvenience! You can easily order through Instagram, PickMe, UberEats, or WhatsApp. Links are in the footer!</p>
           </div>
+        ) : (
+          <>
+            <h2 className="text-2xl font-semibold mb-4">Your Cart</h2>
+            {isCartEmpty ? (
+              <p className="text-lg">Your cart is empty.</p>
+            ) : (
+              <div>
+                {/* Header Row */}
+                <div className="flex justify-between items-center border-b py-2 font-semibold">
+                  <div className="w-[23%] mr-2">Item</div>
+                  <div className="w-[23%] mr-2 text-center">Price</div>
+                  <div className="w-[23%] mr-2 text-center">Quantity</div>
+                  <div className="w-[23%] text-right">Total</div>
+                </div>
+                {cartItems.map((item) => (
+                  <CartItem key={item.id} item={item} onDelete={onDelete} />
+                ))}
+                <div className="flex justify-between items-center mt-4">
+                  <span className="text-lg font-semibold">Total Price:</span>
+                  <span className="text-lg font-bold">Rs {calculateTotalPrice()}</span>
+                </div>
+                <button
+                  onClick={handleCheckoutClick}
+                  className="bg-primary text-white py-2 px-4 rounded-md mt-4 w-full"
+                >
+                  Checkout
+                </button>
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>
@@ -77,4 +87,3 @@ const Cart = ({ isOpen, onClose, cartItems, onDelete }) => {
 };
 
 export default Cart;
-
