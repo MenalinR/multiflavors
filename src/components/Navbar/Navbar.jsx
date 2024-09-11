@@ -23,7 +23,7 @@ const Navbar = ({ cartItems }) => { // Accept cartItems as props
     { id: 4, name: "Sweets", link: "/Sweets" },
     { id: 5, name: "Nuts", link: "/Nuts" },
     { id: 6, name: "Fruits", link: "/Fruits" },
-    { id: 7, name: "Dry Fishes", link: "/DryFishes" },
+    { id: 7, name: "Dry Fish", link: "/DryFishes" },
    
   ];
   return (
