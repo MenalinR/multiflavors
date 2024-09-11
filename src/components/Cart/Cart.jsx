@@ -43,8 +43,14 @@ const Cart = ({ isOpen, onClose, cartItems, onDelete }) => {
   
     const totalPrice = calculateTotalPrice();
     console.log(totalPrice);
-    navigate('/Checkout', { state: { cartItems, totalPrice } });
-  };  
+  
+    // Close the cart modal first
+    onClose();
+  
+    // Navigate to the checkout page
+    navigate('/checkout', { state: { cartItems, totalPrice } });
+  };
+  
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
