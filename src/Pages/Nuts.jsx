@@ -58,7 +58,7 @@ const Popup = ({ nuts, handleClose, addToCart }) => {
     // Create the item object to add to the cart
     const item = {
       id: nuts.id,
-      image: nuts.img,
+      type:nuts.type,
       name: nuts.title,
       price: nuts.price,
       quantity: quantity,

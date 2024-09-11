@@ -121,6 +121,7 @@ const Popup = ({dryFish, handleClose, addToCart}) => {
     // Create the item object to add to the cart
     const item = {
       id: dryFish.id,
+      type:dryFish.type,
       name: dryFish.title,
       price: dryFish.price,
       quantity: quantity,
