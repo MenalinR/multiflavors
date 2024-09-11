@@ -4,6 +4,18 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/assets/MF-D_2HghKt.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="text/javascript">
+      (function(l) {
+        if (l.search[1] === '/' ) {
+          var decoded = l.search.slice(1).split('&').map(function(s) { 
+            return s.replace(/~and~/g, '&')
+          }).join('?');
+          window.history.replaceState(null, null,
+              l.pathname.slice(0, -1) + decoded + l.hash
+          );
+        }
+      }(window.location))
+    </script>
     <title>Muliflavours - Taste the Art of Flavours in Sri Lanka</title>
     <meta name="description" content="Muliflavours offers top-quality dry fish from Mannar, Sri Lanka, along with a variety of snacks including spicy muruku, sweet muruku, laddu, milk toffee, date toffee, and Halal rich cake. We also provide a range of nuts such as cashew nuts, salted pistachios, almonds, and walnuts. Located in Nugegoda, Colombo, we offer delivery across Sri Lanka.">
     <script type="application/ld+json">
