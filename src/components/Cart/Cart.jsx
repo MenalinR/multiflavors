@@ -42,6 +42,7 @@ const Cart = ({ isOpen, onClose, cartItems, onDelete }) => {
     }
   
     const totalPrice = calculateTotalPrice();
+    console.log(totalPrice);
     navigate('/Checkout', { state: { cartItems, totalPrice } });
   };  
 
