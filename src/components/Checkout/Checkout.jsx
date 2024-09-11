@@ -16,6 +16,10 @@ const Checkout = () => {
     deliveryMethod: 'ship' 
   });
 
+  const deliveryFee = formData.deliveryMethod === 'ship' ? 350 : 0;
+  const totalWithDelivery = totalPrice + deliveryFee;
+
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevState) => ({
@@ -33,7 +37,7 @@ const Checkout = () => {
     }
 
     const orderDetails = cartItems.map(
-      (item) => `${item.name} (${item.quantity} x ${item.selectedValue}${item.unit})`
+      (item) => `${item.name} (${item.quantity} x ${item.selectedValue}${item.type === "weight" ? "g" :  "pcs" })`
     ).join(', ');
 
     const emailData = {
@@ -178,8 +182,8 @@ const Checkout = () => {
                 {/* <img src={item.imageUrl} alt={item.name} className="w-12 h-12 object-cover rounded mr-4" /> */}
                 <div>
                   <h3 className="font-semibold">{item.name}</h3>
-                  <p className="text-sm text-gray-500">{item.selectedValue} {item.unit}</p>
-                  <p className="text-sm text-gray-500">Rs {item.price}</p>
+                  <p className="text-sm text-gray-500">{item.selectedValue} {item.type === "pieces" ? "pcs" : "g"}</p>
+                  <p className="text-sm text-gray-500">{item.quantity} </p>
                 </div>
               </div>
             ))}
@@ -193,18 +197,18 @@ const Checkout = () => {
             </div>
           </div>
 
-          {/* Delivery Method */}
-          {formData.deliveryMethod === 'pickup' && (
+            {/* Delivery Fee */}
+            {formData.deliveryMethod === 'ship' && (
             <div className="mb-4 flex justify-between">
-              <span className="text-sm text-gray-500">Pickup in store</span>
-              <span className="text-sm font-semibold">FREE</span>
+              <span className="text-sm text-gray-500">Delivery Fee</span>
+              <span className="text-sm font-semibold">Rs 350</span>
             </div>
           )}
 
-          {/* Total */}
-          <div className="border-t pt-4 flex justify-between items-center">
+{/* Total */}
+<div className="border-t pt-4 flex justify-between items-center">
             <span className="text-lg font-semibold">Total</span>
-            <span className="text-lg font-bold">Rs {totalPrice}</span>
+            <span className="text-lg font-bold">Rs {totalWithDelivery}</span>
           </div>
         </div>
       </div>
