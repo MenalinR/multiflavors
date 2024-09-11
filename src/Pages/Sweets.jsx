@@ -13,7 +13,7 @@ const SweetsData =[
     img:swt1,
     title:"Laddu",
     type: "pieces",
-    price: 60,
+    price: 50,
     inStock: true
   },
   {
