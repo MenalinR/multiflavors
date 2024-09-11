@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const CartItem = ({ item, onDelete }) => {
   // Calculate the total price for the item
@@ -24,18 +25,25 @@ const CartItem = ({ item, onDelete }) => {
 
 const Cart = ({ isOpen, onClose, cartItems, onDelete }) => {
   const [isUnderConstruction, setIsUnderConstruction] = useState(false);
+  const navigate = useNavigate();
 
   if (!isOpen) return null;
 
   // Calculate the total price for all items in the cart
   const calculateTotalPrice = () =>
-    cartItems.reduce((total, item) => total + (item.totalPrice || 0), 0);
+    cartItems.reduce((total, item) => total + (item.totalPrice || item.price * item.quantity * item.selectedValue), 0);
 
   const isCartEmpty = cartItems.length === 0;
 
   const handleCheckoutClick = () => {
-    setIsUnderConstruction(true);
-  };
+    if (!cartItems || cartItems.length === 0) {
+      alert("Your cart is empty! Add items before checking out.");
+      return;
+    }
+  
+    const totalPrice = calculateTotalPrice();
+    navigate('/Checkout', { state: { cartItems, totalPrice } });
+  };  
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
@@ -48,7 +56,11 @@ const Cart = ({ isOpen, onClose, cartItems, onDelete }) => {
         </button>
         {isUnderConstruction ? (
           <div className="text-center">
-            <p className="text-xl font-semibold">We are currently building our cart ordering feature, so it's not quite ready yet. In the meantime, you can easily place your orders through Instagram, PickMe, UberEats, or WhatsApp. Just check the footer for the links!</p>
+            <p className="text-xl font-semibold">
+              We are currently building our cart ordering feature, so it's not quite ready yet.
+              In the meantime, you can easily place your orders through Instagram, PickMe, UberEats, or WhatsApp.
+              Just check the footer for the links!
+            </p>
           </div>
         ) : (
           <>

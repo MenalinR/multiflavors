@@ -13,6 +13,7 @@ import Nuts from './Pages/Nuts';
 import Fruits from './Pages/Fruits';
 import DryFishes from './Pages/DryFishes';
 import Cart from './components/Cart/Cart';
+import Checkout from './components/Checkout/Checkout'
 
 const App = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -104,6 +105,7 @@ const App = () => {
             cartItems={cartItems}
             onDelete={handleDeleteItem}
           />} />
+          <Route path="/Checkout" element={<Checkout />} />
         </Routes>
         <Footer />
       </div>
