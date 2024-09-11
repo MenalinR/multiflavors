@@ -79,7 +79,7 @@ const inStockIds = [1,2,3,4,5,6];
 
 const Popup = ({dryFish, handleClose, addToCart}) => {
 
-  const [selectedValue, setSelectedValue] = useState(null);
+  const [selectedValue, setSelectedValue] = useState(50);
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -105,23 +105,12 @@ const Popup = ({dryFish, handleClose, addToCart}) => {
     setSelectedValue(value);
   };
 
-  const incrementQuantity = (item) => {
-    setQuantity(prevQuantity => {
-      const newQuantity = prevQuantity + 1;
-      addToCart({ ...item, quantity: newQuantity });
-      return newQuantity;
-    });
+  const incrementQuantity = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
   };
-  
-  const decrementQuantity = (item) => {
-    setQuantity(prevQuantity => {
-      if (prevQuantity > 1) {
-        const newQuantity = prevQuantity - 1;
-        addToCart({ ...item, quantity: newQuantity });
-        return newQuantity;
-      }
-      return prevQuantity;
-    });
+
+  const decrementQuantity = () => {
+    setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : prevQuantity));
   };
   
 

@@ -19,7 +19,7 @@ const NutsData = [
 const inStockIds = [1, 3, 4, 5, 6];
 
 const Popup = ({ nuts, handleClose, addToCart }) => {
-  const [selectedValue, setSelectedValue] = useState(null);
+  const [selectedValue, setSelectedValue] = useState(50); // Set a default value (e.g., 50 grams or pieces)
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -38,32 +38,19 @@ const Popup = ({ nuts, handleClose, addToCart }) => {
       setTotalPrice(price * value * quantity);
     }
   }, [selectedValue, quantity, nuts.price]);
-  
+
   const handleValueChange = (value) => {
     setSelectedValue(value);
   };
 
-
-  const incrementQuantity = (item) => {
-    setQuantity(prevQuantity => {
-      const newQuantity = prevQuantity + 1;
-      addToCart({ ...item, quantity: newQuantity });
-      return newQuantity;
-    });
-  };
-  
-  const decrementQuantity = (item) => {
-    setQuantity(prevQuantity => {
-      if (prevQuantity > 1) {
-        const newQuantity = prevQuantity - 1;
-        addToCart({ ...item, quantity: newQuantity });
-        return newQuantity;
-      }
-      return prevQuantity;
-    });
+  const incrementQuantity = () => {
+    setQuantity((prevQuantity) => prevQuantity + 1);
   };
 
-  
+  const decrementQuantity = () => {
+    setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : prevQuantity));
+  };
+
   const handleAddToCart = () => {
     // Calculate the total price
     const itemTotalPrice = nuts.price * (selectedValue || 1) * quantity;
@@ -71,6 +58,7 @@ const Popup = ({ nuts, handleClose, addToCart }) => {
     // Create the item object to add to the cart
     const item = {
       id: nuts.id,
+      image: nuts.img,
       name: nuts.title,
       price: nuts.price,
       quantity: quantity,
@@ -86,7 +74,6 @@ const Popup = ({ nuts, handleClose, addToCart }) => {
 
   const minPrice = nuts.type === "weight" ? 50 * nuts.price : 10 * nuts.price;
   const maxPrice = nuts.type === "weight" ? 1000 * nuts.price : 50 * nuts.price;
-
 
   return (
     <div className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50'>
@@ -104,7 +91,7 @@ const Popup = ({ nuts, handleClose, addToCart }) => {
         <div className='w-full md:w-1/2 flex flex-col'>
           <h2 className='text-2xl font-bold'>{nuts.title}</h2>
           <p className="text-lg text-orange-400 font-bold ">
-            Rs{minPrice} - Rs{maxPrice}
+            Rs {minPrice} - Rs {maxPrice}
           </p>
           <label className="block text-lg mt-4">
             {nuts.type === "weight" ? "Weight:" : "Pieces:"}
@@ -122,7 +109,7 @@ const Popup = ({ nuts, handleClose, addToCart }) => {
                   </button>
                 ))}
               </div>
-              <p className="mt-2">Price: Rs{nuts.price} per gram</p>
+              <p className="mt-2">Price: Rs {nuts.price} per gram</p>
             </div>
           ) : (
             <div>
@@ -137,7 +124,7 @@ const Popup = ({ nuts, handleClose, addToCart }) => {
                   </button>
                 ))}
               </div>
-              <p className="mt-2">Price: Rs{nuts.price} per piece</p>
+              <p className="mt-2">Price: Rs {nuts.price} per piece</p>
             </div>
           )}
 
@@ -166,7 +153,7 @@ const Popup = ({ nuts, handleClose, addToCart }) => {
           </div>
           <div className='mt-4'>
             <label className="block text-lg">Total Price:</label>
-            <p className="text-xl">Rs{totalPrice}</p>
+            <p className="text-xl">Rs {totalPrice}</p>
           </div>
         </div>
       </div>
