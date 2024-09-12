@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import emailjs from 'emailjs-com';
 
 const Checkout = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { cartItems = [], totalPrice = 0 } = location.state || {};
   const [showPopup, setShowPopup] = useState(false);
 
@@ -99,6 +100,7 @@ const Checkout = () => {
 
   const closePopup = () => {
     setShowPopup(false); // Close the popup when the user clicks the close button
+    navigate('/');
   };
 
   return (
@@ -238,11 +240,11 @@ const Checkout = () => {
               <p>Order placed successfully! Check your email for details.</p>
               <p className="font-semibold">See you soon!</p>
               <button
-                onClick={closePopup}
-                className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
-              >
-                OK
-              </button>
+                  onClick={closePopup}
+                  className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
+                >
+                  Back to Home
+                </button>
             </div>
           </div>
         </div>
