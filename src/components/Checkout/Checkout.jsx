@@ -5,11 +5,12 @@ import emailjs from 'emailjs-com';
 const Checkout = () => {
   const location = useLocation();
   const { cartItems = [], totalPrice = 0 } = location.state || {};
+  const [showPopup, setShowPopup] = useState(false);
 
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '', 
+    phone: '',
     address: '',
     city: '',
     zipCode: '',
@@ -19,8 +20,8 @@ const Checkout = () => {
   const deliveryFee = formData.deliveryMethod === 'ship' ? 350 : 0;
   const totalWithDelivery = totalPrice + deliveryFee;
 
-  const calculateTotal = (quantity,selectedvalue,unitprice) =>{
-    return quantity*selectedvalue*unitprice;
+  const calculateTotal = (quantity, selectedValue, unitPrice) => {
+    return quantity * selectedValue * unitPrice;
   };
 
   const handleInputChange = (e) => {
@@ -32,7 +33,7 @@ const Checkout = () => {
   };
 
   const handlePlaceOrder = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent form refresh
 
     if (cartItems.length === 0) {
       alert("Your cart is empty.");
@@ -68,12 +69,18 @@ const Checkout = () => {
         'K0Ef5J7b9o9PYSdzd'
       )
       .then((response) => {
-        alert('Order placed successfully! Check your email for details.');
+        // Show popup after successful order placement
+        setShowPopup(true);
+       
       })
       .catch((error) => {
         console.error('Failed to send email:', error);
         alert('Failed to place order. Please try again.');
       });
+  };
+
+  const closePopup = () => {
+    setShowPopup(false); // Close the popup when the user clicks the close button
   };
 
   return (
@@ -200,6 +207,29 @@ const Checkout = () => {
           </form>
         </div>
 
+        {/* Popup for Successful Order */}
+        {showPopup && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-8 rounded-lg shadow-lg relative max-w-md w-full">
+            <button className="absolute top-2 right-2 text-lg" onClick={closePopup}>
+              &times;
+            </button>
+            <div className="text-center">
+              <div className="text-blue-500 text-5xl mb-4">✔</div>
+              <h2 className="text-2xl font-semibold mb-2">SUCCESS!</h2>
+              <p>Order placed successfully! Check your email for details.</p>
+              <p className="font-semibold">See you soon!</p>
+              <button
+                onClick={closePopup}
+                className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
+              >
+                OK
+              </button>
+            </div>
+          </div>
+        </div>
+        )}
+
         {/* Order Summary (Right Side) */}
         <div className="order-summary bg-gray-50 p-6 rounded-md shadow">
           <h2 className="text-xl font-semibold mb-6 text-gray-800">Order Summary</h2>
@@ -212,32 +242,32 @@ const Checkout = () => {
                   <h3 className="font-semibold">{item.name}</h3>
                   <p className="text-sm text-gray-500">
                     {item.quantity} x {item.selectedValue}{' '}
-                    {item.type === 'pieces' ? 'pcs' : 'g'}
+                    {item.type === 'weight' ? 'g' : 'pcs'}
                   </p>
                 </div>
-                <span className="text-sm text-gray-800 font-semibold">Rs {calculateTotal(item.quantity,item.selectedValue, item.price)}</span>
+                <p className="font-semibold">{calculateTotal(item.quantity, item.selectedValue, item.price)} LKR</p>
               </div>
             ))}
           </div>
 
           {/* Subtotal */}
-          <div className="mt-6 flex justify-between text-gray-700">
-            <span>Subtotal</span>
-            <span>Rs {totalPrice}</span>
-          </div>
-
-          {/* Delivery Fee */}
-          {formData.deliveryMethod === 'ship' && (
-            <div className="mt-2 flex justify-between text-gray-700">
-              <span>Delivery Fee</span>
-              <span>Rs 350</span>
+          <div className="mt-6">
+            <div className="flex items-center justify-between">
+              <p className="font-semibold text-gray-600">Subtotal:</p>
+              <p className="font-semibold">{totalPrice} LKR</p>
             </div>
-          )}
 
-          {/* Total */}
-          <div className="border-t mt-4 pt-4 flex justify-between text-gray-900 text-lg font-semibold">
-            <span>Total</span>
-            <span>Rs {totalWithDelivery}</span>
+            {/* Delivery Fee */}
+            <div className="flex items-center justify-between">
+              <p className="font-semibold text-gray-600">Delivery Fee:</p>
+              <p className="font-semibold">{deliveryFee} LKR</p>
+            </div>
+
+            {/* Total */}
+            <div className="flex items-center justify-between border-t pt-4 mt-4">
+              <p className="font-semibold text-gray-800">Total:</p>
+              <p className="font-semibold">{totalWithDelivery} LKR</p>
+            </div>
           </div>
         </div>
       </div>
