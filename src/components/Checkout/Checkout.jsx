@@ -69,6 +69,24 @@ const Checkout = () => {
         'K0Ef5J7b9o9PYSdzd'
       )
       .then((response) => {
+        // Send email using the second template
+        return emailjs.send(
+          'service_awszyvb', 
+          'template_46ggx0t', 
+          {
+            customer_name: formData.name,
+            product_list: orderDetails,
+            order_details: orderDetails,
+            customer_phone: formData.phone,
+            shipping_address: formData.address,
+            total_price: totalPrice,
+            delivery_fee: deliveryFee,
+            total_with_delivery: totalWithDelivery
+          },
+          'K0Ef5J7b9o9PYSdzd' 
+        );
+      })
+      .then((response) => {
         // Show popup after successful order placement
         setShowPopup(true);
        
