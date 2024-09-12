@@ -17,6 +17,7 @@ const Checkout = () => {
     zipCode: '',
     deliveryMethod: 'ship' 
   });
+  
 
   const deliveryFee = formData.deliveryMethod === 'ship' ? 350 : 0;
   const totalWithDelivery = totalPrice + deliveryFee;
@@ -90,6 +91,16 @@ const Checkout = () => {
       .then((response) => {
         // Show popup after successful order placement
         setShowPopup(true);
+
+        // setFormData({
+        //   name: '',
+        //   email: '',
+        //   phone: '',
+        //   address: '',
+        //   city: '',
+        //   zipCode: '',
+        //   deliveryMethod: ''
+        // });
        
       })
       .catch((error) => {
@@ -231,9 +242,7 @@ const Checkout = () => {
         {showPopup && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="bg-white p-8 rounded-lg shadow-lg relative max-w-md w-full">
-            <button className="absolute top-2 right-2 text-lg" onClick={closePopup}>
-              &times;
-            </button>
+           
             <div className="text-center">
               <div className="text-blue-500 text-5xl mb-4">✔</div>
               <h2 className="text-2xl font-semibold mb-2">SUCCESS!</h2>
