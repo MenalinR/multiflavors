@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import emailjs from 'emailjs-com';
+import { FaShippingFast, FaStore } from 'react-icons/fa';
 
 const Checkout = () => {
   const location = useLocation();
@@ -15,7 +16,7 @@ const Checkout = () => {
     address: '',
     city: '',
     zipCode: '',
-    deliveryMethod: 'ship' 
+    deliveryMethod: '' 
   });
   
 
@@ -83,7 +84,8 @@ const Checkout = () => {
             shipping_address: formData.address,
             total_price: totalPrice,
             delivery_fee: deliveryFee,
-            total_with_delivery: totalWithDelivery
+            total_with_delivery: totalWithDelivery,
+            delivery_method:formData.deliveryMethod
           },
           'K0Ef5J7b9o9PYSdzd' 
         );
@@ -112,6 +114,12 @@ const Checkout = () => {
   const closePopup = () => {
     setShowPopup(false); // Close the popup when the user clicks the close button
     navigate('/');
+  };
+  const selectDeliveryMethod = (method) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      deliveryMethod: method
+    }));
   };
 
   return (
@@ -159,6 +167,41 @@ const Checkout = () => {
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
+            
+            {/* Delivery Method */}
+<div className="space-y-4">
+  <h3 className="text-lg font-semibold">Shipping & Delivery</h3>
+  <p className="text-sm text-gray-500">Select how you would like to receive your order:</p>
+
+  <div className="flex space-x-4 mt-4">
+    <button
+      type="button"
+      className={`flex-1 border border-gray-300 rounded-lg p-4 text-left focus:outline-none ${formData.deliveryMethod === 'ship' ? 'bg-blue-50' : ''}`}
+      onClick={() => selectDeliveryMethod('ship')}
+    >
+      <div className="flex flex-col items-center space-y-2">
+        <FaShippingFast className="w-8 h-8 text-gray-600" />
+        <span className="text-lg font-medium">Ship to my address</span>
+      </div>
+    </button>
+
+    <button
+      type="button"
+      className={`flex-1 border border-gray-300 rounded-lg p-4 text-left focus:outline-none ${formData.deliveryMethod === 'pickup' ? 'bg-blue-50' : ''}`}
+      onClick={() => selectDeliveryMethod('pickup')}
+    >
+      <div className="flex flex-col items-center space-y-2">
+        <FaStore className="w-8 h-8 text-gray-600" />
+        <span className="text-lg font-medium">Pick up from store</span>
+      </div>
+    </button>
+  </div>
+</div>
+
+
+            {formData.deliveryMethod === 'ship' && (
+              <>
+
 
             {/* Address */}
             <div>
@@ -198,35 +241,10 @@ const Checkout = () => {
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-primary"
               />
             </div>
+            
+            </>
+            )}
 
-            {/* Delivery Method */}
-            <div>
-              <label className="block mb-2 text-sm font-medium text-gray-700">Delivery Method</label>
-              <div className="flex items-center space-x-4">
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    name="deliveryMethod"
-                    value="ship"
-                    checked={formData.deliveryMethod === 'ship'}
-                    onChange={handleInputChange}
-                    className="mr-2"
-                  />
-                  Ship
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="radio"
-                    name="deliveryMethod"
-                    value="pickup"
-                    checked={formData.deliveryMethod === 'pickup'}
-                    onChange={handleInputChange}
-                    className="mr-2"
-                  />
-                  Pickup in Store
-                </label>
-              </div>
-            </div>
 
             {/* Place Order Button */}
             <button
@@ -244,13 +262,13 @@ const Checkout = () => {
           <div className="bg-white p-8 rounded-lg shadow-lg relative max-w-md w-full">
            
             <div className="text-center">
-              <div className="text-blue-500 text-5xl mb-4">✔</div>
+              <div className="text-primary text-5xl mb-4">✔</div>
               <h2 className="text-2xl font-semibold mb-2">SUCCESS!</h2>
               <p>Order placed successfully! Check your email for details.</p>
               <p className="font-semibold">See you soon!</p>
               <button
                   onClick={closePopup}
-                  className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
+                  className="mt-4 bg-primary text-white px-4 py-2 rounded"
                 >
                   Back to Home
                 </button>
