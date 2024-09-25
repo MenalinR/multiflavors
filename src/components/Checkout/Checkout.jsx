@@ -253,7 +253,8 @@ const Checkout = () => {
             {/* Place Order Button */}
             <button
               type="submit"
-              className="w-full bg-primary text-white py-2 px-4 rounded shadow-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-dark"
+              disabled={loading} 
+              className={`w-full bg-primary text-white py-2 px-4 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-primary-dark focus:ring-primary-dark'}`}
             >
               {loading ? (
                 <span className="flex justify-center items-center">
