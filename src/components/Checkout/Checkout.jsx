@@ -8,6 +8,7 @@ const Checkout = () => {
   const navigate = useNavigate();
   const { cartItems = [], totalPrice = 0 } = location.state || {};
   const [showPopup, setShowPopup] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -42,6 +43,7 @@ const Checkout = () => {
       alert("Your cart is empty.");
       return;
     }
+    setLoading(true);
 
     const orderDetails = cartItems
       .map(
@@ -92,6 +94,7 @@ const Checkout = () => {
       })
       .then((response) => {
         // Show popup after successful order placement
+        setLoading(false);
         setShowPopup(true);
 
         // setFormData({
@@ -107,6 +110,7 @@ const Checkout = () => {
       })
       .catch((error) => {
         console.error('Failed to send email:', error);
+        setLoading(false);
         alert('Failed to place order. Please try again.');
       });
   };
@@ -251,7 +255,33 @@ const Checkout = () => {
               type="submit"
               className="w-full bg-primary text-white py-2 px-4 rounded shadow-sm hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-dark"
             >
-              Place Order
+              {loading ? (
+                <span className="flex justify-center items-center">
+                  <svg
+                    className="animate-spin h-5 w-5 mr-3 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+                    ></path>
+                  </svg>
+                  Packing Up Happiness..
+                </span>
+              ) : (
+                'Place Order'
+              )}
             </button>
           </form>
         </div>
