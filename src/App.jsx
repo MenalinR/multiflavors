@@ -14,6 +14,7 @@ import Fruits from './Pages/Fruits';
 import DryFishes from './Pages/DryFishes';
 import Cart from './components/Cart/Cart';
 import Checkout from './components/Checkout/Checkout'
+import Terms from './components/Terms/terms'
 
 const App = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -106,6 +107,8 @@ const App = () => {
             onDelete={handleDeleteItem}
           />} />
           <Route path="/Checkout" element={<Checkout />} />
+          <Route path="/Terms-Conditions" element={<Terms />} />
+
         </Routes>
         <Footer />
       </div>

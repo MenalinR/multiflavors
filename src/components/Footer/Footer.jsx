@@ -4,6 +4,7 @@ import Banner from '../../assets/footer.jpg';
 import { FaInstagram, FaFacebook, FaLocationArrow, FaMobileAlt, FaTiktok, FaYoutube } from 'react-icons/fa';
 import { FaWhatsapp } from 'react-icons/fa6';
 import Pickme from "../../assets/pickme.png";
+import Terms from "../../components/Terms/terms"
 
 const BannerImg = {
   backgroundImage: `url(${Banner})`,
@@ -36,8 +37,8 @@ const FooterSecondLinks = [
     link: '/#',
   },
   {
-    title: 'About',
-    link: '/#about',
+    title: 'Terms & Conditions',
+    link: '/Terms-Conditions',
   },
   {
     title: 'Contact',
