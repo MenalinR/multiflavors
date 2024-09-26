@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import img1 from "../../assets/dry.png";
 import img2 from "../../assets/mu.png";
 import img3 from "../../assets/la.png";
 import img4 from "../../assets/n.png";
-import img5 from "../../assets/milk.png";
+import img5 from "../../assets/dr.png";
 
 const ProductsData = [
    { id: 1,
@@ -11,20 +12,23 @@ const ProductsData = [
     title:"DryFish",
     color:"white",
     aosDelay: "0",
+    link: "/DryFishes"
 
     },
     { id: 2,
         img: img2,
-        title:"Muruku",
+        title:"Snacks",
         color:"white",
         aosDelay: "200",
+         link: "/Snacks"
     
         },
         { id: 3,
             img: img3,
-            title:"Laddu",
+            title:"Sweets",
             color:"white",
             aosDelay: "400",
+             link: "/Sweets"
         
             },
             { id: 4,
@@ -32,13 +36,15 @@ const ProductsData = [
                 title:"Nuts",
                 color:"white",
                 aosDelay: "600",
+                 link: "/Nuts"
             
                 },
                 { id: 5,
                     img: img5,
-                    title:"Sweets",
+                    title:"Fruits",
                     color:"white",
                     aosDelay: "800",
+                     link: "/Fruits"
                 
                     },
 
@@ -54,24 +60,25 @@ const Products = () => {
             </div>
             <div>
                 <div className='grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 place-items-center gap-5'>
-                    {
-                        ProductsData.map((data) => (
-                            <div  
-                            data-aos="fade-up"
-                            data-aos-delay={data.aosDelay}
-                            className='space-y-3'>
-                                <img 
-                                src={data.img}
-                                className='h-[220px] w-[200px] object-cover rounded-md '/>
-
-                            <div className='text-center'>
-                                <h3 className='font-semibold'>{data.title}</h3>
-                            </div>
-
-                            </div>
-
-                        ))
-                    }
+                {ProductsData.map((data) => (
+              <div 
+                key={data.id}
+                data-aos="fade-up"
+                data-aos-delay={data.aosDelay}
+                className='space-y-3'
+              >
+                <Link to={data.link}> {/* Wrap image and title in Link */}
+                  <img 
+                    src={data.img}
+                    alt={data.title}
+                    className='h-[230px] w-[258px] object-cover rounded-md'
+                  />
+                  <div className='text-center'>
+                    <h3 className='font-semibold'>{data.title}</h3>
+                  </div>
+                </Link>
+              </div>
+            ))}
 
                 </div>
             </div>
