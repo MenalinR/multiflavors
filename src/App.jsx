@@ -15,6 +15,7 @@ import DryFishes from './Pages/DryFishes';
 import Cart from './components/Cart/Cart';
 import Checkout from './components/Checkout/Checkout'
 import Terms from './components/Terms/terms'
+import Policy from './components/Terms/privacy'
 
 const App = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -108,6 +109,7 @@ const App = () => {
           />} />
           <Route path="/Checkout" element={<Checkout />} />
           <Route path="/Terms-Conditions" element={<Terms />} />
+          <Route path="/Policy" element={<Policy />} />
 
         </Routes>
         <Footer />

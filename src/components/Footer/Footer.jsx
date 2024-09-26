@@ -41,12 +41,12 @@ const FooterSecondLinks = [
     link: '/Terms-Conditions',
   },
   {
-    title: 'Contact',
-    link: '/#contact',
+    title: 'Privacy policy',
+    link: '/Policy',
   },
   {
-    title: 'Block',
-    link: '/#block',
+    title: 'Contact',
+    link: '/#contact',
   },
 ];
 
