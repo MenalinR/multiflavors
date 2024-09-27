@@ -43,7 +43,7 @@ const FooterSecondLinks = [
   },
   {
     title: 'Privacy policy',
-    link: '/Policy',
+    link: '/Privacy-Policy',
   },
   {
     title: 'Contact',

@@ -109,7 +109,7 @@ const App = () => {
           />} />
           <Route path="/Checkout" element={<Checkout />} />
           <Route path="/Terms-Conditions" element={<Terms />} />
-          <Route path="/Policy" element={<Policy />} />
+          <Route path="/Privacy-Policy" element={<Policy />} />
 
         </Routes>
         <Footer />
