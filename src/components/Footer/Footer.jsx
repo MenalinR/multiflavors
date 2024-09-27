@@ -4,6 +4,7 @@ import Banner from '../../assets/footer.jpg';
 import { FaInstagram, FaFacebook, FaLocationArrow, FaMobileAlt, FaTiktok, FaYoutube } from 'react-icons/fa';
 import { FaWhatsapp } from 'react-icons/fa6';
 import Pickme from "../../assets/pickme.png";
+import Uber from "../../assets/uber.png";
 import Terms from "../../components/Terms/terms"
 
 const BannerImg = {
@@ -120,12 +121,21 @@ const Footer = () => {
                   <FaMobileAlt />
                   <p>+94 750606206</p>
                 </div>
-                <div className="py-8 px-4">
+                <div className='flex py-8'>
+                <div className=" px-4">
             <a href="https://pickme-app-sl.onelink.me/Fore/s28axsoo" className="inline-block bg-black text-white flex items-center justify-center rounded-lg"
               style={{ width: '160px', height: '60px' }}>
               <img src={Pickme} alt="PickMe Logo" className="w-9 h-9 mr-5 ml-3 " />
               <span>Get it on <span className="text-2xl font-bold">PickMe</span></span>
             </a>
+          </div>
+          <div className=" px-4">
+            <a href="https://www.ubereats.com/lk/store/multi-flavours-nugegoda/Jf0XIydWX1-rOT6t0GXLGg?diningMode=DELIVERY&pl=JTdCJTIyYWRkcmVzcyUyMiUzQSUyMjMyJTIwTWFkZHVtYWdld2F0dGElMjBMbiUyMiUyQyUyMnJlZmVyZW5jZSUyMiUzQSUyMkNoSUprNmFiTldkYTRqb1JGSVZrWC1veElUWSUyMiUyQyUyMnJlZmVyZW5jZVR5cGUlMjIlM0ElMjJnb29nbGVfcGxhY2VzJTIyJTJDJTIybGF0aXR1ZGUlMjIlM0E2Ljg2MjQyNzYlMkMlMjJsb25naXR1ZGUlMjIlM0E3OS44OTgzMzUxJTdE&ps=1" className="inline-block bg-black text-white flex items-center justify-center rounded-lg"
+              style={{ width: '160px', height: '60px' }}>
+              <img src={Uber} alt="Uber Logo" className="w-9 h-9 mr-5 ml-3 " />
+              <span>Get it on <span className="text-2xl font-bold">Uber</span></span>
+            </a>
+          </div>
           </div>
               </div>
             </div>
