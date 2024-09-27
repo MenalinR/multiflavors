@@ -79,7 +79,7 @@ const Ad = () => {
                             <img
                                 src={data.img}
                                 alt={`Dry Nut ${index + 1}`}
-                                className="h-[250px] sm:h-[300px] md:h-[350px] w-full object-contain rounded-md"
+                                className="h-[200px] sm:h-[250px] md:h-[300px] w-full object-contain rounded-md"
                             />
                         </div>
                     ))}
@@ -95,7 +95,7 @@ const Ad = () => {
                             <img
                                 src={data.img}
                                 alt={`Snack ${index + 1}`}
-                                className="h-[250px] sm:h-[300px] md:h-[350px] w-full object-contain rounded-md"
+                                className="h-[200px] sm:h-[250px] md:h-[300px] w-full object-contain rounded-md"
                             />
                         </div>
                     ))}
