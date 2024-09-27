@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import img1 from "../../assets/dry.png";
 import img2 from "../../assets/muuu.png";
-import img3 from "../../assets/la.png";
+import img3 from "../../assets/laa.png";
 import img4 from "../../assets/n.png";
 import img5 from "../../assets/dr.png";
 
@@ -71,7 +71,7 @@ const Products = () => {
                   <img 
                     src={data.img}
                     alt={data.title}
-                    className='h-[230px] w-[258px] object-cover rounded-md'
+                    className='h-[230px] w-[268px] object-cover rounded-md'
                   />
                   <div className='text-center'>
                     <h3 className='font-semibold'>{data.title}</h3>
