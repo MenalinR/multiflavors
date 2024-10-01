@@ -80,11 +80,19 @@ const terms = () => {
 
     <h2 className="text-2xl font-semibold mt-8 mb-4">Refund</h2>
     <p className="mb-6">
-      If any orders are canceled by you after procurement, but before being shipped by
-      Multiflavours.com, then Multiflavours.com will charge a restocking fee applicable as per the
-      product category. Some of the items listed will attract a restocking fee of 25% of the order
-      value. All other orders will attract a restocking fee of 10% of the order value. Refund will
-      be made after deducting such a restocking fee as applicable within 7-10 working days.
+      
+If any orders are canceled by you after procurement but before being shipped by Multiflavours.com, we will charge a restocking fee, as per the product category. The restocking fee is as follows:
+
+<p className="mb-6  ">
+<div className="flex items-center">
+25% of the order value for certain listed items.
+</div>
+<div className="flex items-center gap-3 mt-1">
+10% of the order value for all other items.
+</div>
+</p>
+
+Refunds will be made after deducting the restocking fee and will be processed to the same payment method used for the purchase within 7-10 working days.
     </p>
 
     <h2 className="text-2xl font-semibold mt-8 mb-4">License and Website Access</h2>
