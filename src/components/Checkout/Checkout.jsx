@@ -69,7 +69,8 @@ const Checkout = () => {
           product_list: orderDetails,
           customer_email: formData.email,
           customer_phone: formData.phone,
-          delivery_method: formData.deliveryMethod
+          delivery_method: formData.deliveryMethod,
+          total_price: totalWithDelivery,
         },
         'K0Ef5J7b9o9PYSdzd'
       );
@@ -83,7 +84,7 @@ const Checkout = () => {
           order_details: orderDetails,
           customer_phone: formData.phone,
           shipping_address: formData.address,
-          total_price: totalPrice,
+          total_price: totalWithDelivery,
           delivery_fee: deliveryFee,
           total_with_delivery: totalWithDelivery,
           delivery_method: formData.deliveryMethod
