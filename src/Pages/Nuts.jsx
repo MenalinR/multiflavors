@@ -16,7 +16,7 @@ const NutsData = [
   { id: 6, img: nut6, title: "Mixed Nuts",type: "weight", price: 8 ,inStock: true},
 ];
 
-const inStockIds = [1, 3, 4, 5, 6];
+const inStockIds = [1,2, 3, 4, 5, 6];
 
 const Popup = ({ nuts, handleClose, addToCart }) => {
   const [selectedValue, setSelectedValue] = useState(50); // Set a default value (e.g., 50 grams or pieces)
