@@ -16,6 +16,7 @@ import Cart from './components/Cart/Cart';
 import Checkout from './components/Checkout/Checkout'
 import Terms from './components/Terms/terms'
 import Policy from './components/Terms/privacy'
+import About from './components/Terms/AboutUs'
 
 const App = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -82,11 +83,17 @@ const App = () => {
   };
   
   
-  const handleDeleteItem = (id) => {
+  const handleDeleteItem = (id, selectedValue) => {
     setCartItems((prevItems) =>
-      prevItems.filter((item) => item.id !== id)
+      prevItems.filter(
+        (item) => item.id !== id || item.selectedValue !== selectedValue
+      )
     );
   };
+    // Function to clear the cart
+    const handleClearCart = () => {
+      setCartItems([]);  // Clear the cart by setting it to an empty array
+    };
 
   return (
     <Router>
@@ -105,11 +112,14 @@ const App = () => {
             isOpen={isCartOpen}
             onClose={toggleCart}
             cartItems={cartItems}
-            onDelete={handleDeleteItem}
+            setCartItems={setCartItems} // Pass setCartItems here
+            onDelete={handleDeleteItem} // Corrected delete function
+            onClear={handleClearCart} 
           />} />
           <Route path="/Checkout" element={<Checkout />} />
           <Route path="/Terms-Conditions" element={<Terms />} />
           <Route path="/Privacy-Policy" element={<Policy />} />
+          <Route path="/AboutUs" element={<About />} />
 
         </Routes>
         <Footer />

@@ -34,8 +34,8 @@ const FooterLinks = [
 
 const FooterSecondLinks = [
   {
-    title: 'Home',
-    link: '/#',
+    title: 'About Us',
+    link: '/AboutUs',
   },
   {
     title: 'Terms & Conditions',
@@ -80,7 +80,7 @@ const Footer = () => {
             </div>
 
             <div className="py-8 px-4 pl-8">
-              <h2 className="sm:text-3xl text-xl font-bold sm:text-left text-justify mb-3">Important Links</h2>
+              <h2 className="sm:text-3xl text-xl font-bold sm:text-left text-justify mb-3">Information</h2>
               <ul className="flex flex-col gap-3">
                 {FooterSecondLinks.map((link) => (
                   <li
