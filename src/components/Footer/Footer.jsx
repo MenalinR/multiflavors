@@ -29,6 +29,10 @@ const FooterLinks = [
     title: 'Advertisement',
     link: '/#contact',
   },
+  {
+    title: 'Testimonials',
+    link: '/#testimonials',
+  },
   
 ];
 
@@ -113,24 +117,24 @@ const Footer = () => {
               </div>
 
               <div className="mt-6 ">
-                <div className="flex items-center gap-5">
+                <div className="flex items-center gap-5 cursor-pointer hover:text-primary hover:translate-x-1 duration-300">
                   <FaLocationArrow />
                   <a href='https://maps.app.goo.gl/vq71owXn2jJsn8qq6'>Maddumagewatta, Housing Scheme, Nugegoda</a>
                 </div>
-                <div className="flex items-center gap-3 mt-4">
+                <div className="flex items-center gap-3 mt-4 cursor-pointer hover:text-primary hover:translate-x-1 duration-300">
                   <FaMobileAlt />
                   <p>+94 750606206</p>
                 </div>
                 <div className='flex py-8'>
                 <div className=" px-4">
-            <a href="https://pickme-app-sl.onelink.me/Fore/s28axsoo" className="inline-block bg-black text-white flex items-center justify-center rounded-lg"
+            <a href="https://pickme-app-sl.onelink.me/Fore/s28axsoo" className="inline-block bg-black text-white flex items-center justify-center rounded-lg cursor-pointer hover:text-primary hover:translate-x-1 duration-300"
               style={{ width: '160px', height: '60px' }}>
               <img src={Pickme} alt="PickMe Logo" className="w-9 h-9 mr-5 ml-3 " />
               <span>Get it on <span className="text-2xl font-bold">PickMe</span></span>
             </a>
           </div>
           <div className=" px-4">
-            <a href="https://www.ubereats.com/lk/store/multi-flavours-nugegoda/Jf0XIydWX1-rOT6t0GXLGg?diningMode=DELIVERY&pl=JTdCJTIyYWRkcmVzcyUyMiUzQSUyMjMyJTIwTWFkZHVtYWdld2F0dGElMjBMbiUyMiUyQyUyMnJlZmVyZW5jZSUyMiUzQSUyMkNoSUprNmFiTldkYTRqb1JGSVZrWC1veElUWSUyMiUyQyUyMnJlZmVyZW5jZVR5cGUlMjIlM0ElMjJnb29nbGVfcGxhY2VzJTIyJTJDJTIybGF0aXR1ZGUlMjIlM0E2Ljg2MjQyNzYlMkMlMjJsb25naXR1ZGUlMjIlM0E3OS44OTgzMzUxJTdE&ps=1" className="inline-block bg-black text-white flex items-center justify-center rounded-lg"
+            <a href="https://www.ubereats.com/lk/store/multi-flavours-nugegoda/Jf0XIydWX1-rOT6t0GXLGg?diningMode=DELIVERY&pl=JTdCJTIyYWRkcmVzcyUyMiUzQSUyMjMyJTIwTWFkZHVtYWdld2F0dGElMjBMbiUyMiUyQyUyMnJlZmVyZW5jZSUyMiUzQSUyMkNoSUprNmFiTldkYTRqb1JGSVZrWC1veElUWSUyMiUyQyUyMnJlZmVyZW5jZVR5cGUlMjIlM0ElMjJnb29nbGVfcGxhY2VzJTIyJTJDJTIybGF0aXR1ZGUlMjIlM0E2Ljg2MjQyNzYlMkMlMjJsb25naXR1ZGUlMjIlM0E3OS44OTgzMzUxJTdE&ps=1" className="inline-block bg-black text-white flex items-center justify-center rounded-lg cursor-pointer hover:text-green-700 hover:translate-x-1 duration-300"
               style={{ width: '160px', height: '60px' }}>
               <img src={Uber} alt="Uber Logo" className="w-9 h-9 mr-5 ml-3 " />
               <span>Get it on <span className="text-2xl font-bold">Uber</span></span>
