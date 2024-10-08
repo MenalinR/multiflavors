@@ -197,6 +197,7 @@ const Checkout = () => {
                   type="button"
                   className={`flex-1 border border-gray-300 rounded-lg p-4 text-left focus:outline-none ${formData.deliveryMethod === 'ship' ? 'bg-blue-50' : ''}`}
                   onClick={() => selectDeliveryMethod('ship')}
+                  required
                 >
                   <div className="flex flex-col items-center space-y-2">
                     <FaShippingFast className="w-8 h-8 text-gray-600" />
@@ -208,6 +209,7 @@ const Checkout = () => {
                   type="button"
                   className={`flex-1 border border-gray-300 rounded-lg p-4 text-left focus:outline-none ${formData.deliveryMethod === 'pickup' ? 'bg-blue-50' : ''}`}
                   onClick={() => selectDeliveryMethod('pickup')}
+                  required
                 >
                   <div className="flex flex-col items-center space-y-2">
                     <FaStore className="w-8 h-8 text-gray-600" />
@@ -335,26 +337,28 @@ const Checkout = () => {
             </div>
             ))}
           </div>
-           {/* Subtotal */}
-           <div className="mt-6">
+          {/* Subtotal */}
+          <div className="mt-6">
             <div className="flex items-center justify-between">
               <p className="font-semibold text-gray-600">Subtotal:</p>
               <p className="font-semibold">{totalPrice} LKR</p>
-            </div>          </div>
-          {formData.deliveryMethod === 'ship' && (
-            <>
-              <div className="flex justify-between text-lg font-semibold">
-                <span>Delivery Fee:</span>
-                <span>Rs. {deliveryFee}</span>
-              </div>
-              <div className="flex justify-between text-lg font-semibold">
-                <span>Total with Delivery:</span>
-                <span>Rs. {totalWithDelivery}</span>
-              </div>
-            </>
-          )}
-        </div>
-      </div>
+            </div>
+
+            {/* Delivery Fee */}
+            <div className="flex items-center justify-between">
+              <p className="font-semibold text-gray-600">Delivery Fee:</p>
+              <p className="font-semibold">{deliveryFee} LKR</p>
+            </div>
+
+            {/* Total */}
+            <div className="flex items-center justify-between border-t pt-4 mt-4">
+              <p className="font-semibold text-gray-800">Total:</p>
+              <p className="font-semibold">{totalWithDelivery} LKR</p>
+            </div>
+          </div>
+          </div>
+          </div>
+
 
       {/* {showPopup && (
         <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
