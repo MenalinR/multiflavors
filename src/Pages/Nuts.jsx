@@ -9,7 +9,7 @@ import { FaCartPlus } from "react-icons/fa";
 
 const NutsData = [
   { id: 1, img: nut1, title: "Cashews", type: "weight", price: 7.2 ,inStock: true},
-  { id: 2, img: nut2, title: "Peanuts", type: "weight",price: 0.8,inStock: false },
+  { id: 2, img: nut2, title: "Peanuts", type: "weight",price: 3,inStock: true },
   { id: 3, img: nut3, title: "Pistachios",type: "weight", price: 7.6,inStock: true },
   { id: 4, img: nut4, title: "Almonds",type: "weight", price: 5 ,inStock: true},
   { id: 5, img: nut5, title: "Walnuts",type: "weight", price: 5 ,inStock: true},
