@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { db } from '../../firebase';
+import { getFirestore, updateDoc , doc, getDoc, setDoc, collection, addDoc } from "firebase/firestore";
 import { useLocation, useNavigate } from 'react-router-dom';
 import emailjs from 'emailjs-com';
 import { FaShippingFast, FaStore } from 'react-icons/fa';
@@ -35,6 +37,7 @@ const Checkout = () => {
     }));
   };
 
+  const db = getFirestore();
   const handlePlaceOrder = async (e) => {
     e.preventDefault();
   
@@ -60,7 +63,29 @@ const Checkout = () => {
     };
   
     try {
-      // EmailJS integration
+      const lastOrderRef = doc(db, 'LastOrderNumber', 'orderCount');
+      const lastOrderSnap = await getDoc(lastOrderRef);
+      let newLastOrder;
+      if (lastOrderSnap.exists()) {
+        const currentLastOrder = lastOrderSnap.data().lastOrderNumber;
+  
+        // Increment the LastOrderNumber by 1
+         newLastOrder = currentLastOrder + 1;
+      }else {
+        // Handle case where the document doesn't exist
+        await setDoc(lastOrderRef, { lastOrderNumber: 1 });
+        newLastOrder = 1; // First order
+      }
+    
+  
+        // Update the LastOrderNumber in Firestore
+        await updateDoc(lastOrderRef, {
+          lastOrderNumber: newLastOrder,
+        });
+  
+        console.log(`LastOrderNumber updated to: ${newLastOrder}`);
+      
+     // Send the email using EmailJS
       await emailjs.send(
         'service_awszyvb',
         'template_ciosocd',
@@ -92,41 +117,30 @@ const Checkout = () => {
         'K0Ef5J7b9o9PYSdzd'
       );
   
-      // Firebase integration to store order data
-      const response = await fetch(
-        'https://e-commerce-1499f-default-rtdb.firebaseio.com/UserData.json', 
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            Name: formData.name,
-            Email: formData.email,
-            Phone: formData.phone,
-            Address: formData.address,
-            City: formData.city,
-            ZipCode: formData.zipCode,
-            DeliveryMethod: formData.deliveryMethod,
-            OrderDetails: orderDetails,
-            TotalPrice: totalWithDelivery
-          }),
-        }
-      );
-  
-      if (response.ok) {
-        setLoading(false);
-        setShowPopup(true); // Show success popup
-      } else {
-        throw new Error("Failed to store data in Firebase");
-      }
-    } catch (error) {
-      console.error('Failed to send email or store data:', error);
-      alert('Failed to place order. Please try again.');
-    } finally {
-      setLoading(false); // Stop loading spinner in all cases
-    }
-  };
+     
+await addDoc(collection(db, "orders"), {
+  name: formData.name,
+  email: formData.email,
+  phone: formData.phone,
+  address: formData.address,
+  city: formData.city,
+  zipCode: formData.zipCode,
+  deliveryMethod: formData.deliveryMethod,
+  totalPrice: totalWithDelivery, // totalPrice + delivery fee
+  orderNumber: newLastOrder,
+  cartItems
+
+});
+
+setLoading(false);
+setShowPopup(true); // Show success popup
+} catch (error) {
+console.error("Failed to place order:", error);
+alert("Failed to place order. Please try again.");
+} finally {
+setLoading(false);
+}
+};
   
   const closePopup = () => {
     setShowPopup(false); // Close the popup when the user clicks the close button
@@ -137,9 +151,7 @@ const Checkout = () => {
       ...prevState,
       deliveryMethod: method
     }));
-  };
-
-      
+  }; 
           
   return (
     <div className="checkout-container flex justify-center items-center min-h-screen bg-gray-100 p-4">
@@ -197,7 +209,6 @@ const Checkout = () => {
                   type="button"
                   className={`flex-1 border border-gray-300 rounded-lg p-4 text-left focus:outline-none ${formData.deliveryMethod === 'ship' ? 'bg-blue-50' : ''}`}
                   onClick={() => selectDeliveryMethod('ship')}
-                  required
                 >
                   <div className="flex flex-col items-center space-y-2">
                     <FaShippingFast className="w-8 h-8 text-gray-600" />
@@ -209,7 +220,6 @@ const Checkout = () => {
                   type="button"
                   className={`flex-1 border border-gray-300 rounded-lg p-4 text-left focus:outline-none ${formData.deliveryMethod === 'pickup' ? 'bg-blue-50' : ''}`}
                   onClick={() => selectDeliveryMethod('pickup')}
-                  required
                 >
                   <div className="flex flex-col items-center space-y-2">
                     <FaStore className="w-8 h-8 text-gray-600" />
@@ -261,6 +271,9 @@ const Checkout = () => {
                 </div>
               </>
             )}
+
+
+
 
             {/* Place Order Button */}
             <button
@@ -337,7 +350,7 @@ const Checkout = () => {
             </div>
             ))}
           </div>
-          {/* Subtotal */}
+           {/* Subtotal */}
           <div className="mt-6">
             <div className="flex items-center justify-between">
               <p className="font-semibold text-gray-600">Subtotal:</p>
@@ -357,8 +370,7 @@ const Checkout = () => {
             </div>
           </div>
           </div>
-          </div>
-
+      </div>
 
       {/* {showPopup && (
         <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
