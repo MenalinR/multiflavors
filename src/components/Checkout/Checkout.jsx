@@ -118,19 +118,25 @@ const Checkout = () => {
       );
   
      
-await addDoc(collection(db, "orders"), {
-  name: formData.name,
-  email: formData.email,
-  phone: formData.phone,
-  address: formData.address,
-  city: formData.city,
-  zipCode: formData.zipCode,
-  deliveryMethod: formData.deliveryMethod,
-  totalPrice: totalWithDelivery, // totalPrice + delivery fee
-  orderNumber: newLastOrder,
-  cartItems
+   // Log the data to be added to Firestore
+   const orderData = {
+    name: formData.name,
+    email: formData.email,
+    phone: formData.phone,
+    address: formData.address,
+    city: formData.city,
+    zipCode: formData.zipCode,
+    deliveryMethod: formData.deliveryMethod,
+    totalPrice: totalWithDelivery, // totalPrice + delivery fee
+    orderNumber: newLastOrder,
+    cartItems,
+  };
+  
+  console.log("Order Data:", orderData); // This logs the data
 
-});
+  // Add the order to Firestore
+  await addDoc(collection(db, "orders"), orderData);
+
 
 setLoading(false);
 setShowPopup(true); // Show success popup
