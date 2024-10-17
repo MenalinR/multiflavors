@@ -21,9 +21,19 @@ jobs:
         with:
           node-version: 20
 
+     - name: Create .env file with Firebase config
+        run:
+          echo "VITE_FIREBASE_APIKEY=${{ secrets.APIKEY }}" >> .env
+          echo "VITE_FIREBASE_APPID=${{ secrets.APPID }}" >> .env
+          echo "VITE_FIREBASE_AUTHDOMAIN=${{ secrets.AUTHDOMAIN}}" >> .env
+          echo "VITE_FIREBASE_MEASUREMENTID=${{ secrets.MEASUREMENTID}}" >> .env
+          echo "VITE_FIREBASE_MESSAGINGSENDERID=${{ secrets.MESSAGINGSENDERID }}" >> .env
+          echo "VITE_FIREBASE_PROJECTID=${{ secrets.PROJECTID}}" >> .env
+          echo "VITE_FIREBASE_STORAGEBUCKET=${{ secrets.STORAGEBUCKET}}" >> .env     
+
       - name: Install dependencies
         run: npm install
-        
+
       - name: Build project
         run: npm run build
 
