@@ -5,9 +5,5 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   base: "/", // Ensure the base path is correct for GitHub Pages
-  build: {
-    rollupOptions: {
-      external: ['firebase/firestore'], // Externalize Firebase Firestore
-    },
-  },
+  
 });
