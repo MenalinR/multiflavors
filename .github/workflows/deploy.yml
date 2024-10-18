@@ -32,7 +32,9 @@ jobs:
           echo "VITE_FIREBASE_STORAGEBUCKET=${{ secrets.STORAGEBUCKET }}" >> .env
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install
+          npm install firebase  
 
       - name: Build project
         run: npm run build
