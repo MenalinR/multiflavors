@@ -1,15 +1,17 @@
 
 import React, {useState, useEffect} from 'react'
-import frd1 from "../assets/Fruits/dat.jpg"
-import frd2 from "../assets/Fruits/plum.png"
-import frd3 from "../assets/Fruits/staw.jpeg"
+import frt1 from "../assets/Fruits/dat.jpg"
+import frt2 from "../assets/Fruits/plum.png"
+import frt3 from "../assets/Fruits/staw.jpeg"
+import frt4 from "../assets/Fruits/figs.png"
+import frt5 from "../assets/Fruits/apricot.png"
 import { FaCartPlus } from "react-icons/fa";
 
 
 const FruitsData = [
   {
       id: 1,
-      img: frd1,
+      img: frt1,
       title:"Dates",
       type: "weight",
       price: 2.375,
@@ -18,7 +20,7 @@ const FruitsData = [
     },
     {
         id: 2,
-        img: frd3,
+        img: frt3,
         title:"Dried Strawberry",
         type: "weight",
         price: 2.375,
@@ -27,10 +29,28 @@ const FruitsData = [
       },
     {
       id: 3,
-      img: frd2,
+      img: frt2,
       title:"Dried plums",
       type: "weight",
       price:2.375,
+      inStock: true
+  
+    },
+    {
+      id: 4,
+      img: frt4,
+      title:"Dried Figs",
+      type: "weight",
+      price:7.6,
+      inStock: true
+  
+    },
+    {
+      id: 5,
+      img: frt5,
+      title:"Dried Apricot",
+      type: "weight",
+      price:7.2,
       inStock: true
   
     },
