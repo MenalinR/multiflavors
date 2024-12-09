@@ -32,10 +32,14 @@ const Navbar = ({ cartItems }) => {
     <div className='shadow-md duration-200 relative z-40'>
       <div className='bg-white py-4 relative'>
         {/* Christmas Animation */}
-        <div className="absolute left-0 top-0 p-2">
-          <img src={Snowflake} alt="Christmas Animation" className="w-24 h-24 animate-spin-slow" // Increased size and added animation class
-    style={{ background: 'none' }}  />
-        </div>
+<div className="absolute left-0 top-0 p-4">
+  <img 
+    src={Snowflake} 
+    alt="Christmas Animation" 
+    className="w-16 h-16 sm:w-24 sm:h-24 lg:w-32 lg:h-32 animate-spin-slow" // Responsive size adjustments
+    style={{ background: 'none' }} // Ensures no background
+  />
+</div>
         
         <div className='container flex justify-between items-center'>
           <div>
