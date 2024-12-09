@@ -31,22 +31,24 @@ const Navbar = ({ cartItems }) => {
   return (
     <div className='shadow-md duration-200 relative z-40'>
       <div className='bg-white py-4 relative'>
-        {/* Christmas Animation */}
-<div className="absolute left-0 top-0 p-4">
-  <img 
-    src={Snowflake} 
-    alt="Christmas Animation" 
-    className="w-16 h-16 sm:w-24 sm:h-24 lg:w-32 lg:h-32 animate-spin-slow" // Responsive size adjustments
-    style={{ background: 'none' }} // Ensures no background
-  />
-</div>
+       
         
         <div className='container flex justify-between items-center'>
           <div>
             <NavLink to='/' className='font-bold text-2xl sm:text-4xl flex gap-2'>
               <img src={Logo} alt='Logo' className='w-12 rounded-lg' />
               Multi Flavours
+               {/* Christmas Animation */}
+             <div className="relative">
+              <img 
+                src={Snowflake} 
+                alt="Christmas Animation" 
+                className="w-6 h-6 sm:w-14 sm:h-14 lg:w-22 lg:h-22 animate-spin-slow" // Responsive size adjustments
+                style={{ background: 'none' }} // Ensures no background
+              />
+            </div>
             </NavLink>
+            
           </div>
           <div className='flex justify-between items-center gap-4'>
             <div className="relative group hidden sm:block">
