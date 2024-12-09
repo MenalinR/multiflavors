@@ -4,8 +4,9 @@ import Logo from "../../assets/multi.svg";
 import { IoMdSearch } from "react-icons/io";
 import { FaShoppingCart, FaBars, FaTimes } from 'react-icons/fa'; 
 import Cart from '../../components/Cart/Cart';
+import Snowflake from "../../assets/tree.gif"; // Add your animated GIF here
 
-const Navbar = ({ cartItems }) => { // Accept cartItems as props
+const Navbar = ({ cartItems }) => { 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
 
@@ -16,6 +17,7 @@ const Navbar = ({ cartItems }) => { // Accept cartItems as props
   const handleCartClick = () => {
     setCartOpen(!cartOpen); 
   };
+
   const Menu = [
     { id: 1, name: "Home", link: "/Home" },
     { id: 2, name: "New Arrivals", link: "/NewArrivals" },
@@ -24,11 +26,17 @@ const Navbar = ({ cartItems }) => { // Accept cartItems as props
     { id: 5, name: "Nuts", link: "/Nuts" },
     { id: 6, name: "Fruits", link: "/Fruits" },
     { id: 7, name: "Dry Fish", link: "/DryFishes" },
-   
   ];
+
   return (
     <div className='shadow-md duration-200 relative z-40'>
-      <div className='bg-white py-4'>
+      <div className='bg-white py-4 relative'>
+        {/* Christmas Animation */}
+        <div className="absolute left-0 top-0 p-2">
+          <img src={Snowflake} alt="Christmas Animation" className="w-24 h-24 animate-spin-slow" // Increased size and added animation class
+    style={{ background: 'none' }}  />
+        </div>
+        
         <div className='container flex justify-between items-center'>
           <div>
             <NavLink to='/' className='font-bold text-2xl sm:text-4xl flex gap-2'>
@@ -48,7 +56,7 @@ const Navbar = ({ cartItems }) => { // Accept cartItems as props
             <button
               onClick={handleCartClick}
               className='bg-gradient-to-r from-primary to-secondary transition-all duration-200 text-black py-1 px-4 rounded-full flex items-center gap-3 group'>
-              <span className='group-hover:block transition-all duration-200'>Cart ({cartItems.length})</span> {/* Display cart size */}
+              <span className='group-hover:block transition-all duration-200'>Cart ({cartItems.length})</span>
               <FaShoppingCart className='text-xl text-black drop-shadow-sm cursor-pointer' />
             </button>
             <button className='sm:hidden text-2xl' onClick={handleMobileMenuToggle}>
@@ -78,7 +86,7 @@ const Navbar = ({ cartItems }) => { // Accept cartItems as props
           ))}
         </ul>
       </div>
-      <Cart isOpen={cartOpen} onClose={() => setCartOpen(false)} cartItems={cartItems} setCartItems={() => {}} /> {/* Pass cartItems to Cart */}
+      <Cart isOpen={cartOpen} onClose={() => setCartOpen(false)} cartItems={cartItems} setCartItems={() => {}} />
     </div>
   );
 };
