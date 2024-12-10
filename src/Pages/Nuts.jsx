@@ -5,10 +5,13 @@ import nut3 from "../assets/Nuts/nut3.jpg";
 import nut4 from "../assets/Nuts/nut4.jpg";
 import nut5 from "../assets/Nuts/nut5.jpg";
 import nut6 from "../assets/Nuts/nut6.jpeg";
+import rel1 from "../assets/Nuts/s.cashew.jpg";
+import rel2 from "../assets/Nuts/SC.png";
+import rel3 from "../assets/Nuts/RCN.png";
 import { FaCartPlus } from "react-icons/fa";
 
 const NutsData = [
-  { id: 1, img: nut1, title: "Cashews", type: "weight", price: 7.2 ,inStock: true},
+  { id: 1, img: nut1, title: "Oven Cashews", type: "weight", price: 7.2 ,inStock: true,relatedImages:[rel1,rel2,rel3]},
   { id: 2, img: nut2, title: "Peanuts", type: "weight",price: 1.5,inStock: true },
   { id: 3, img: nut3, title: "Pistachios",type: "weight", price: 7.6,inStock: true },
   { id: 4, img: nut4, title: "Almonds",type: "weight", price: 5 ,inStock: true},
@@ -19,9 +22,11 @@ const NutsData = [
 const inStockIds = [1,2, 3, 4, 5, 6];
 
 const Popup = ({ nuts, handleClose, addToCart }) => {
-  const [selectedValue, setSelectedValue] = useState(50); // Set a default value (e.g., 50 grams or pieces)
+  const [selectedValue, setSelectedValue] = useState(50);
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [currentTitle, setCurrentTitle] = useState(nuts.title); 
+  const [currentPrice, setCurrentPrice] = useState(nuts.price);
 
   useEffect(() => {
     document.body.classList.add('overflow-hidden');
@@ -31,13 +36,8 @@ const Popup = ({ nuts, handleClose, addToCart }) => {
   }, []);
 
   useEffect(() => {
-    if (nuts) {
-      // Calculate the total price based on selected value and quantity
-      const price = nuts.price || 0;
-      const value = selectedValue || 1; // Default to 1 if no selected value
-      setTotalPrice(price * value * quantity);
-    }
-  }, [selectedValue, quantity, nuts.price]);
+    setTotalPrice((currentPrice || nuts.price) * (selectedValue || 1) * quantity);
+  }, [currentPrice, selectedValue, quantity, nuts.price]);
 
   const handleValueChange = (value) => {
     setSelectedValue(value);
@@ -52,28 +52,34 @@ const Popup = ({ nuts, handleClose, addToCart }) => {
   };
 
   const handleAddToCart = () => {
-    // Calculate the total price
     const itemTotalPrice = nuts.price * (selectedValue || 1) * quantity;
 
-    // Create the item object to add to the cart
     const item = {
       id: nuts.id,
-      type:nuts.type,
-      name: nuts.title,
-      price: nuts.price,
+      type: nuts.type,
+      name: currentTitle,
+      price: currentPrice,
       quantity: quantity,
       totalPrice: itemTotalPrice,
-      selectedValue: selectedValue, // The selected value (e.g., weight or pieces)
+      selectedValue: selectedValue,
     };
 
     addToCart(item);
     handleClose();
   };
+  const handleRelatedImageClick = (index) => {
+    const relatedTitles = ["Spicy Cashews", "Salted Cashews", "Roasted Cashews"];
+    const relatedPrice = [8.6,8.6,8.6];
+    setCurrentTitle(relatedTitles[index]); // Update the title based on the clicked image
+    setCurrentPrice(relatedPrice[index]); 
+    setTotalPrice(relatedPrices[index] * (selectedValue || 1) * quantity);
+  };
+ 
 
   if (!nuts) return null;
 
-  const minPrice = nuts.type === "weight" ? 50 * nuts.price : 10 * nuts.price;
-  const maxPrice = nuts.type === "weight" ? 1000 * nuts.price : 50 * nuts.price;
+  const minPrice = nuts.type === "weight" ? 50 * currentPrice  : 10 * currentPrice ;
+  const maxPrice = nuts.type === "weight" ? 1000 * currentPrice  : 50 * currentPrice ;
 
   return (
     <div className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50'>
@@ -84,13 +90,26 @@ const Popup = ({ nuts, handleClose, addToCart }) => {
         >
           &times;
         </button>
-        <div className='w-full md:w-1/2 flex justify-center items-center md:pr-8'>
+        <div className='w-full md:w-1/2 flex flex-col items-center  md:pr-8'>
           <img src={nuts.img} alt={nuts.title} className='max-w-full h-auto rounded-lg' />
+          {nuts.relatedImages && nuts.relatedImages.length > 0 && (
+            <div className="mt-4 grid grid-cols-3 gap-4">
+              {nuts.relatedImages.map((relatedImg, index) => (
+                <img
+                  key={index}
+                  src={relatedImg}
+                  alt={`Related ${nuts.title}`}
+                  className="w-24 h-24 object-cover rounded-md shadow-md cursor-pointer"
+                  onClick={() => handleRelatedImageClick(index)}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
         <div className='w-full md:w-1/2 flex flex-col'>
-          <h2 className='text-2xl font-bold'>{nuts.title}</h2>
-          <p className="text-lg text-orange-400 font-bold ">
+          <h2 className='text-2xl font-bold'>{currentTitle}</h2>
+          <p className="text-lg text-orange-400 font-bold">
             Rs {minPrice} - Rs {maxPrice}
           </p>
           <label className="block text-lg mt-4">
@@ -102,7 +121,7 @@ const Popup = ({ nuts, handleClose, addToCart }) => {
                 {[50, 100, 250, 500, 1000].map(weight => (
                   <button
                     key={weight}
-                    className={`border p-2 rounded ${selectedValue === weight ? 'border border-primary' : ''}`}
+                    className={`border p-2 rounded ${selectedValue === weight ? 'border-primary' : ''}`}
                     onClick={() => handleValueChange(weight)}
                   >
                     {weight}g
@@ -117,7 +136,7 @@ const Popup = ({ nuts, handleClose, addToCart }) => {
                 {[10, 20, 30, 40, 50].map(piece => (
                   <button
                     key={piece}
-                    className={`border p-2 rounded ${selectedValue === piece ? 'border border-primary' : ''}`}
+                    className={`border p-2 rounded ${selectedValue === piece ? 'border-primary' : ''}`}
                     onClick={() => handleValueChange(piece)}
                   >
                     {piece} pieces
