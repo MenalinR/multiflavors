@@ -3,6 +3,7 @@ import Dryfish from "../../assets/dryfish.jpg";
 import Snacks from "../../assets/snacks.jpg";
 import Sweets from "../../assets/sweet.jpg";
 import Slider from "react-slick";
+import Back from "../../assets/back.webp";
 
 const ImageList = [
     {
@@ -46,7 +47,12 @@ const First = () => {
         pauseOnFocus: true,
     };
   return (
-    <div className='relative overflow-hidden min-h-[550px] size-min-h-[650px] bg-gray-100 flex justify-center items-center  dark:text-white duration-200'>
+    <div className='relative overflow-hidden min-h-[550px] size-min-h-[650px] flex justify-center items-center  dark:text-white duration-200' style={{
+        backgroundImage: `url(${Back})`, // Add your image path
+        backgroundSize: 'cover', // Ensures the image covers the entire area
+        backgroundPosition: 'center', // Centers the image
+        backgroundRepeat: 'no-repeat', // Prevents tiling
+    }}>
         <div className='h-[700px] bg-primary/40 absolute -top-1/2 right-0 rounded-3xl rotate-45 -z-9'>
 
         </div>
