@@ -4,7 +4,7 @@ import Logo from "../../assets/multi.svg";
 import { IoMdSearch } from "react-icons/io";
 import { FaShoppingCart, FaBars, FaTimes } from 'react-icons/fa'; 
 import Cart from '../../components/Cart/Cart';
-import Snowflake from "../../assets/tree.gif"; // Add your animated GIF here
+import Cap from "../../assets/cap.png";
 
 const Navbar = ({ cartItems }) => { 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -35,18 +35,18 @@ const Navbar = ({ cartItems }) => {
         
         <div className='container flex justify-between items-center'>
           <div>
-            <NavLink to='/' className='font-bold text-2xl sm:text-4xl flex gap-2'>
+          <NavLink to='/' className='font-bold text-2xl sm:text-4xl flex gap-2 items-center relative'>
               <img src={Logo} alt='Logo' className='w-12 rounded-lg' />
-              Multi Flavours
-               {/* Christmas Animation */}
-             <div className="relative">
-              <img 
-                src={Snowflake} 
-                alt="Christmas Animation" 
-                className="w-6 h-6 sm:w-14 sm:h-14 lg:w-22 lg:h-22 animate-spin-slow" // Responsive size adjustments
-                style={{ background: 'none' }} // Ensures no background
-              />
-            </div>
+              {/* Text container with Cap */}
+              <div className="relative">
+                Multi Flavours
+                {/* Cap Image */}
+                <img 
+                  src={Cap} 
+                  alt="Cap" 
+                  className="absolute top-[-10px] right-[-15px] w-6 sm:w-8 lg:w-10"
+                />
+              </div>
             </NavLink>
             
           </div>
