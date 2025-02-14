@@ -4,7 +4,7 @@ import Logo from "../../assets/multi.svg";
 import { IoMdSearch } from "react-icons/io";
 import { FaShoppingCart, FaBars, FaTimes } from 'react-icons/fa'; 
 import Cart from '../../components/Cart/Cart';
-import Cap from "../../assets/heart.gif";
+
 
 const Navbar = ({ cartItems }) => { 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -40,12 +40,7 @@ const Navbar = ({ cartItems }) => {
               {/* Text container with Cap */}
               <div className="relative">
                 Multi Flavours
-                {/* Cap Image */}
-                <img tt
-                  src={Cap} 
-                  alt="Cap" 
-                  className="absolute top-[-10px] right-[-15px] w-10 sm:w-10 lg:w-18"
-                />
+              
               </div>
             </NavLink>
             
