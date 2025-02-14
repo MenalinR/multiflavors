@@ -3,7 +3,7 @@ import Dryfish from "../../assets/dryfish.jpg";
 import Snacks from "../../assets/snacks.jpg";
 import Sweets from "../../assets/sweet.jpg";
 import Slider from "react-slick";
-import Back from "../../assets/christmas.jpg";
+import Back from "../../assets/valent.jpg";
 
 const ImageList = [
     {
