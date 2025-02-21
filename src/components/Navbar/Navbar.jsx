@@ -80,7 +80,9 @@ const Navbar = ({ cartItems }) => {
                   isActive 
                     ? 'inline-block px-4 py-2 text-primary duration-200' 
                     : 'inline-block px-4 py-2 hover:text-primary duration-200'
-                }>
+                }
+                onClick={() => setMobileMenuOpen(false)}
+                >
                 {data.name}
               </NavLink>
             </li>
