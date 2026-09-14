@@ -98,31 +98,33 @@ const App = () => {
 
   return (
     <Router>
-      <div className='bg-white duration-200'>
+      <div className='bg-white duration-200 min-h-screen flex flex-col'>
         <Navbar cartItems={cartItems} toggleCart={toggleCart} />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Home" element={<Home />} />
-          <Route path="/NewArrivals" element={<NewArrivals addToCart={handleAddToCart} />} />
-          <Route path="/Snacks" element={<Snacks addToCart={handleAddToCart} />} />
-          <Route path="/Sweets" element={<Sweets addToCart={handleAddToCart} />} />
-          <Route path="/Nuts" element={<Nuts addToCart={handleAddToCart} />} />
-          <Route path="/Fruits" element={<Fruits addToCart={handleAddToCart} />} />
-          <Route path="/DryFishes" element={<DryFishes addToCart={handleAddToCart} />} />
-          <Route path="/Cart" element={<Cart
-            isOpen={isCartOpen}
-            onClose={toggleCart}
-            cartItems={cartItems}
-            setCartItems={setCartItems} // Pass setCartItems here
-            onDelete={handleDeleteItem} // Corrected delete function
-            onClear={handleClearCart} 
-          />} />
-          <Route path="/Checkout" element={<Checkout />} />
-          <Route path="/Terms-Conditions" element={<Terms />} />
-          <Route path="/Privacy-Policy" element={<Policy />} />
-          <Route path="/AboutUs" element={<About />} />
+        <div className='flex-1'>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/Home" element={<Home />} />
+            <Route path="/NewArrivals" element={<NewArrivals addToCart={handleAddToCart} />} />
+            <Route path="/Snacks" element={<Snacks addToCart={handleAddToCart} />} />
+            <Route path="/Sweets" element={<Sweets addToCart={handleAddToCart} />} />
+            <Route path="/Nuts" element={<Nuts addToCart={handleAddToCart} />} />
+            <Route path="/Fruits" element={<Fruits addToCart={handleAddToCart} />} />
+            <Route path="/DryFishes" element={<DryFishes addToCart={handleAddToCart} />} />
+            <Route path="/Cart" element={<Cart
+              isOpen={isCartOpen}
+              onClose={toggleCart}
+              cartItems={cartItems}
+              setCartItems={setCartItems} // Pass setCartItems here
+              onDelete={handleDeleteItem} // Corrected delete function
+              onClear={handleClearCart}
+            />} />
+            <Route path="/Checkout" element={<Checkout />} />
+            <Route path="/Terms-Conditions" element={<Terms />} />
+            <Route path="/Privacy-Policy" element={<Policy />} />
+            <Route path="/AboutUs" element={<About />} />
 
-        </Routes>
+          </Routes>
+        </div>
         <Footer />
       </div>
     </Router>

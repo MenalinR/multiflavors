@@ -59,7 +59,7 @@ const Footer = () => {
   return (
     <div  className="text-black mb-0 bg-gray-300">
       <div className="container">
-        <div data-aos="zoom-in" className="grid md:grid-cols-3 py-44 pt-5">
+        <div data-aos="zoom-in" className="grid md:grid-cols-3 pt-5 pb-10">
           <div className="py-8 px-4">
             <h1 className="sm:text-4xl text-xl font-bold sm:text-left text-justify mb-3 flex items-center gap-3">
               <img src={FooterLogo} className="w-12 rounded-lg" alt="Footer Logo" />
