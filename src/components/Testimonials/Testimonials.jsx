@@ -141,19 +141,19 @@ const Testimonials = () => {
                     <Slider {...settings}>
                         {TestimonialData.map((data) => (
                             <div key={data.id} className='my-6'>
-                                <div className='flex flex-col items-center gap-4 shadow-lg py-8 px-6 mx-4 rounded-xl bg-white min-h-[300px]'>
+                                <div className='flex flex-col items-center justify-center gap-4 shadow-lg py-8 px-6 mx-4 rounded-xl bg-white h-[320px]'>
                                     <div className='mb-4'>
                                         <img
                                             src={data.img}
                                             alt={data.name}
-                                            className='rounded-full w-20 h-20'
+                                            className='rounded-full w-20 h-20 object-cover'
                                         />
                                     </div>
                                     <div className='flex flex-col items-center text-center'>
-                                        <p className='text-sm text-gray-500 overflow-hidden text-ellipsis'>
+                                        <p className='text-sm text-gray-500 line-clamp-4'>
                                             {data.text}
                                         </p>
-                                        <h1 className='text-xl font-bold text-black/80'>
+                                        <h1 className='text-xl font-bold text-black/80 mt-2'>
                                             {data.name}
                                         </h1>
                                     </div>
