@@ -8,7 +8,10 @@ const ProductPopup = ({ product, handleClose, addToCart, weightOptions = WEIGHT_
   const isWeight = product.type === 'weight';
   const options = isWeight ? weightOptions : PIECE_OPTIONS;
 
-  const [variant, setVariant] = useState({ title: product.title, price: product.price });
+  const variants = product.variants && product.variants.length > 0 ? product.variants : null;
+
+  const [variantIndex, setVariantIndex] = useState(product.variantIndex || 0);
+  const variant = variants ? variants[variantIndex] : { img: product.img, title: product.title, price: product.price };
   const [selectedValue, setSelectedValue] = useState(options[0]);
   const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
@@ -22,7 +25,7 @@ const ProductPopup = ({ product, handleClose, addToCart, weightOptions = WEIGHT_
 
   useEffect(() => {
     setTotalPrice((variant.price || 0) * (selectedValue || 1) * quantity);
-  }, [variant, selectedValue, quantity]);
+  }, [variant.price, selectedValue, quantity]);
 
   const incrementQuantity = () => setQuantity((prev) => prev + 1);
   const decrementQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : prev));
@@ -53,18 +56,31 @@ const ProductPopup = ({ product, handleClose, addToCart, weightOptions = WEIGHT_
           &times;
         </button>
         <div className='w-full md:w-1/2 flex flex-col items-center md:pr-8'>
-          <img src={product.img} alt={product.title} className='max-w-full h-auto rounded-lg' />
-          {product.relatedImages && product.relatedImages.length > 0 && (
-            <div className='mt-4 grid grid-cols-3 gap-4'>
-              {product.relatedImages.map((related, index) => (
-                <img
-                  key={index}
-                  src={related.img}
-                  alt={related.title}
-                  className='w-24 h-24 object-cover rounded-md shadow-md cursor-pointer'
-                  onClick={() => setVariant({ title: related.title, price: related.price })}
-                />
-              ))}
+          <img src={variant.img} alt={variant.title} className='w-full h-64 md:h-80 object-cover rounded-lg' />
+          {variants && (
+            <div className='mt-4 w-full'>
+              <label className='block text-sm font-semibold text-gray-600 mb-2'>Choose Type:</label>
+              <div className='grid grid-cols-4 gap-3'>
+                {variants.map((v, index) => (
+                  <button
+                    key={index}
+                    type='button'
+                    onClick={() => setVariantIndex(index)}
+                    className={`flex flex-col items-center gap-1 p-1 rounded-md border-2 transition ${
+                      variantIndex === index ? 'border-primary' : 'border-transparent hover:border-gray-200'
+                    }`}
+                  >
+                    <img
+                      src={v.img}
+                      alt={v.title}
+                      className='w-16 h-16 object-cover rounded-md shadow-md'
+                    />
+                    <span className={`text-xs text-center leading-tight ${variantIndex === index ? 'font-semibold text-primary' : 'text-gray-600'}`}>
+                      {v.title}
+                    </span>
+                  </button>
+                ))}
+              </div>
             </div>
           )}
         </div>
