@@ -99,7 +99,7 @@ const App = () => {
   return (
     <Router>
       <div className='bg-white duration-200 min-h-screen flex flex-col'>
-        <Navbar cartItems={cartItems} toggleCart={toggleCart} />
+        <Navbar cartItems={cartItems} toggleCart={toggleCart} onDelete={handleDeleteItem} />
         <div className='flex-1'>
           <Routes>
             <Route path="/" element={<Home />} />

@@ -6,7 +6,7 @@ import { FaShoppingCart, FaBars, FaTimes } from 'react-icons/fa';
 import Cart from '../../components/Cart/Cart';
 
 
-const Navbar = ({ cartItems }) => { 
+const Navbar = ({ cartItems, onDelete }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
 
@@ -89,7 +89,7 @@ const Navbar = ({ cartItems }) => {
           ))}
         </ul>
       </div>
-      <Cart isOpen={cartOpen} onClose={() => setCartOpen(false)} cartItems={cartItems} setCartItems={() => {}} />
+      <Cart isOpen={cartOpen} onClose={() => setCartOpen(false)} cartItems={cartItems} setCartItems={() => {}} onDelete={onDelete} />
     </div>
   );
 };

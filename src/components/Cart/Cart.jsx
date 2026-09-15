@@ -47,11 +47,12 @@ const CartItem = ({ item, onDelete }) => {
             type="button"
             onClick={() => onDelete(item.id, item.selectedValue)}
             aria-label={`Remove ${item.name} from cart`}
-            className="flex h-8 w-8 items-center justify-center rounded-full text-gray-400 transition-colors hover:bg-red-50 hover:text-red-500"
+            className="flex items-center gap-1 rounded-full px-2 py-1.5 text-gray-400 transition-colors hover:bg-red-50 hover:text-red-500 sm:px-2.5"
           >
-            <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+            <svg className="h-4 w-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               <path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v6M14 11v6" />
             </svg>
+            <span className="hidden text-xs font-semibold sm:inline">Remove</span>
           </button>
         )}
       </div>
