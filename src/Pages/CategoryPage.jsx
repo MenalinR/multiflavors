@@ -35,6 +35,7 @@ const ProductPopup = ({ product, handleClose, addToCart, weightOptions = WEIGHT_
       id: product.id,
       type: product.type,
       name: variant.title,
+      img: variant.img,
       price: variant.price,
       quantity,
       totalPrice,
