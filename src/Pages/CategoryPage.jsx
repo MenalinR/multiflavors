@@ -31,8 +31,12 @@ const ProductPopup = ({ product, handleClose, addToCart, weightOptions = WEIGHT_
   const decrementQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : prev));
 
   const handleAddToCart = () => {
+    // When a product has variants (e.g. Cashews: Oven/Spicy/Salted/Roasted),
+    // give each variant its own cart id so switching variants adds a
+    // separate line instead of merging into whichever variant was added first.
+    const cartId = variants ? `${product.id}-${variantIndex}` : product.id;
     addToCart({
-      id: product.id,
+      id: cartId,
       type: product.type,
       name: variant.title,
       img: variant.img,
