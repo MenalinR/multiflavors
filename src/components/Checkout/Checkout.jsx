@@ -12,10 +12,16 @@ const fmt = (value) =>
     maximumFractionDigits: 2,
   });
 
-const Checkout = () => {
+const Checkout = ({ cartItems: liveCartItems }) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { cartItems = [], totalPrice = 0 } = location.state || {};
+  // Prefer the live cart from App state (resets on refresh, just like the navbar cart)
+  // over router history state, which the browser keeps around across a reload.
+  const cartItems = liveCartItems ?? location.state?.cartItems ?? [];
+  const totalPrice = cartItems.reduce(
+    (sum, item) => sum + (item.totalPrice || item.price * item.quantity * item.selectedValue),
+    0
+  );
   const [showPopup, setShowPopup] = useState(false);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({

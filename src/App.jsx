@@ -118,7 +118,7 @@ const App = () => {
               onDelete={handleDeleteItem} // Corrected delete function
               onClear={handleClearCart}
             />} />
-            <Route path="/Checkout" element={<Checkout />} />
+            <Route path="/Checkout" element={<Checkout cartItems={cartItems} />} />
             <Route path="/Terms-Conditions" element={<Terms />} />
             <Route path="/Privacy-Policy" element={<Policy />} />
             <Route path="/AboutUs" element={<About />} />
