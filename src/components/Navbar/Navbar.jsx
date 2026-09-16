@@ -56,9 +56,14 @@ const Navbar = ({ cartItems, onDelete }) => {
             </div>
             <button
               onClick={handleCartClick}
-              className='bg-gradient-to-r from-primary to-secondary transition-all duration-200 text-black py-1 px-4 rounded-full flex items-center gap-3 group'>
-              <span className='group-hover:block transition-all duration-200'>Cart ({cartItems.length})</span>
+              aria-label={`Cart (${cartItems.length})`}
+              className='relative bg-gradient-to-r from-primary to-secondary transition-all duration-200 text-black w-10 h-10 rounded-full flex items-center justify-center'>
               <FaShoppingCart className='text-xl text-black drop-shadow-sm cursor-pointer' />
+              {cartItems.length > 0 && (
+                <span className='absolute -top-1 -right-1 flex h-5 min-w-[1.25rem] items-center justify-center rounded-full bg-gray-900 px-1 text-[11px] font-semibold text-white'>
+                  {cartItems.length}
+                </span>
+              )}
             </button>
             <button className='sm:hidden text-2xl' onClick={handleMobileMenuToggle}>
               {mobileMenuOpen ? <FaTimes /> : <FaBars />}
