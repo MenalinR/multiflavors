@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { db } from '../../firebase';
 import { getFirestore, updateDoc , doc, getDoc, setDoc, collection, addDoc } from "firebase/firestore";
 import { useLocation, useNavigate } from 'react-router-dom';
-import emailjs from 'emailjs-com';
 import { FaShippingFast, FaStore, FaCheckCircle } from 'react-icons/fa';
+
+const STORE_EMAIL = 'multiflavours.store@gmail.com';
 
 // Format money without trailing ".00" noise
 const fmt = (value) =>
@@ -23,6 +24,7 @@ const Checkout = ({ cartItems: liveCartItems }) => {
     0
   );
   const [showPopup, setShowPopup] = useState(false);
+  const [orderMailto, setOrderMailto] = useState(null);
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -69,12 +71,6 @@ const Checkout = ({ cartItems: liveCartItems }) => {
       )
       .join(', ');
   
-    const emailData = {
-      ...formData,
-      orderDetails,
-      totalPrice
-    };
-  
     try {
       const lastOrderRef = doc(db, 'LastOrderNumber', 'orderCount');
       const lastOrderSnap = await getDoc(lastOrderRef);
@@ -98,39 +94,6 @@ const Checkout = ({ cartItems: liveCartItems }) => {
   
         console.log(`LastOrderNumber updated to: ${newLastOrder}`);
       
-     // Send the email using EmailJS
-      await emailjs.send(
-        'service_awszyvb',
-        'template_ciosocd',
-        {
-          customer_name: formData.name,
-          product_list: orderDetails,
-          customer_email: formData.email,
-          customer_phone: formData.phone,
-          delivery_method: formData.deliveryMethod,
-          total_price: totalWithDelivery,
-        },
-        'K0Ef5J7b9o9PYSdzd'
-      );
-  
-      await emailjs.send(
-        'service_awszyvb',
-        'template_46ggx0t',
-        {
-          customer_name: formData.name,
-          product_list: orderDetails,
-          order_details: orderDetails,
-          customer_phone: formData.phone,
-          shipping_address: formData.address,
-          total_price: totalWithDelivery,
-          delivery_fee: deliveryFee,
-          total_with_delivery: totalWithDelivery,
-          delivery_method: formData.deliveryMethod
-        },
-        'K0Ef5J7b9o9PYSdzd'
-      );
-  
-     
    // Log the data to be added to Firestore
    const orderData = {
     name: formData.name,
@@ -150,6 +113,27 @@ const Checkout = ({ cartItems: liveCartItems }) => {
   // Add the order to Firestore
   await addDoc(collection(db, "orders"), orderData);
 
+  // Open the customer's email client with the order pre-filled, addressed to the store
+  const mailBody = [
+    `Order #${newLastOrder} from ${formData.name}`,
+    '',
+    `Phone: ${formData.phone}`,
+    `Email: ${formData.email}`,
+    `Delivery method: ${formData.deliveryMethod === 'ship' ? 'Ship to address' : 'Pick up from store'}`,
+    ...(formData.deliveryMethod === 'ship'
+      ? [`Address: ${formData.address}, ${formData.city} ${formData.zipCode}`]
+      : []),
+    '',
+    'Items:',
+    orderDetails,
+    '',
+    `Delivery fee: Rs ${fmt(deliveryFee)}`,
+    `Total: Rs ${fmt(totalWithDelivery)}`,
+  ].join('\n');
+  const mailtoLink = `mailto:${STORE_EMAIL}?subject=${encodeURIComponent(
+    `New order #${newLastOrder} from ${formData.name}`
+  )}&body=${encodeURIComponent(mailBody)}`;
+  setOrderMailto(mailtoLink);
 
 setLoading(false);
 setShowPopup(true); // Show success popup
@@ -163,6 +147,7 @@ setLoading(false);
   
   const closePopup = () => {
     setShowPopup(false); // Close the popup when the user clicks the close button
+    setOrderMailto(null);
     navigate('/');
   };
   const selectDeliveryMethod = (method) => {
@@ -420,12 +405,20 @@ setLoading(false);
             </div>
             <h2 className="mt-4 text-xl font-bold text-gray-900">Order placed!</h2>
             <p className="mt-2 text-sm text-gray-500">
-              Your order was placed successfully. Check your email for the details.
+              Your order was saved successfully. Tap below to email us the order so we can get started.
             </p>
             <p className="mt-1 text-sm font-semibold text-gray-700">See you soon!</p>
+            {orderMailto && (
+              <a
+                href={orderMailto}
+                className="mt-6 flex w-full items-center justify-center rounded-2xl border border-primary/30 bg-primary/5 py-3 text-sm font-semibold text-primary transition-all hover:bg-primary/10"
+              >
+                Email order to the store
+              </a>
+            )}
             <button
               onClick={closePopup}
-              className="mt-6 w-full rounded-2xl bg-gradient-to-r from-primary to-secondary py-3 text-sm font-semibold text-white shadow-lg shadow-primary/30 transition-all hover:shadow-xl hover:shadow-primary/40 active:scale-[0.99]"
+              className="mt-3 w-full rounded-2xl bg-gradient-to-r from-primary to-secondary py-3 text-sm font-semibold text-white shadow-lg shadow-primary/30 transition-all hover:shadow-xl hover:shadow-primary/40 active:scale-[0.99]"
             >
               Back to Home
             </button>
