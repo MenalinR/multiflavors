@@ -1,0 +1,9 @@
+# Netlify hosts only the order/PayHere functions; the website itself is
+# deployed to GitHub Pages by .github/workflows/deploy.yml.
+[build]
+  command = "echo 'functions only'"
+  publish = "netlify/public"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"

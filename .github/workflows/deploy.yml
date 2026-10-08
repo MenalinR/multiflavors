@@ -30,6 +30,7 @@ jobs:
           echo "VITE_FIREBASE_MESSAGINGSENDERID=${{ secrets.MESSAGINGSENDERID }}" >> .env
           echo "VITE_FIREBASE_PROJECTID=${{ secrets.PROJECTID }}" >> .env
           echo "VITE_FIREBASE_STORAGEBUCKET=${{ secrets.STORAGEBUCKET }}" >> .env
+          echo "VITE_ORDER_API_URL=https://multiflavours-orders.netlify.app" >> .env
 
       - name: Install dependencies
         run: |

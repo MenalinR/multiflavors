@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { db } from '../../firebase';
-import { getFirestore, updateDoc , doc, getDoc, setDoc, collection, addDoc } from "firebase/firestore";
 import { useLocation, useNavigate } from 'react-router-dom';
-import { FaShippingFast, FaStore, FaCheckCircle } from 'react-icons/fa';
+import { FaShippingFast, FaStore, FaCheckCircle, FaCreditCard, FaMoneyBillWave } from 'react-icons/fa';
 
 // Format money without trailing ".00" noise
 const fmt = (value) =>
@@ -11,7 +9,39 @@ const fmt = (value) =>
     maximumFractionDigits: 2,
   });
 
-const Checkout = ({ cartItems: liveCartItems }) => {
+// Netlify function that saves the order and signs PayHere card payments (see netlify/functions/).
+// VITE_ORDER_API_URL is the Netlify site URL, e.g. https://multiflavours-orders.netlify.app
+const placeOrder = async (order) => {
+  const res = await fetch(`${import.meta.env.VITE_ORDER_API_URL}/.netlify/functions/place-order`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(order),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || 'Failed to place order. Please try again.');
+  return data;
+};
+
+// Saved while the customer is away on the PayHere page, so a cancelled payment can restore the checkout.
+const PENDING_KEY = 'mf-pending-card-checkout';
+
+// Sends the browser to PayHere's hosted payment page with the server-signed fields.
+const redirectToPayHere = (checkoutUrl, fields) => {
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.action = checkoutUrl;
+  Object.entries(fields).forEach(([name, value]) => {
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = name;
+    input.value = value;
+    form.appendChild(input);
+  });
+  document.body.appendChild(form);
+  form.submit();
+};
+
+const Checkout = ({ cartItems: liveCartItems, setCartItems }) => {
   const location = useLocation();
   const navigate = useNavigate();
   // Prefer the live cart from App state (resets on refresh, just like the navbar cart)
@@ -30,8 +60,32 @@ const Checkout = ({ cartItems: liveCartItems }) => {
     address: '',
     city: '',
     zipCode: '',
-    deliveryMethod: '' 
+    deliveryMethod: '',
+    paymentMethod: ''
   });
+
+  // Back from the PayHere page: ?payment=done after paying, ?payment=cancelled otherwise.
+  useEffect(() => {
+    const result = new URLSearchParams(location.search).get('payment');
+    if (!result) return;
+
+    let pending = null;
+    try {
+      pending = JSON.parse(sessionStorage.getItem(PENDING_KEY));
+      sessionStorage.removeItem(PENDING_KEY);
+    } catch {
+      // Storage unavailable; the order itself is already saved on the server.
+    }
+    navigate('/Checkout', { replace: true });
+
+    if (pending?.formData) setFormData(pending.formData);
+    if (result === 'done') {
+      setShowPopup(true);
+    } else {
+      if (pending?.cartItems && setCartItems) setCartItems(pending.cartItems);
+      alert("Payment was cancelled. You can try again or choose cash payment.");
+    }
+  }, [location.search, navigate, setCartItems]);
 
   const deliveryFee = formData.deliveryMethod === 'ship' ? 350 : 0;
   const totalWithDelivery = totalPrice + deliveryFee;
@@ -49,69 +103,46 @@ const Checkout = ({ cartItems: liveCartItems }) => {
     }));
   };
 
-  const db = getFirestore();
   const handlePlaceOrder = async (e) => {
     e.preventDefault();
-  
+
     if (cartItems.length === 0) {
       alert("Your cart is empty.");
+      return;
+    }
+    if (!formData.deliveryMethod) {
+      alert("Please select a delivery method.");
+      return;
+    }
+    if (!formData.paymentMethod) {
+      alert("Please select a payment method.");
       return;
     }
     setLoading(true);
 
     try {
-      const lastOrderRef = doc(db, 'LastOrderNumber', 'orderCount');
-      const lastOrderSnap = await getDoc(lastOrderRef);
-      let newLastOrder;
-      if (lastOrderSnap.exists()) {
-        const currentLastOrder = lastOrderSnap.data().lastOrderNumber;
-  
-        // Increment the LastOrderNumber by 1
-         newLastOrder = currentLastOrder + 1;
-      }else {
-        // Handle case where the document doesn't exist
-        await setDoc(lastOrderRef, { lastOrderNumber: 1 });
-        newLastOrder = 1; // First order
+      // The server saves and numbers the order, and for card payments signs the PayHere payment.
+      const data = await placeOrder({ ...formData, cartItems });
+
+      if (formData.paymentMethod === 'cash') {
+        setLoading(false);
+        setShowPopup(true);
+        return;
       }
-    
-  
-        // Update the LastOrderNumber in Firestore
-        await updateDoc(lastOrderRef, {
-          lastOrderNumber: newLastOrder,
-        });
-  
-        console.log(`LastOrderNumber updated to: ${newLastOrder}`);
-      
-   // Log the data to be added to Firestore
-   const orderData = {
-    name: formData.name,
-    email: formData.email,
-    phone: formData.phone,
-    address: formData.address,
-    city: formData.city,
-    zipCode: formData.zipCode,
-    deliveryMethod: formData.deliveryMethod,
-    totalPrice: totalWithDelivery, // totalPrice + delivery fee
-    orderNumber: newLastOrder,
-    cartItems,
+
+      try {
+        sessionStorage.setItem(PENDING_KEY, JSON.stringify({ formData, cartItems }));
+      } catch {
+        // Not critical: only used to restore the cart if the payment is cancelled.
+      }
+      redirectToPayHere(data.checkoutUrl, data.payment);
+    } catch (error) {
+      console.error("Failed to place order:", error);
+      setLoading(false);
+      alert(error.message || "Failed to place order. Please try again.");
+    }
   };
-  
-  console.log("Order Data:", orderData); // This logs the data
 
-  // Add the order to Firestore — a Cloud Function (functions/index.js) picks this up
-  // and automatically emails both the store and the customer.
-  await addDoc(collection(db, "orders"), orderData);
-
-setLoading(false);
-setShowPopup(true); // Show success popup
-} catch (error) {
-console.error("Failed to place order:", error);
-alert("Failed to place order. Please try again.");
-} finally {
-setLoading(false);
-}
-};
-  
   const closePopup = () => {
     setShowPopup(false); // Close the popup when the user clicks the close button
     navigate('/');
@@ -121,7 +152,13 @@ setLoading(false);
       ...prevState,
       deliveryMethod: method
     }));
-  }; 
+  };
+  const selectPaymentMethod = (method) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      paymentMethod: method
+    }));
+  };
           
   const inputClass =
     "w-full px-4 py-2.5 rounded-xl border border-gray-200 bg-gray-50/60 text-gray-900 placeholder:text-gray-400 transition-colors focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary focus:bg-white";
@@ -269,6 +306,58 @@ setLoading(false);
               </div>
             )}
           </div>
+
+          {/* Payment method section */}
+          <div className="rounded-3xl border border-gray-100 bg-white p-5 shadow-sm sm:p-7">
+            <h2 className="text-base font-semibold text-gray-900">Payment method</h2>
+            <p className="mt-1 text-sm text-gray-500">Choose how you would like to pay.</p>
+
+            <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
+              {[
+                { key: 'card', label: 'Card payment', hint: 'Pay securely with PayHere', Icon: FaCreditCard },
+                {
+                  key: 'cash',
+                  label: 'Cash payment',
+                  hint: formData.deliveryMethod === 'pickup' ? 'Pay when you pick up' : 'Pay on delivery',
+                  Icon: FaMoneyBillWave,
+                },
+              ].map(({ key, label, hint, Icon }) => {
+                const selected = formData.paymentMethod === key;
+                return (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={() => selectPaymentMethod(key)}
+                    aria-pressed={selected}
+                    className={`relative flex items-center gap-3 rounded-2xl border p-4 text-left transition-all focus:outline-none ${
+                      selected
+                        ? 'border-primary bg-primary/5 ring-2 ring-primary/30'
+                        : 'border-gray-200 hover:border-primary/40 hover:bg-gray-50'
+                    }`}
+                  >
+                    <div
+                      className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full ${
+                        selected ? 'bg-primary text-white' : 'bg-gray-100 text-gray-500'
+                      }`}
+                    >
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold text-gray-900">{label}</p>
+                      <p className="text-xs text-gray-500">{hint}</p>
+                    </div>
+                    {selected && (
+                      <span className="absolute right-3 top-3 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-white">
+                        <svg className="h-3 w-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M20 6 9 17l-5-5" />
+                        </svg>
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
         </div>
 
         {/* Order Summary (Right) */}
@@ -347,11 +436,11 @@ setLoading(false);
                       d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
                     ></path>
                   </svg>
-                  Packing Up Happiness..
+                  {formData.paymentMethod === 'card' ? 'Opening PayHere..' : 'Packing Up Happiness..'}
                 </>
               ) : (
                 <>
-                  Place Order
+                  {formData.paymentMethod === 'card' ? 'Continue to PayHere' : 'Place Order'}
                   <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M5 12h14M13 6l6 6-6 6" />
                   </svg>
@@ -371,7 +460,11 @@ setLoading(false);
             </div>
             <h2 className="mt-4 text-xl font-bold text-gray-900">Order placed!</h2>
             <p className="mt-2 text-sm text-gray-500">
-              Your order was placed successfully. Check your email for the details.
+              {formData.paymentMethod === 'card'
+                ? 'Your payment was successful and your order is placed. Check your email for the details.'
+                : `Your order was placed successfully. Please have Rs ${fmt(totalWithDelivery)} ready ${
+                    formData.deliveryMethod === 'pickup' ? 'when you pick it up' : 'on delivery'
+                  }.`}
             </p>
             <p className="mt-1 text-sm font-semibold text-gray-700">See you soon!</p>
             <button
