@@ -26,7 +26,13 @@ export const md5Upper = (value) => crypto.createHash("md5").update(value).digest
 
 // Trimmed so a stray space or newline pasted into the Netlify settings can't break the hash.
 export const payhereMerchantId = () => (process.env.PAYHERE_MERCHANT_ID || "").trim();
-export const payhereMerchantSecret = () => (process.env.PAYHERE_MERCHANT_SECRET || "").trim();
+// PayHere issues one secret per domain: PAYHERE_MERCHANT_SECRET is for multiflavours.com,
+// PAYHERE_MERCHANT_SECRET_LOCALHOST for testing from http://localhost.
+export const payhereMerchantSecret = (site) =>
+  ((site === "localhost" ? process.env.PAYHERE_MERCHANT_SECRET_LOCALHOST : process.env.PAYHERE_MERCHANT_SECRET) || "").trim();
+
+// Which PayHere domain a checkout request comes from ("localhost" or "website").
+export const payhereSiteFor = (origin) => (origin?.startsWith("http://localhost") ? "localhost" : "website");
 
 // FIREBASE_SERVICE_ACCOUNT holds the full service-account JSON downloaded from
 // Firebase Console > Project settings > Service accounts. Works on the free Spark plan.

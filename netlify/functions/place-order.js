@@ -3,7 +3,7 @@
 // PayHere. The PayHere merchant secret never leaves the server.
 import { FieldValue } from "firebase-admin/firestore";
 import {
-  getDb, corsHeaders, md5Upper, sendOrderEmails, CURRENCY, DELIVERY_FEE, STORE_NAME, payhereMerchantId, payhereMerchantSecret, ALLOWED_ORIGINS,
+  getDb, corsHeaders, md5Upper, sendOrderEmails, CURRENCY, DELIVERY_FEE, STORE_NAME, payhereMerchantId, payhereMerchantSecret, payhereSiteFor, ALLOWED_ORIGINS,
 } from "../lib/shared.js";
 
 export const handler = async (event) => {
@@ -54,6 +54,8 @@ export const handler = async (event) => {
       cartItems,
       totalPrice: Number(amount),
       status: paymentMethod === "cash" ? "confirmed" : "pending_payment",
+      // Remembered so payhere-notify can verify PayHere's reply with the same domain's secret.
+      payhereSite: payhereSiteFor(event.headers.origin),
     };
 
     order.orderNumber = await db.runTransaction(async (tx) => {
@@ -71,7 +73,7 @@ export const handler = async (event) => {
 
     const merchantId = payhereMerchantId();
     const hash = md5Upper(
-      merchantId + orderRef.id + amount + CURRENCY + md5Upper(payhereMerchantSecret())
+      merchantId + orderRef.id + amount + CURRENCY + md5Upper(payhereMerchantSecret(order.payhereSite))
     );
     const [firstName, ...rest] = name.trim().split(/\s+/);
 

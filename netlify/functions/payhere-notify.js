@@ -12,19 +12,24 @@ export const handler = async (event) => {
     merchant_id, order_id, payment_id, payhere_amount, payhere_currency, status_code, md5sig, method,
   } = Object.fromEntries(new URLSearchParams(raw || ""));
 
-  const expectedSig = md5Upper(
-    merchant_id + order_id + payhere_amount + payhere_currency + status_code +
-      md5Upper(payhereMerchantSecret())
-  );
-  if (!md5sig || md5sig !== expectedSig || merchant_id !== payhereMerchantId()) {
-    console.warn("Rejected PayHere notification with bad signature", { order_id });
-    return { statusCode: 400, body: "Invalid signature" };
+  if (!order_id || merchant_id !== payhereMerchantId()) {
+    console.warn("Rejected PayHere notification for another merchant", { order_id });
+    return { statusCode: 400, body: "Invalid merchant" };
   }
 
   const orderRef = getDb().collection("orders").doc(order_id);
   const snap = await orderRef.get();
   if (!snap.exists) return { statusCode: 404, body: "Unknown order" };
   const order = snap.data();
+
+  const expectedSig = md5Upper(
+    merchant_id + order_id + payhere_amount + payhere_currency + status_code +
+      md5Upper(payhereMerchantSecret(order.payhereSite))
+  );
+  if (!md5sig || md5sig !== expectedSig) {
+    console.warn("Rejected PayHere notification with bad signature", { order_id });
+    return { statusCode: 400, body: "Invalid signature" };
+  }
 
   // Don't let a late/duplicate notification downgrade or re-email an order that is already paid.
   if (order.status === "paid") return { statusCode: 200, body: "OK" };
