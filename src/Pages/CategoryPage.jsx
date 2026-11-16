@@ -6,7 +6,7 @@ const PIECE_OPTIONS = [10, 20, 30, 40, 50];
 
 const ProductPopup = ({ product, handleClose, addToCart, weightOptions = WEIGHT_OPTIONS }) => {
   const isWeight = product.type === 'weight';
-  const options = isWeight ? weightOptions : PIECE_OPTIONS;
+  const options = isWeight ? weightOptions : (product.pieceOptions || PIECE_OPTIONS);
 
   const variants = product.variants && product.variants.length > 0 ? product.variants : null;
 
@@ -48,8 +48,8 @@ const ProductPopup = ({ product, handleClose, addToCart, weightOptions = WEIGHT_
     handleClose();
   };
 
-  const minPrice = isWeight ? 50 * variant.price : 10 * variant.price;
-  const maxPrice = isWeight ? 1000 * variant.price : 50 * variant.price;
+  const minPrice = options[0] * variant.price;
+  const maxPrice = options[options.length - 1] * variant.price;
 
   return (
     <div className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50'>
